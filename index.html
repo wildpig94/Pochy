@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Pocha ♥ Our First 3 Months</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#8e44ad;
+    --purple-dark:#5b2c6f;
+    --purple-soft:#e8d5f5;
+    --purple-bg:#ecdcf6;
+    --gold:#d4af37;
+    --ink:#3a2248;
+    --soft:#e4d0f2;
+    --text-muted:#5a3a68;
+    --text-muted-soft:#7c5490;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins',sans-serif;color:var(--ink);background:var(--purple-bg);overflow-x:hidden;
+  }
+
+  /* ===== ENTRY OVERLAY (START BUTTON) ===== */
+  #overlay{
+    position:fixed;inset:0;z-index:100;background:linear-gradient(160deg,#3a1a52 0%,#5b2c6f 55%,#8e44ad 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;
+    transition:opacity 1s ease,visibility 1s;cursor:pointer;
+  }
+  #overlay.hidden{opacity:0;visibility:hidden;}
+  #overlay .heart-pulse{font-size:4rem;animation:beat 1.2s infinite;margin-bottom:1.5rem;}
+  @keyframes beat{0%,100%{transform:scale(1);}25%{transform:scale(1.2);}40%{transform:scale(0.95);}60%{transform:scale(1.15);}}
+  #overlay .o-etoile{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#e8d5f5;margin-bottom:.8rem;}
+  #overlay h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,2.8rem);color:#fff;margin-bottom:1rem;}
+  #overlay .o-sub{color:#dcc7ee;max-width:30ch;margin:0 auto 2.2rem;font-weight:300;line-height:1.6;}
+  #startBtn{
+    font-family:'Poppins',sans-serif;font-size:1rem;letter-spacing:.15em;text-transform:uppercase;color:#5b2c6f;
+    background:#fff;border:none;padding:1rem 2.6rem;border-radius:50px;cursor:pointer;font-weight:500;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .2s;
+  }
+  #startBtn:hover{transform:scale(1.05);}
+
+  /* ===== MUSIC FAB ===== */
+  #musicBtn{
+    position:fixed;bottom:1.3rem;right:1.3rem;z-index:90;width:54px;height:54px;border-radius:50%;
+    background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;border:none;cursor:pointer;
+    font-size:1.3rem;box-shadow:0 8px 24px rgba(91,44,111,.4);display:flex;align-items:center;justify-content:center;
+    transition:transform .2s;
+  }
+  #musicBtn.playing{animation:spin 6s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .music-bar{position:fixed;bottom:5.4rem;right:1.3rem;z-index:89;background:#fff;border-radius:14px;
+    padding:.7rem .9rem;box-shadow:0 8px 24px rgba(91,44,111,.25);font-size:.8rem;color:var(--purple-dark);
+    max-width:200px;display:none;}
+  .music-bar.show{display:block;animation:fadeIn .3s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;}}
+  .music-bar .m-title{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  /* ===== Floating hearts ===== */
+  .hearts{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+  .heart{position:absolute;bottom:-40px;font-size:22px;opacity:0;animation:floatUp linear infinite;}
+  @keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:0;}10%{opacity:.5;}90%{opacity:.4;}100%{transform:translateY(-110vh) rotate(40deg);opacity:0;}}
+  .content{position:relative;z-index:2;}
+
+  /* ===== Hero ===== */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:2rem;position:relative;background:linear-gradient(160deg,#ecdcf6 0%,#ddbfec 45%,#c79fdd 100%);}
+  .hero .eyebrow{font-size:.85rem;letter-spacing:.35em;text-transform:uppercase;color:var(--purple-dark);font-weight:500;margin-bottom:1.4rem;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,9vw,5rem);font-weight:600;line-height:1.05;color:var(--purple-dark);}
+  .hero h1 .amper{font-style:italic;color:var(--gold);}
+  .hero .sub{margin-top:1.5rem;font-size:clamp(1rem,3vw,1.25rem);font-weight:300;color:var(--ink);max-width:34ch;}
+  .hero .names{margin-top:2.2rem;font-size:1.05rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);font-weight:400;}
+  .hero .names span{color:var(--gold);}
+  .scroll-cue{margin-top:3rem;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple-dark);opacity:.7;animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+  /* ===== Sections ===== */
+  section{padding:5rem 1.5rem;position:relative;}
+  .section-label{text-align:center;font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;}
+  h2.title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:600;color:var(--purple-dark);margin-bottom:1rem;}
+  .section-intro{text-align:center;max-width:46rem;margin:0 auto 3rem;font-weight:300;color:var(--text-muted);line-height:1.7;}
+
+  /* ===== Timeline ===== */
+  .timeline{max-width:680px;margin:0 auto;position:relative;padding:1rem 0;}
+  .timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--purple),var(--purple),transparent);}
+  .tl-item{position:relative;padding-left:64px;margin-bottom:2.6rem;}
+  .tl-dot{position:absolute;left:14px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--purple);box-shadow:0 0 0 4px var(--soft);}
+  .tl-dot::after{content:'♥';position:absolute;font-size:10px;color:var(--purple);top:3px;left:5px;}
+  .tl-tag{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--gold);padding:.25rem .7rem;border-radius:20px;margin-bottom:.5rem;}
+  .tl-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--purple-dark);margin-bottom:.35rem;}
+  .tl-text{font-weight:300;line-height:1.75;color:var(--text-muted);}
+
+  /* ===== Timeline photos ===== */
+  .tl-photos{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem;}
+  .tl-photos .frame{width:88px;height:112px;flex:0 0 auto;border-radius:12px;overflow:hidden;background:var(--soft);aspect-ratio:auto;}
+  .tl-photos .frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  .tl-photos .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;color:var(--text-muted-soft);font-size:.55rem;text-align:center;padding:.3rem;}
+  .tl-photos .ph span{font-size:1.1rem;}
+
+  /* ===== Songs ===== */
+  .songs{max-width:560px;margin:0 auto;}
+  .song{display:flex;align-items:center;gap:1.1rem;background:#fff;padding:1.1rem 1.3rem;border-radius:16px;
+    box-shadow:0 10px 30px rgba(142,68,173,.08);margin-bottom:1rem;border:1px solid #ead9f5;}
+  .song .num{width:42px;height:42px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;}
+  .song .meta h3{font-size:1.05rem;color:var(--purple-dark);font-weight:500;}
+  .song .meta p{font-size:.82rem;color:var(--text-muted-soft);font-style:italic;}
+  .song a{margin-left:auto;color:var(--gold);font-size:.85rem;text-decoration:none;white-space:nowrap;}
+  .song a:hover{color:var(--purple-dark);}
+
+  /* ===== Letter ===== */
+  .letter{max-width:620px;margin:0 auto;background:#fff;border-radius:24px;padding:2.5rem 2rem;
+    box-shadow:0 20px 50px rgba(142,68,173,.10);border:1px solid #ead9f5;position:relative;}
+  .letter .wax{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:64px;height:64px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,var(--purple),var(--purple-dark));display:flex;align-items:center;
+    justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 6px 16px rgba(91,44,111,.4);z-index:2;}
+  .letter h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--purple-dark);margin:2.2rem 0 1rem;text-align:center;}
+  .letter p{font-weight:300;line-height:1.85;color:#5d414b;margin-bottom:1.1rem;text-align:justify;}
+  .letter .sig{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--purple-dark);text-align:right;font-style:italic;}
+
+  footer{text-align:center;padding:3rem 1rem 5rem;color:var(--text-muted-soft);font-size:.85rem;}
+  footer .big{font-size:1.6rem;}
+
+  @media(max-width:480px){
+    .timeline::before{left:20px;}
+    .tl-item{padding-left:54px;}
+    .tl-dot{left:11px;}
+    .letter{padding:2rem 1.3rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ENTRY OVERLAY -->
+<div id="overlay">
+  <div class="heart-pulse">💜</div>
+  <div class="o-etoile">for the love of my life</div>
+  <h2>Pocha ♥ Pocho</h2>
+  <div class="o-sub">Three months across 4,000 km.<br>Press start and press play — this one's just for you.</div>
+  <button id="startBtn">✦ Enter ✦</button>
+</div>
+
+<!-- Music controls -->
+<button id="musicBtn" title="Music">♫</button>
+<div class="music-bar" id="musicBar"><div class="m-title" id="musicTitle">Ready…</div></div>
+
+<!-- Floating hearts -->
+<div class="hearts" id="hearts"></div>
+
+<div class="content">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">for the love of my life</div>
+    <h1>Three Months<br><span class="amper">&</span> Forever To Come</h1>
+    <div class="sub">Distance was supposed to make it harder.<br>Across 4,000 km, it only made them stronger.</div>
+    <div class="names">Pocha <span>&</span> Pocho</div>
+    <div class="scroll-cue">▼ scroll to relive it</div>
+  </header>
+
+  <!-- TIMELINE -->
+  <section id="story">
+    <div class="section-label">our story</div>
+    <h2 class="title">How We Began</h2>
+    <p class="section-intro">Every love has a beginning. Theirs started in a world made of pixels — and quietly became the realest thing either of them had ever known.</p>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">Day one</span>
+        <div class="tl-title">A Heart in Ragnarok</div>
+        <p class="tl-text">It began in a world made of pixels — Ragnarok Online, where two strangers crossed paths without knowing what they were about to find. He sent her a heart emote. She sent one back. After that, every time he saw her online, a little heart appeared — until the day he finally gathered the courage to ask, half-joking, half-serious, <em>"hola, nos casamos?"</em> She said no. But that was the day they started talking. And nothing was ever quite the same again.</p>
+        <div class="tl-photos" data-photos="1,2,3,4"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">TokyDoki & Nh2</span>
+        <div class="tl-title">Two Strangers, Two Languages</div>
+        <p class="tl-text">For two or three months, they were only usernames to each other — <strong>TokyDoki</strong> and <strong>Nh2</strong>. She wrote in English, he in Spanish, leaning on a translator for almost every sentence. None of that mattered; he only wanted to understand her. So he made a decision that would quietly change his life: he would learn English, just for her.</p>
+        <div class="tl-photos" data-photos="5,6,8,9"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">The first photo</span>
+        <div class="tl-title">Discord & Real Faces</div>
+        <p class="tl-text">Then came Discord — daily calls, familiar voices, and finally, their first photos. He still remembers the exact feeling of seeing her face for the first time: the person behind all those words, the one who somehow made his heart race across an ocean.</p>
+        <div class="tl-photos" data-photos="10,11,12,13"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">The first call</span>
+        <div class="tl-title">Their First Video Call</div>
+        <p class="tl-text">He was nervous beyond words. On a video call there was no translator to hide behind, so he memorized phrases, nodded, smiled, and let her carry the conversation while he pretended to keep up. Then he went home and studied English an hour or two, every single day — first learning to understand her without asking her to slow down, then slowly finishing sentences of his own. Today they talk for hours with barely a translator in sight, and when a word escapes him, he describes it, makes a sound, or throws out synonyms until it turns into a game of charades that always makes her laugh. That laugh made every hour of studying worth it.</p>
+        <div class="tl-photos" data-photos="14,15,16"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">Officially ours</span>
+        <div class="tl-title">From "2D Boyfriend" to the Real Thing</div>
+        <p class="tl-text">Little by little, the evening calls became night calls, and the night calls stretched into hours — until, one day, it became official. She used to call him her "2D boyfriend." But somewhere along the way, they had become something real. And from that moment, they began dreaming about the day they would finally meet.</p>
+        <div class="tl-photos" data-photos="17,18,19"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">Every single night</span>
+        <div class="tl-title">Falling Asleep Together, 4,000 km Apart</div>
+        <p class="tl-text">Since that very first night, they haven't spent a single one apart. They fall asleep on a video call and wake up to each other's voice — two different countries, beating to the same heart. The call only pauses while she's at work. They share meals, songs, and silly videos every day, because it was never really about talking constantly. It was about knowing the other person was there. And she always was.</p>
+        <div class="tl-photos" data-photos="21,22,24"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">What she gave him</span>
+        <div class="tl-title">She Changed His Life</div>
+        <p class="tl-text">When they met, he had just lost his job and was sinking into a depression so heavy he barely wanted to get out of bed. Then he met her, and something in him wanted to become worthy of her. He finished a book he'd been writing for months in just two nights, then translated it chapter by chapter to share with her. She showed him what he was capable of — and that's how Camena was born. She believed in him before he believed in himself, and every day since, he's been trying to deserve that.</p>
+        <div class="tl-photos" data-photos="25,26,27"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-dot"></span>
+        <span class="tl-tag">to be continued</span>
+        <div class="tl-title">The Story Continues</div>
+        <p class="tl-text">This is only where the record ends — not where the story does. What comes next is still being written, one day, one call, one step closer at a time. And whatever the next chapter holds, they already know how it begins: together.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SONGS -->
+  <section id="songs" style="background:#f3eafb;">
+    <div class="section-label">our soundtrack</div>
+    <h2 class="title">The Songs That Are Us</h2>
+    <p class="section-intro">Every love has music. These songs carry the feeling of us.</p>
+    <div class="songs">
+      <div class="song reveal">
+        <div class="num">1</div>
+        <div class="meta"><h3>Mi Princesa</h3><p>David Bisbal</p></div>
+        <a href="https://www.youtube.com/watch?v=AS5DOyyoXJI" target="_blank">▶</a>
+      </div>
+      <div class="song reveal">
+        <div class="num">2</div>
+        <div class="meta"><h3>Kilometros</h3><p>Sin Bandera</p></div>
+        <a href="https://www.youtube.com/watch?v=oR5rpFzaBaA" target="_blank">▶</a>
+      </div>
+      <div class="song reveal">
+        <div class="num">3</div>
+        <div class="meta"><h3>La Complicidad</h3><p>Perotá Chingó</p></div>
+        <a href="https://www.youtube.com/watch?v=vBZf3kOn3CQ" target="_blank">▶</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section id="letter" style="background:#f3eafb;">
+    <div class="section-label">to my pocha</div>
+    <div class="letter reveal">
+      <div class="wax">♥</div>
+      <h3>My dearest Pocha,</h3>
+      <p>I've always known I wasn't an ordinary guy. And from the very first moment, I knew you weren't an ordinary girl. I've never met anyone who thinks like me, acts like me, who carries that same mix of innocence, humor, intelligence, and beautiful madness. And every day, you prove it to me a little more.</p>
+      <p>People ask how we do this — how a connection across thousands of kilometers feels so deep. But it's not about distance. It's that I understand you like I'm reading my own heart. And you understand me like I'm describing you. You even asked once if I'd hacked you — because I'd always say exactly what you were thinking, right before you said it. I never have. We're just… <em>the same soul</em>. It's like we've been partners for more than one lifetime. And we both love believing that.</p>
+      <p>You pulled me out of the dark. You gave me a reason to move, to learn, to build, to dream. Camena exists because of you. The man I'm becoming exists because of you. And the future I see — Canada, Cancún, a home, a wedding, a life — it all has you in it.</p>
+      <p>Three months. It feels like no time at all and like I've known you my whole life. Thank you for being my best friend, my love, my everything. I'm coming to you, Pocha. And I'm never letting go.</p>
+      <p class="sig">Forever yours,<br>Pocho ♥</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big">TokyDoki ♥ Nh2</div>
+    <div>Mexico → Canada · 3 months · infinite more to come</div>
+  </footer>
+
+</div>
+
+<!-- YouTube IFrame API for music -->
+<div id="player" style="display:none;"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  // ---------- MUSIC (Mi Princesa → Kilometros → La Complicidad) ----------
+  var SONG_IDS=['AS5DOyyoXJI','oR5rpFzaBaA','vBZf3kOn3CQ'];
+  var SONG_NAMES=['Mi Princesa — David Bisbal','Kilómetros — Sin Bandera','La Complicidad — Perotá Chingó'];
+  var player, cur=0, started=false, playerReady=false, pendingPlay=false;
+  function onYouTubeIframeAPIReady(){
+    player=new YT.Player('player',{
+      width:'1',height:'1',
+      videoId:SONG_IDS[0],
+      playerVars:{autoplay:0,controls:0,disablekb:1},
+      events:{
+        onReady:function(){
+          playerReady=true;
+          if(pendingPlay){pendingPlay=false;startMusic();}
+        },
+        onStateChange:function(e){
+          if(e.data===YT.PlayerState.ENDED){
+            cur=(cur+1)%SONG_IDS.length;
+            player.loadVideoById(SONG_IDS[cur]);
+            player.playVideo();
+            document.getElementById('musicTitle').textContent=SONG_NAMES[cur];
+          }
+        }
+      }
+    });
+  }
+  function startMusic(){
+    if(!playerReady){pendingPlay=true;return;}
+    player.loadVideoById(SONG_IDS[0]);
+    player.playVideo();
+    document.getElementById('musicTitle').textContent=SONG_NAMES[0];
+    document.getElementById('musicBtn').classList.add('playing');
+    document.getElementById('musicBar').classList.add('show');
+  }
+  document.getElementById('musicBtn').addEventListener('click',function(){
+    if(this.classList.contains('playing')){
+      player.pauseVideo();this.classList.remove('playing');
+    }else{player.playVideo();this.classList.add('playing');}
+  });
+
+  // ---------- ENTRY OVERLAY ----------
+  document.getElementById('startBtn').addEventListener('click',function(){
+    document.getElementById('overlay').classList.add('hidden');
+    startMusic();
+  });
+
+  // ---------- Floating hearts ----------
+  var heartsEl=document.getElementById('hearts');
+  var emo=['💜','💗','💖','💕','🩷','✨'];
+  for(var i=0;i<20;i++){
+    var h=document.createElement('span');h.className='heart';h.textContent=emo[i%emo.length];
+    h.style.left=Math.random()*100+'vw';h.style.fontSize=(14+Math.random()*22)+'px';
+    h.style.animationDuration=(8+Math.random()*10)+'s';h.style.animationDelay=(Math.random()*10)+'s';
+    heartsEl.appendChild(h);
+  }
+
+  // ---------- Reveal on scroll ----------
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // ---------- Photos: distributed inside the timeline, same size for all ----------
+  // index 1-27 maps to the files in /fotos (edit filenames here if yours differ)
+  var IMG_MAP={
+    1:'memoria1.png',2:'memoria2.png',3:'memoria3.png',4:'memoria4.png',5:'memoria5.jpg',
+    6:'memoria6.jpg',8:'memoria8.jpg',9:'memoria9.jpg',10:'memoria10.jpg',
+    11:'memoria11.jpg',12:'memoria12.jpg',13:'memoria13.jpg',14:'memoria14.jpg',15:'memoria15.jpg',
+    16:'memoria16.jpg',17:'memoria17.jpg',18:'memoria18.jpg',19:'memoria19.jpg',
+    21:'memoria21.jpg',22:'memoria22.jpg',24:'memoria24.jpg',25:'memoria25.png',
+    26:'memoria26.jpg',27:'memoria27.jpeg'
+  };
+  document.querySelectorAll('.tl-photos').forEach(function(container){
+    var ids=(container.dataset.photos||'').split(',').filter(Boolean);
+    ids.forEach(function(idx){
+      var name=IMG_MAP[idx];
+      if(!name)return;
+      var frame=document.createElement('div');frame.className='frame';
+      frame.innerHTML='<div class="ph"><span>♡</span>Loading…</div>';
+      var img=new Image();
+      img.src='fotos/'+name;
+      img.alt='Our memory';
+      img.onload=function(){frame.innerHTML='';frame.appendChild(img);};
+      img.onerror=function(){frame.innerHTML='<div class="ph"><span>♡</span>Missing</div>';};
+      container.appendChild(frame);
+    });
+  });
+</script>
+</body>
+</html>
