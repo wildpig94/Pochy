@@ -93,11 +93,23 @@
   .tl-text{font-weight:300;line-height:1.75;color:var(--text-muted);}
 
   /* ===== Timeline photos ===== */
-  .tl-photos{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem;}
-  .tl-photos .frame{width:88px;height:112px;flex:0 0 auto;border-radius:12px;overflow:hidden;background:var(--soft);aspect-ratio:auto;}
+  .tl-photos{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem;}
+  .tl-photos .frame{width:140px;height:175px;flex:0 0 auto;border-radius:14px;overflow:hidden;background:var(--soft);aspect-ratio:auto;cursor:pointer;transition:transform .2s;}
+  .tl-photos .frame:hover{transform:scale(1.04);}
   .tl-photos .frame img{width:100%;height:100%;object-fit:cover;display:block;}
-  .tl-photos .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;color:var(--text-muted-soft);font-size:.55rem;text-align:center;padding:.3rem;}
-  .tl-photos .ph span{font-size:1.1rem;}
+  .tl-photos .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;color:var(--text-muted-soft);font-size:.6rem;text-align:center;padding:.3rem;cursor:default;}
+  .tl-photos .ph span{font-size:1.3rem;}
+
+  /* ===== Lightbox ===== */
+  .lightbox{position:fixed;inset:0;z-index:200;background:rgba(20,8,28,.92);display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;}
+  .lightbox.show{display:flex;animation:fadeIn .25s;}
+  .lightbox img{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .lightbox-close{position:fixed;top:1.2rem;right:1.6rem;font-size:2.2rem;color:#fff;cursor:pointer;line-height:1;opacity:.85;}
+  .lightbox-close:hover{opacity:1;}
+
+  @media(max-width:480px){
+    .tl-photos .frame{width:104px;height:130px;}
+  }
 
   /* ===== Songs ===== */
   .songs{max-width:560px;margin:0 auto;}
@@ -276,6 +288,12 @@
 
 </div>
 
+<!-- Lightbox for photos -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <img id="lightboxImg" src="" alt="Our memory, full size">
+</div>
+
 <!-- YouTube IFrame API for music -->
 <div id="player" style="display:none;"></div>
 
@@ -362,10 +380,27 @@
       var img=new Image();
       img.src='fotos/'+name;
       img.alt='Our memory';
-      img.onload=function(){frame.innerHTML='';frame.appendChild(img);};
+      img.onload=function(){
+        frame.innerHTML='';
+        frame.appendChild(img);
+        frame.addEventListener('click',function(){
+          document.getElementById('lightboxImg').src=img.src;
+          document.getElementById('lightbox').classList.add('show');
+        });
+      };
       img.onerror=function(){frame.innerHTML='<div class="ph"><span>♡</span>Missing</div>';};
       container.appendChild(frame);
     });
+  });
+
+  // ---------- Lightbox close ----------
+  var lightbox=document.getElementById('lightbox');
+  document.getElementById('lightboxClose').addEventListener('click',function(){lightbox.classList.remove('show');});
+  lightbox.addEventListener('click',function(e){
+    if(e.target===lightbox){lightbox.classList.remove('show');}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){lightbox.classList.remove('show');}
   });
 </script>
 </body>
