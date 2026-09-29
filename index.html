@@ -69,17 +69,33 @@
   .scroll-cue{margin-top:3rem;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple-dark);opacity:.7;animation:bob 2s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
 
-  /* ===== Countdown ===== */
-  .countdown-sec{padding:5rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
-  .countdown-sec .stars-bg{position:absolute;inset:0;}
-  .cd-label{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;}
-  .cd-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,5vw,2.6rem);color:#fff;margin-bottom:.6rem;}
-  .cd-sub{color:#cbb3e8;font-weight:300;max-width:42ch;margin:0 auto 2.5rem;line-height:1.6;}
-  .cd-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
-  .cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:1.2rem 1.4rem;min-width:82px;backdrop-filter:blur(6px);}
-  .cd-box .n{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3rem);font-weight:600;color:#fff;line-height:1;}
-  .cd-box .l{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:#d9c2f0;margin-top:.5rem;}
-  .cd-msg{display:none;font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.2rem);color:#ffd76a;margin-top:1rem;animation:beat 1.4s infinite;}
+  /* ===== Ring reveal ===== */
+  .ring-sec{padding:6rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
+  .ring-sec .stars-bg{position:absolute;inset:0;}
+  .ring-kicker{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;position:relative;z-index:2;}
+  .ring-hint{position:relative;z-index:2;color:#cbb3e8;font-weight:300;max-width:34ch;margin:0 auto 1.8rem;line-height:1.6;}
+  .ring-btn{position:relative;z-index:2;background:transparent;border:none;cursor:pointer;outline:none;padding:.5rem;}
+  .ring-btn .rheart{font-size:3.4rem;display:inline-block;animation:beat 1.4s infinite;filter:drop-shadow(0 0 18px rgba(255,120,180,.55));}
+  .ring-btn .rlabel{display:block;margin-top:.6rem;font-family:'Poppins',sans-serif;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:#ffd0e8;}
+
+  /* Ring modal */
+  .ring-modal{position:fixed;inset:0;z-index:400;background:rgba(12,4,24,.97);display:none;overflow-y:auto;padding:1.2rem;}
+  .ring-modal.show{display:flex;}
+  .ring-card{margin:auto;max-width:520px;width:100%;background:linear-gradient(170deg,#2a1150,#1a0b2e);border:1px solid rgba(216,182,240,.25);border-radius:24px;padding:2rem 1.6rem;text-align:center;color:#fff;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .ring-close{position:absolute;top:.7rem;right:1rem;color:#d9c2f0;font-size:1.9rem;cursor:pointer;background:none;border:none;line-height:1;}
+  .ring-photo{width:100%;max-height:50vh;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.5);border:2px solid rgba(216,182,240,.35);}
+  .ring-letters{display:flex;justify-content:center;gap:.9rem;margin:1.6rem 0 .6rem;flex-wrap:wrap;}
+  .rletter{opacity:0;transform:scale(.5) rotate(-8deg);transition:opacity .5s,transform .5s;}
+  .rletter.show{opacity:1;transform:scale(1) rotate(0);}
+  .rletter .big{font-family:'Playfair Display',serif;font-size:3rem;font-weight:600;color:#ffd76a;line-height:1;}
+  .rletter .word{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#d9c2f0;margin-top:.3rem;}
+  .ring-acronym{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:#ffd76a;margin-bottom:1.5rem;opacity:0;transition:opacity .8s;}
+  .ring-acronym.show{opacity:1;}
+  .ring-msg{text-align:left;font-weight:300;line-height:1.8;color:#e8dcf5;font-size:.95rem;}
+  .ring-msg .l1{font-weight:400;color:#ffd76a;margin-bottom:.8rem;text-align:center;font-family:'Playfair Display',serif;font-size:1.15rem;}
+  .ring-msg p{margin-bottom:.9rem;}
+  .ring-msg strong{color:#fff;font-weight:500;}
+  .ring-msg .sig{font-family:'Playfair Display',serif;font-style:italic;text-align:right;color:#ffd76a;margin-top:1rem;font-size:1.1rem;}
 
   /* ===== Under the same sky ===== */
   .sky-sec{height:100vh;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e0620 0%,#1a0b2e 50%,#2a1150 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;}
@@ -201,20 +217,41 @@
     <div class="scroll-cue">▼ scroll to relive it</div>
   </header>
 
-  <!-- COUNTDOWN -->
-  <section class="countdown-sec">
-    <canvas class="stars-bg" id="cdCanvas"></canvas>
-    <div class="cd-label">the day we finally meet</div>
-    <h2 class="cd-title">Counting Down To You</h2>
-    <p class="cd-sub">From two countries to one airport. The first time I see you in person.</p>
-    <div class="cd-grid" id="cdGrid">
-      <div class="cd-box"><div class="n" id="cdD">0</div><div class="l">days</div></div>
-      <div class="cd-box"><div class="n" id="cdH">0</div><div class="l">hours</div></div>
-      <div class="cd-box"><div class="n" id="cdM">0</div><div class="l">min</div></div>
-      <div class="cd-box"><div class="n" id="cdS">0</div><div class="l">sec</div></div>
-    </div>
-    <div class="cd-msg" id="cdMsg">The day is here. I'm finally holding you. ♥</div>
+  <!-- RING REVEAL -->
+  <section class="ring-sec">
+    <canvas class="stars-bg" id="ringCanvas"></canvas>
+    <div class="ring-kicker">there's something for you…</div>
+    <p class="ring-hint">A promise I wanted to put into words — but only when you're ready to find it.</p>
+    <button class="ring-btn" id="ringBtn" title="Open">
+      <span class="rheart">💜</span>
+      <span class="rlabel">tap here</span>
+    </button>
   </section>
+
+  <!-- RING MODAL -->
+  <div class="ring-modal" id="ringModal">
+    <div class="ring-card">
+      <button class="ring-close" id="ringClose">&times;</button>
+      <img class="ring-photo" src="fotos/nuestra-primera-foto.jpg" alt="Us">
+      <div class="ring-letters" id="ringLetters">
+        <div class="rletter"><div class="big">T</div><div class="word">Through</div></div>
+        <div class="rletter"><div class="big">O</div><div class="word">Our</div></div>
+        <div class="rletter"><div class="big">K</div><div class="word">Kindred</div></div>
+        <div class="rletter"><div class="big">Y</div><div class="word">Years</div></div>
+      </div>
+      <div class="ring-acronym" id="ringAcronym">Through Our Kindred Years</div>
+      <div class="ring-msg" id="ringMsg" style="display:none;">
+        <div class="l1">Four letters. One promise.</div>
+        <p><strong>T — Through.</strong> Through every mile that once separated us, and every step we still have to take.</p>
+        <p><strong>O — Our.</strong> Our story, our love, our life — always built together.</p>
+        <p><strong>K — Kindred.</strong> Kindred souls — two people who understand each other without a single word.</p>
+        <p><strong>Y — Years.</strong> Through our kindred years — all of them — I'll love you, stand beside you, and hold you up.</p>
+        <p>This ring isn't a question. It's a promise.<br>To love you, to be loyal to you, and to walk with you — no matter what we have to face, no matter how long it takes.</p>
+        <p>I choose you. Today, and for every year to come.</p>
+        <div class="sig">Forever yours, Pocho ♥</div>
+      </div>
+    </div>
+  </div>
 
   <!-- UNDER THE SAME SKY -->
   <section class="sky-sec">
@@ -444,30 +481,36 @@
   },{threshold:0.5});
   subObserver.observe(subEl);
 
-  // ============ COUNTDOWN ============
-  // Ajusta aquí la fecha del reencuentro (año, mes 0-11, día, hora, min, seg).
-  // Sept 26 a medianoche (00:00 del 27) = new Date(2026, 8, 27, 0, 0, 0)
-  // Si prefieres la hora exacta del aterrizaje (11:45 PM del 26): new Date(2026, 8, 26, 23, 45, 0)
-  var MEET=new Date(2026,8,27,0,0,0);
-  var cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
-  function tick(){
-    var now=new Date();
-    var diff=MEET-now;
-    if(diff<=0){
-      cdD.textContent='0';cdH.textContent='0';cdM.textContent='0';cdS.textContent='0';
-      document.getElementById('cdGrid').style.display='none';
-      document.getElementById('cdMsg').style.display='block';
-      return;
-    }
-    var d=Math.floor(diff/86400000);
-    var hh=Math.floor(diff%86400000/3600000);
-    var mm=Math.floor(diff%3600000/60000);
-    var ss=Math.floor(diff%60000/1000);
-    cdD.textContent=d;cdH.textContent=hh;cdM.textContent=mm;cdS.textContent=ss;
-  }
-  tick(); setInterval(tick,1000);
+  // ============ RING REVEAL ============
+  var ringModal=document.getElementById('ringModal');
+  var ringBtn=document.getElementById('ringBtn');
+  var ringClose=document.getElementById('ringClose');
+  var ringLetters=document.querySelectorAll('#ringLetters .rletter');
+  var ringAcronym=document.getElementById('ringAcronym');
+  var ringMsg=document.getElementById('ringMsg');
+  var ringRevealed=false;
 
-  // ============ STARRY SKIES (two canvases) ============
+  function revealRing(){
+    ringModal.classList.add('show');
+    if(ringRevealed){ return; }
+    ringRevealed=true;
+    ringLetters.forEach(function(l,i){
+      setTimeout(function(){ l.classList.add('show'); }, 400+i*420);
+    });
+    setTimeout(function(){ ringAcronym.classList.add('show'); }, 400+4*420);
+    setTimeout(function(){
+      ringMsg.style.display='block';
+      ringMsg.style.opacity='0';
+      ringMsg.style.transition='opacity .9s';
+      requestAnimationFrame(function(){ ringMsg.style.opacity='1'; });
+    }, 400+4*420+800);
+    burstHearts(26);
+  }
+  ringBtn.addEventListener('click',revealRing);
+  ringClose.addEventListener('click',function(){ ringModal.classList.remove('show'); });
+  ringModal.addEventListener('click',function(e){ if(e.target===ringModal){ ringModal.classList.remove('show'); } });
+
+  // ============ STARRY SKIES ============
   function makeStars(canvas,count,shooters){
     var ctx=canvas.getContext('2d');
     var W,H;
@@ -503,7 +546,7 @@
     requestAnimationFrame(frame);
   }
   makeStars(document.getElementById('skyCanvas'),170,true);
-  makeStars(document.getElementById('cdCanvas'),90,false);
+  makeStars(document.getElementById('ringCanvas'),90,false);
 
   // ============ ENVELOPE ============
   var envObserver=new IntersectionObserver(function(entries){
