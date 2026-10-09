@@ -69,6 +69,36 @@
   .scroll-cue{margin-top:3rem;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple-dark);opacity:.7;animation:bob 2s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
 
+  /* ===== Countdown ===== */
+  .countdown-sec{padding:5rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
+  .countdown-sec .stars-bg{position:absolute;inset:0;}
+  .cd-label{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;position:relative;z-index:2;}
+  .cd-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,5vw,2.6rem);color:#fff;margin-bottom:.6rem;position:relative;z-index:2;}
+  .cd-sub{color:#cbb3e8;font-weight:300;max-width:42ch;margin:0 auto 2.5rem;line-height:1.6;position:relative;z-index:2;}
+  .cd-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
+  .cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:1.2rem 1.4rem;min-width:82px;backdrop-filter:blur(6px);}
+  .cd-box .n{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3rem);font-weight:600;color:#fff;line-height:1;}
+  .cd-box .l{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:#d9c2f0;margin-top:.5rem;}
+
+  /* ===== Easter eggs ===== */
+  .egg-word{cursor:pointer;border-bottom:1px dashed rgba(142,68,173,.55);position:relative;transition:background .25s,color .25s;}
+  .egg-word:hover{background:rgba(142,68,173,.12);}
+  .egg-sparkle{position:absolute;z-index:3;font-size:1.6rem;cursor:pointer;animation:twinkle 2.2s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(255,200,120,.85));background:none;border:none;}
+  @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8);}50%{opacity:1;transform:scale(1.15);}}
+  .sky-moon{cursor:pointer;}
+
+  /* Easter egg modal */
+  .egg-modal{position:fixed;inset:0;z-index:400;background:rgba(12,4,24,.97);display:none;overflow-y:auto;padding:1.2rem;}
+  .egg-modal.show{display:flex;}
+  .egg-card{margin:auto;max-width:440px;width:100%;background:linear-gradient(170deg,#2a1150,#1a0b2e);border:1px solid rgba(216,182,240,.25);border-radius:24px;padding:1.6rem;text-align:center;color:#fff;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .egg-close{position:absolute;top:.6rem;right:1rem;color:#d9c2f0;font-size:1.9rem;cursor:pointer;background:none;border:none;line-height:1;}
+  .egg-photo{width:100%;max-height:52vh;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.5);border:2px solid rgba(216,182,240,.35);}
+  .egg-text{margin-top:1.2rem;font-weight:300;line-height:1.8;color:#e8dcf5;font-size:.95rem;text-align:left;}
+
+  /* Toast */
+  .toast{position:fixed;bottom:5.4rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:450;background:#fff;color:var(--purple-dark);padding:1rem 1.4rem;border-radius:16px;box-shadow:0 12px 40px rgba(91,44,111,.4);font-size:.95rem;font-weight:500;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
   /* ===== Ring reveal ===== */
   .ring-sec{padding:6rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
   .ring-sec .stars-bg{position:absolute;inset:0;}
@@ -129,6 +159,9 @@
   .polaroid .ph-img{width:100%;height:100%;object-fit:cover;border-radius:3px;display:block;}
   .polaroid .cap{display:block;font-size:.6rem;color:#9a6dae;text-align:center;margin-top:.35rem;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .polaroid:hover{transform:rotate(0deg) scale(1.06) !important;box-shadow:0 12px 28px rgba(91,44,111,.3);z-index:3;}
+
+  /* Moments gallery */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
 
   /* ===== Lightbox ===== */
   #lightbox{position:fixed;inset:0;z-index:200;background:rgba(15,5,30,.95);display:none;align-items:center;justify-content:center;cursor:zoom-out;flex-direction:column;}
@@ -206,6 +239,18 @@
 <!-- Lightbox -->
 <div id="lightbox"><span class="close">&times;</span><img id="lightboxImg" src="" alt=""><div class="cap" id="lightboxCap"></div></div>
 
+<!-- Easter egg modal -->
+<div class="egg-modal" id="eggModal">
+  <div class="egg-card">
+    <button class="egg-close" id="eggClose">&times;</button>
+    <img class="egg-photo" id="eggPhoto" src="" alt="Us">
+    <div class="egg-text" id="eggText"></div>
+  </div>
+</div>
+
+<!-- Toast (10-min secret) -->
+<div class="toast" id="toast">It seems you miss me as much as I miss you, my love. I love you! 💜</div>
+
 <div class="content">
 
   <!-- HERO -->
@@ -216,6 +261,20 @@
     <div class="names">Pocha <span>&</span> Pocho</div>
     <div class="scroll-cue">▼ scroll to relive it</div>
   </header>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-sec">
+    <canvas class="stars-bg" id="cdCanvas"></canvas>
+    <div class="cd-label">counting down</div>
+    <h2 class="cd-title">Until I See You Again</h2>
+    <p class="cd-sub">November 6. The next time I get to hold you.</p>
+    <div class="cd-grid" id="cdGrid">
+      <div class="cd-box"><div class="n" id="cdD">0</div><div class="l">days</div></div>
+      <div class="cd-box"><div class="n" id="cdH">0</div><div class="l">hours</div></div>
+      <div class="cd-box"><div class="n" id="cdM">0</div><div class="l">min</div></div>
+      <div class="cd-box"><div class="n" id="cdS">0</div><div class="l">sec</div></div>
+    </div>
+  </section>
 
   <!-- RING REVEAL -->
   <section class="ring-sec">
@@ -256,7 +315,9 @@
   <!-- UNDER THE SAME SKY -->
   <section class="sky-sec">
     <canvas id="skyCanvas"></canvas>
-    <div class="sky-moon"></div>
+    <div class="sky-moon" id="eggMoon" data-file="nueva01.jpg" data-text="You lit up my darkest sky long before I could ever hold you. ✨"></div>
+    <button class="egg-sparkle" id="eggSparkle1" data-file="nueva02.jpg" data-text="Every wish I made on a star was you." style="top:22%;left:16%;">✨</button>
+    <button class="egg-sparkle" id="eggSparkle2" data-file="nueva03.jpg" data-text="Out of a whole sky, I'd still find you." style="top:60%;right:10%;">✨</button>
     <div class="sky-text">
       <div class="kicker">4,000 km apart</div>
       <h2>Under the <em>same sky</em>,<br>I was always with you.</h2>
@@ -275,7 +336,7 @@
         <span class="tl-dot"></span>
         <span class="tl-tag">Day one</span>
         <div class="tl-title">A Heart in Ragnarok</div>
-        <p class="tl-text">I saw you first in Ragnarok Online. I sent you a heart emote… and you sent one back. From that moment, every time I saw you online, I sent you a heart — until one day I finally built up the courage to say <em>"hola, nos casamos?"</em> You said no. But that's the day we started talking. And it changed everything.</p>
+        <p class="tl-text">I saw you first in <span class="egg-word" data-file="nueva04.jpg" data-egg="t3">Ragnarok Online</span>. I sent you a heart emote… and you sent one back. From that moment, every time I saw you online, I sent you a heart — until one day I finally built up the courage to say <em>"hola, nos casamos?"</em> You said no. But that's the day we started talking. And it changed everything.</p>
       </div>
 
       <div class="tl-item reveal">
@@ -289,7 +350,7 @@
         <span class="tl-dot"></span>
         <span class="tl-tag">The first photo</span>
         <div class="tl-title">Discord & Real Faces</div>
-        <p class="tl-text">Then came Discord. Daily calls. And soon, our first photos. I still remember the feeling of finally seeing your face — the person behind the words, the one who made my heart race across the ocean.</p>
+        <p class="tl-text">Then came Discord. Daily calls. And soon, our first photos. I still remember the feeling of finally seeing <span class="egg-word" data-file="nueva05.jpg" data-egg="t2">your face</span> — the person behind the words, the one who made my heart race across the ocean.</p>
       </div>
 
       <div class="tl-item reveal">
@@ -310,7 +371,7 @@
         <span class="tl-dot"></span>
         <span class="tl-tag">Every single night</span>
         <div class="tl-title">Falling Asleep Together, 4,000 km Apart</div>
-        <p class="tl-text">Since the very first night, we have not spent a single night apart. We fall asleep together on a video call and wake up to each other's voice — different countries, same heartbeat. The call only pauses while you're at work. We eat together, we shower together, we share TikToks and songs every day. It's never about always talking. It's about knowing the other person is there. And you always are.</p>
+        <p class="tl-text">Since the very first night, we have not spent a single night apart. We fall asleep together on a video call and wake up to each other's voice — different countries, <span class="egg-word" data-file="nueva06.jpg" data-egg="t4">same heartbeat</span>. The call only pauses while you're at work. We eat together, we shower together, we share TikToks and songs every day. It's never about always talking. It's about knowing the other person is there. And you always are.</p>
       </div>
 
       <div class="tl-item reveal">
@@ -329,18 +390,23 @@
     </div>
   </section>
 
+  <!-- MOMENTS WE KEEP -->
+  <section id="moments">
+    <div class="section-label">moments we keep</div>
+    <h2 class="title">New Memories With You</h2>
+    <p class="section-intro">Some of these are hiding around the page — keep your eyes open. 💜</p>
+    <div class="gallery" id="momentsGallery"></div>
+  </section>
+
   <!-- SONGS -->
   <section id="songs" style="background:#f3eafb;">
     <div class="section-label">our soundtrack</div>
     <h2 class="title">The Songs That Are Us</h2>
     <p class="section-intro">Every love has music. These songs carry the feeling of us.</p>
     <div class="songs">
-      <div class="song reveal"><div class="num">1</div><div class="meta"><h3>Mi Princesa</h3><p>David Bisbal</p></div><a href="https://www.youtube.com/watch?v=AS5DOyyoXJI" target="_blank">▶</a></div>
-      <div class="song reveal"><div class="num">2</div><div class="meta"><h3>Kilometros</h3><p>Sin Bandera</p></div><a href="https://www.youtube.com/watch?v=oR5rpFzaBaA" target="_blank">▶</a></div>
-      <div class="song reveal"><div class="num">3</div><div class="meta"><h3>La Complicidad</h3><p>Perotá Chingó</p></div><a href="https://www.youtube.com/watch?v=vBZf3kOn3CQ" target="_blank">▶</a></div>
-      <div class="song reveal"><div class="num">4</div><div class="meta"><h3>Somebody</h3><p>Depeche Mode</p></div><a href="https://www.youtube.com/watch?v=jbaKcxTW7A8" target="_blank">▶</a></div>
-      <div class="song reveal"><div class="num">5</div><div class="meta"><h3>Mi Credo</h3><p>Pepe Aguilar</p></div><a href="https://www.youtube.com/watch?v=qh0hP6mQnbk" target="_blank">▶</a></div>
-      <div class="song reveal"><div class="num">6</div><div class="meta"><h3>Ríe Chinito</h3><p>Perotá Chingó</p></div><a href="https://www.youtube.com/watch?v=_aIuna5a8Dc" target="_blank">▶</a></div>
+      <div class="song reveal"><div class="num">1</div><div class="meta"><h3>Antología</h3><p>Shakira</p></div></div>
+      <div class="song reveal"><div class="num">2</div><div class="meta"><h3>Aprovéchate</h3><p>Café Tacvba</p></div></div>
+      <div class="song reveal"><div class="num">3</div><div class="meta"><h3>Enjoy the Silence</h3><p>Depeche Mode</p></div></div>
     </div>
   </section>
 
@@ -354,7 +420,7 @@
         <div class="wax">♥</div>
         <h3>My dearest Pocha,</h3>
         <p>I've always known I wasn't an ordinary guy. And from the very first moment, I knew you weren't an ordinary girl. I've never met anyone who thinks like me, acts like me, who carries that same mix of innocence, humor, intelligence, and beautiful madness. And every day, you prove it to me a little more.</p>
-        <p>People ask how we do this — how a connection across thousands of kilometers feels so deep. But it's not about distance. It's that I understand you like I'm reading my own heart. And you understand me like I'm describing you. You even asked once if I'd hacked you — because I'd always say exactly what you were thinking, right before you said it. I never have. We're just… <em>the same soul</em>. It's like we've been partners for more than one lifetime. And we both love believing that.</p>
+        <p>People ask how we do this — how a connection across thousands of kilometers feels so deep. But it's not about distance. It's that I understand you like I'm reading my own heart. And you understand me like I'm describing you. You even asked once if I'd hacked you — because I'd always say exactly what you were thinking, right before you said it. I never have. We're just… <span class="egg-word" data-file="nueva07.jpg" data-egg="t1"><em>the same soul</em></span>. It's like we've been partners for more than one lifetime. And we both love believing that.</p>
         <p>You pulled me out of the dark. You gave me a reason to move, to learn, to build, to dream. The man I'm becoming exists because of you. And the future I see — an airport, Canada, Cancún, a home, a wedding, a life — it all has you in it.</p>
         <p>Three months. It feels like no time at all and like I've known you my whole life. Thank you for being my best friend, my love, my everything. I'm coming to you, Pocha. And I'm never letting go.</p>
         <p class="sig">Forever yours,<br>Pocho ♥</p>
@@ -382,8 +448,8 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
   // ============ MUSIC ============
-  var SONG_IDS=['AS5DOyyoXJI','oR5rpFzaBaA','vBZf3kOn3CQ','jbaKcxTW7A8','qh0hP6mQnbk','_aIuna5a8Dc'];
-  var SONG_NAMES=['Mi Princesa — David Bisbal','Kilómetros — Sin Bandera','La Complicidad — Perotá Chingó','Somebody — Depeche Mode','Mi Credo — Pepe Aguilar','Ríe Chinito — Perotá Chingó'];
+  var SONG_IDS=['MCH1tA-6JWs','N9eroXvvCiI','ojvldIzbaMo'];
+  var SONG_NAMES=['Antología — Shakira','Aprovéchate — Café Tacvba','Enjoy the Silence — Depeche Mode'];
   var player=null, cur=0, pendingStart=false, started=false;
   function onYouTubeIframeAPIReady(){
     player=new YT.Player('player',{
@@ -510,6 +576,72 @@
   ringClose.addEventListener('click',function(){ ringModal.classList.remove('show'); });
   ringModal.addEventListener('click',function(e){ if(e.target===ringModal){ ringModal.classList.remove('show'); } });
 
+  // ============ COUNTDOWN (Nov 6) ============
+  var MEET=new Date(2026,10,6,0,0,0); // 6 de noviembre, 00:00
+  var cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
+  function tick(){
+    var now=new Date();
+    var diff=MEET-now;
+    if(diff<=0){
+      cdD.textContent='0';cdH.textContent='0';cdM.textContent='0';cdS.textContent='0';
+      return;
+    }
+    cdD.textContent=Math.floor(diff/86400000);
+    cdH.textContent=Math.floor(diff%86400000/3600000);
+    cdM.textContent=Math.floor(diff%3600000/60000);
+    cdS.textContent=Math.floor(diff%60000/1000);
+  }
+  tick(); setInterval(tick,1000);
+
+  // ============ EASTER EGG MODAL ============
+  var eggModal=document.getElementById('eggModal');
+  var eggPhoto=document.getElementById('eggPhoto');
+  var eggText=document.getElementById('eggText');
+  var eggClose=document.getElementById('eggClose');
+  function openEgg(file,text){
+    eggPhoto.src='fotos/'+file;
+    eggText.textContent=text||'';
+    eggText.style.display=text?'block':'none';
+    eggModal.classList.add('show');
+  }
+  eggClose.addEventListener('click',function(){ eggModal.classList.remove('show'); });
+  eggModal.addEventListener('click',function(e){ if(e.target===eggModal){ eggModal.classList.remove('show'); } });
+
+  // Easter egg: hidden words
+  var EGG_TEXTS={
+    t1:"I wouldn't change a single second of what we lived — not even this ache of missing you, because it's the proof of how immense my love for you is.",
+    t2:"Look at you. You're so perfect, so painfully beautiful, that sometimes I don't understand how so much light fits in such a small, lovely body. You're everything I want and need.",
+    t3:"Sometimes I catch myself calculating the odds. The thousands of variables that had to align, the microscopic decisions we each made, the kilometers that separated us, and the exact instant we happened to cross paths — casually hunting monsters.",
+    t4:"Saying I miss you falls short. There's a very specific kind of ache that appears right after being ridiculously happy with you, and then having to wait to see you again. :'("
+  };
+  function bindEggWords(){
+    var words=document.querySelectorAll('.egg-word');
+    words.forEach(function(w){
+      w.addEventListener('click',function(){
+        openEgg(w.getAttribute('data-file'), EGG_TEXTS[w.getAttribute('data-egg')]||'');
+      });
+    });
+  }
+  bindEggWords();
+
+  // Easter egg: moon + sparkles in sky
+  function bindSkyEggs(){
+    var moon=document.getElementById('eggMoon');
+    if(moon) moon.addEventListener('click',function(){ openEgg(moon.getAttribute('data-file'), moon.getAttribute('data-text')); });
+    ['eggSparkle1','eggSparkle2'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.addEventListener('click',function(){ openEgg(el.getAttribute('data-file'), el.getAttribute('data-text')); });
+    });
+  }
+  bindSkyEggs();
+
+  // ============ 10-MINUTE SECRET ============
+  var toast=document.getElementById('toast');
+  setTimeout(function(){
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); },6000);
+  },600000); // 10 minutes
+
   // ============ STARRY SKIES ============
   function makeStars(canvas,count,shooters){
     var ctx=canvas.getContext('2d');
@@ -547,6 +679,7 @@
   }
   makeStars(document.getElementById('skyCanvas'),170,true);
   makeStars(document.getElementById('ringCanvas'),90,false);
+  makeStars(document.getElementById('cdCanvas'),90,false);
 
   // ============ ENVELOPE ============
   var envObserver=new IntersectionObserver(function(entries){
@@ -594,6 +727,18 @@
       f.appendChild(img);f.appendChild(cap);strip.appendChild(f);
     });
     item.appendChild(strip);
+  });
+
+  // ============ MOMENTS GALLERY (new visible photos) ============
+  var MOMENTS=['nueva08.jpg','nueva09.jpg','nueva10.jpg','nueva11.jpg','nueva12.jpg','nueva13.jpg','nueva14.jpg'];
+  var momentsGallery=document.getElementById('momentsGallery');
+  MOMENTS.forEach(function(name){
+    var f=document.createElement('div');f.className='polaroid';
+    var rot=(-3+Math.random()*6);
+    f.style.transform='rotate('+rot+'deg)';
+    var img=new Image();img.src='fotos/'+name;img.alt='Us';img.loading='lazy';img.className='ph-img';
+    img.onclick=function(){openLightbox('fotos/'+name,'Us');};
+    f.appendChild(img);momentsGallery.appendChild(f);
   });
 </script>
 </body>
