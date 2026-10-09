@@ -284,6 +284,31 @@
   </div>
 </div>
 
+  <!-- RING MODAL -->
+  <div class="ring-modal" id="ringModal">
+    <div class="ring-card">
+      <button class="ring-close" id="ringClose">&times;</button>
+      <img class="ring-photo" src="fotos/nuestra-primera-foto.jpg" alt="Us">
+      <div class="ring-letters" id="ringLetters">
+        <div class="rletter"><div class="big">T</div><div class="word">Through</div></div>
+        <div class="rletter"><div class="big">O</div><div class="word">Our</div></div>
+        <div class="rletter"><div class="big">K</div><div class="word">Kindred</div></div>
+        <div class="rletter"><div class="big">Y</div><div class="word">Years</div></div>
+      </div>
+      <div class="ring-acronym" id="ringAcronym">Through Our Kindred Years</div>
+      <div class="ring-msg" id="ringMsg" style="display:none;">
+        <div class="l1">Four letters. One promise.</div>
+        <p><strong>T — Through.</strong> Through every mile that once separated us, and every step we still have to take.</p>
+        <p><strong>O — Our.</strong> Our story, our love, our life — always built together.</p>
+        <p><strong>K — Kindred.</strong> Kindred souls — two people who understand each other without a single word.</p>
+        <p><strong>Y — Years.</strong> Through our kindred years — all of them — I'll love you, stand beside you, and hold you up.</p>
+        <p>This ring isn't a question. It's a promise.<br>To love you, to be loyal to you, and to walk with you — no matter what we have to face, no matter how long it takes.</p>
+        <p>I choose you. Today, and for every year to come.</p>
+        <div class="sig">Forever yours, Pocho ♥</div>
+      </div>
+    </div>
+  </div>
+
 <!-- Toast (10-min secret) -->
 <div class="toast" id="toast">It seems you miss me as much as I miss you, my love. I love you! 💜</div>
 
@@ -639,14 +664,16 @@
   var ringRevealed=false;
 
   function revealRing(){
+    if(!ringModal) return;
     ringModal.classList.add('show');
     if(ringRevealed){ return; }
     ringRevealed=true;
     ringLetters.forEach(function(l,i){
       setTimeout(function(){ l.classList.add('show'); }, 400+i*420);
     });
-    setTimeout(function(){ ringAcronym.classList.add('show'); }, 400+4*420);
+    setTimeout(function(){ if(ringAcronym) ringAcronym.classList.add('show'); }, 400+4*420);
     setTimeout(function(){
+      if(!ringMsg) return;
       ringMsg.style.display='block';
       ringMsg.style.opacity='0';
       ringMsg.style.transition='opacity .9s';
@@ -654,9 +681,9 @@
     }, 400+4*420+800);
     burstHearts(26);
   }
-  ringBtn.addEventListener('click',revealRing);
-  ringClose.addEventListener('click',function(){ ringModal.classList.remove('show'); });
-  ringModal.addEventListener('click',function(e){ if(e.target===ringModal){ ringModal.classList.remove('show'); } });
+  if(ringBtn) ringBtn.addEventListener('click',revealRing);
+  if(ringClose) ringClose.addEventListener('click',function(){ ringModal.classList.remove('show'); });
+  if(ringModal) ringModal.addEventListener('click',function(e){ if(e.target===ringModal){ ringModal.classList.remove('show'); } });
 
   // ============ COUNTDOWN (Nov 6) ============
   var MEET=new Date(2026,10,6,0,0,0); // 6 de noviembre, 00:00
