@@ -37,6 +37,8 @@
   /* ===== MUSIC FAB ===== */
   #musicBtn{position:fixed;bottom:1.3rem;right:1.3rem;z-index:90;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;border:none;cursor:pointer;font-size:1.3rem;box-shadow:0 8px 24px rgba(91,44,111,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s;}
   #musicBtn.playing{animation:spin 6s linear infinite;}
+  #nextBtn{position:fixed;bottom:1.55rem;right:5rem;z-index:90;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.94);color:var(--purple-dark);border:1px solid #ead9f5;cursor:pointer;font-size:1rem;box-shadow:0 8px 24px rgba(91,44,111,.25);display:flex;align-items:center;justify-content:center;transition:transform .2s;}
+  #nextBtn:hover{transform:scale(1.08);}
   @keyframes spin{to{transform:rotate(360deg);}}
   .music-bar{position:fixed;bottom:5.4rem;right:1.3rem;z-index:89;background:#fff;border-radius:14px;padding:.7rem .9rem;box-shadow:0 8px 24px rgba(91,44,111,.25);font-size:.8rem;color:var(--purple-dark);max-width:220px;display:none;}
   .music-bar.show{display:block;animation:fadeIn .3s;}
@@ -267,6 +269,7 @@
 
 <!-- Music controls -->
 <button id="musicBtn" title="Music">♫</button>
+<button id="nextBtn" title="Next song">⏭</button>
 <div class="music-bar" id="musicBar"><div class="m-title" id="musicTitle">Ready…</div></div>
 
 <!-- Ambient floating hearts -->
@@ -553,12 +556,7 @@
       events:{
         onReady:function(){ if(pendingStart){ startMusic(); } },
         onStateChange:function(e){
-          if(e.data===YT.PlayerState.ENDED){
-            cur=(cur+1)%SONG_IDS.length;
-            player.loadVideoById(SONG_IDS[cur]);
-            player.playVideo();
-            document.getElementById('musicTitle').textContent=SONG_NAMES[cur];
-          }
+          if(e.data===YT.PlayerState.ENDED){ nextSong(); }
         }
       }
     });
@@ -571,6 +569,16 @@
     document.getElementById('musicBtn').classList.add('playing');
     document.getElementById('musicBar').classList.add('show');
   }
+  // salta a la siguiente canción, la pida el botón o porque se acabó la anterior
+  function nextSong(){
+    if(!player || typeof player.loadVideoById!=='function'){ pendingStart=true; return; }
+    cur=(cur+1)%SONG_IDS.length;
+    player.loadVideoById(SONG_IDS[cur]); player.playVideo();
+    started=true; pendingStart=false;
+    document.getElementById('musicTitle').textContent=SONG_NAMES[cur];
+    document.getElementById('musicBar').classList.add('show');
+    document.getElementById('musicBtn').classList.add('playing');
+  }
   var musicBtn=document.getElementById('musicBtn');
   musicBtn.addEventListener('click',function(){
     if(this.classList.contains('playing')){
@@ -580,6 +588,7 @@
       this.classList.add('playing');
     }
   });
+  document.getElementById('nextBtn').addEventListener('click',nextSong);
 
   // ============ CHAPTERS (accordion) ============
   var chapterHeads=document.querySelectorAll('.chapter-head');

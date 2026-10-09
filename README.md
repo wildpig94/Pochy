@@ -16,7 +16,7 @@ A romantic, interactive webpage for Carmen ("Pocha") from Pocho (Alexis), celebr
 - ✉️ **Envelope letter** — the final love letter opens like a real envelope.
 - ⌨️ **Typewriter** hero text + a surprise button at the end.
 - 🤫 **10-minute secret** — a toast that only shows up if she stays that long.
-- ♫ **Music** — plays 3 songs in order, then loops.
+- ♫ **Music** — plays 3 songs in order, then loops (♫ pause/resume, ⏭ skip).
 
 ## 📸 Photos
 Photos live in the **`fotos/`** folder. `memoria1` … `memoria26` are the timeline,
