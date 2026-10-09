@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Índice de fotos — carmen-3-meses</title>
+<style>
+  body{font-family:sans-serif;background:#1a0b2e;color:#fff;margin:0;padding:20px;}
+  h1{font-size:1.4rem;margin-bottom:.3rem;}
+  p.sub{opacity:.7;font-size:.9rem;margin:0 0 20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+  .card{background:#2a1150;border-radius:12px;overflow:hidden;border:1px solid rgba(216,182,240,.2);}
+  .card img{width:100%;height:200px;object-fit:cover;display:block;}
+  .card .name{font-size:.72rem;padding:8px 10px;word-break:break-all;color:#d9c2f0;background:#3a1555;}
+</style>
+</head>
+<body>
+<h1>📸 Índice de fotos</h1>
+<p class="sub">Cada foto tiene su nombre debajo. Apunta el nombre y el texto que le toca.</p>
+<div class="grid" id="grid"></div>
+<script>
+var files=["memoria1.jpg","memoria2.jpg","memoria3.jpg","memoria4.jpg","memoria5.jpg","memoria6.jpg","memoria7.png","memoria8.jpg","memoria9.png","memoria10.jpg","memoria11.jpg","memoria12.jpg","memoria13.jpg","memoria14.jpg","memoria15.png","memoria16.jpg","memoria17.jpg","memoria18.jpg","memoria19.jpg","memoria20.png","memoria21.png","memoria22.jpg","memoria23.jpg","memoria24.jpg","memoria25.jpg","memoria26.jpg","nuestra-primera-foto.jpg","nueva01.jpg","nueva02.jpg","nueva03.jpg","nueva04.jpg","nueva05.jpg","nueva06.jpg","nueva07.jpg","nueva08.jpg","nueva09.jpg","nueva10.jpg","nueva11.jpg","nueva12.jpg","nueva13.jpg","nueva14.jpg"];
+var g=document.getElementById('grid');
+files.forEach(function(f){
+  var c=document.createElement('div');c.className='card';
+  var img=document.createElement('img');img.src='fotos/'+f;img.loading='lazy';
+  var n=document.createElement('div');n.className='name';n.textContent=f;
+  c.appendChild(img);c.appendChild(n);g.appendChild(c);
+});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Pocha ♥ Our First 3 Months</title>
+<title>For Pocha ♥ Our Story</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -69,16 +69,29 @@
   .scroll-cue{margin-top:3rem;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple-dark);opacity:.7;animation:bob 2s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
 
+  /* ===== Chapters ===== */
+  .chapters{max-width:800px;margin:2rem auto;padding:0 1rem;}
+  .chapter{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 14px 44px rgba(91,44,111,.14);border:1px solid #ead9f5;margin-bottom:1.4rem;}
+  .chapter-head{width:100%;display:flex;align-items:center;gap:1.1rem;padding:1.4rem 1.5rem;background:linear-gradient(135deg,#fff,#f6edfb);border:none;cursor:pointer;text-align:left;}
+  .ch-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:600;color:var(--gold);line-height:1;}
+  .ch-titles{display:flex;flex-direction:column;gap:.15rem;}
+  .ch-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--purple-dark);}
+  .ch-sub{font-size:.78rem;color:#9a6dae;font-weight:400;}
+  .ch-arrow{margin-left:auto;color:var(--purple);font-size:1.3rem;transition:transform .35s;flex-shrink:0;}
+  .chapter.open .ch-arrow{transform:rotate(180deg);}
+  .chapter-body{display:none;padding:0 1.5rem 2rem;}
+  .chapter.open .chapter-body{display:block;}
+
   /* ===== Countdown ===== */
-  .countdown-sec{padding:5rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
+  .countdown-sec{padding:4rem 1rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;border-radius:18px;}
   .countdown-sec .stars-bg{position:absolute;inset:0;}
   .cd-label{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;position:relative;z-index:2;}
   .cd-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,5vw,2.6rem);color:#fff;margin-bottom:.6rem;position:relative;z-index:2;}
   .cd-sub{color:#cbb3e8;font-weight:300;max-width:42ch;margin:0 auto 2.5rem;line-height:1.6;position:relative;z-index:2;}
   .cd-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
-  .cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:1.2rem 1.4rem;min-width:82px;backdrop-filter:blur(6px);}
-  .cd-box .n{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3rem);font-weight:600;color:#fff;line-height:1;}
-  .cd-box .l{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:#d9c2f0;margin-top:.5rem;}
+  .cd-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:1.2rem 1.2rem;min-width:76px;backdrop-filter:blur(6px);}
+  .cd-box .n{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,2.6rem);font-weight:600;color:#fff;line-height:1;}
+  .cd-box .l{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#d9c2f0;margin-top:.5rem;}
 
   /* ===== Easter eggs ===== */
   .egg-word{cursor:pointer;border-bottom:1px dashed rgba(142,68,173,.55);position:relative;transition:background .25s,color .25s;}
@@ -100,12 +113,12 @@
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   /* ===== Ring reveal ===== */
-  .ring-sec{padding:6rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;}
+  .ring-sec{padding:4rem 1.5rem;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 60%,#3a1555 100%);text-align:center;color:#fff;position:relative;overflow:hidden;border-radius:18px;}
   .ring-sec .stars-bg{position:absolute;inset:0;}
   .ring-kicker{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;position:relative;z-index:2;}
   .ring-hint{position:relative;z-index:2;color:#cbb3e8;font-weight:300;max-width:34ch;margin:0 auto 1.8rem;line-height:1.6;}
   .ring-btn{position:relative;z-index:2;background:transparent;border:none;cursor:pointer;outline:none;padding:.5rem;}
-  .ring-btn .rheart{font-size:3.4rem;display:inline-block;animation:beat 1.4s infinite;filter:drop-shadow(0 0 18px rgba(255,120,180,.55));}
+  .ring-btn .rheart{font-size:3.2rem;display:inline-block;animation:beat 1.4s infinite;filter:drop-shadow(0 0 18px rgba(255,120,180,.55));}
   .ring-btn .rlabel{display:block;margin-top:.6rem;font-family:'Poppins',sans-serif;font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:#ffd0e8;}
 
   /* Ring modal */
@@ -128,23 +141,17 @@
   .ring-msg .sig{font-family:'Playfair Display',serif;font-style:italic;text-align:right;color:#ffd76a;margin-top:1rem;font-size:1.1rem;}
 
   /* ===== Under the same sky ===== */
-  .sky-sec{height:100vh;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e0620 0%,#1a0b2e 50%,#2a1150 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;}
+  .sky-sec{height:70vh;min-height:420px;position:relative;overflow:hidden;background:linear-gradient(180deg,#0e0620 0%,#1a0b2e 50%,#2a1150 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;border-radius:18px;}
   #skyCanvas{position:absolute;inset:0;}
   .sky-moon{position:absolute;top:12%;right:14%;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff8e1,#f3e5c0 60%,#e6d3a8);box-shadow:0 0 60px 20px rgba(255,244,200,.5);}
   .sky-text{position:relative;z-index:2;color:#fff;}
   .sky-text .kicker{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;}
-  .sky-text h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3.2rem);font-weight:600;line-height:1.15;}
+  .sky-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,6vw,2.8rem);font-weight:600;line-height:1.15;}
   .sky-text h2 em{font-style:italic;color:#ffd76a;}
   .sky-text p{margin-top:1.4rem;color:#cbb3e8;font-weight:300;max-width:36ch;margin-left:auto;margin-right:auto;line-height:1.7;}
 
-  /* ===== Sections ===== */
-  section{padding:5rem 1.5rem;position:relative;}
-  .section-label{text-align:center;font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;}
-  h2.title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:600;color:var(--purple-dark);margin-bottom:1rem;}
-  .section-intro{text-align:center;max-width:46rem;margin:0 auto 3rem;font-weight:300;color:#6d4a7e;line-height:1.7;}
-
   /* ===== Timeline ===== */
-  .timeline{max-width:720px;margin:0 auto;position:relative;padding:1rem 0;}
+  .timeline{max-width:700px;margin:0 auto;position:relative;padding:1rem 0;}
   .timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--purple),var(--purple),transparent);}
   .tl-item{position:relative;padding-left:64px;margin-bottom:3.2rem;}
   .tl-dot{position:absolute;left:14px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--purple);box-shadow:0 0 0 4px var(--soft);}
@@ -161,7 +168,7 @@
   .polaroid:hover{transform:rotate(0deg) scale(1.06) !important;box-shadow:0 12px 28px rgba(91,44,111,.3);z-index:3;}
 
   /* Moments gallery */
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;max-width:820px;margin:0 auto;}
 
   /* ===== Lightbox ===== */
   #lightbox{position:fixed;inset:0;z-index:200;background:rgba(15,5,30,.95);display:none;align-items:center;justify-content:center;cursor:zoom-out;flex-direction:column;}
@@ -176,30 +183,31 @@
   .song .num{width:42px;height:42px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;}
   .song .meta h3{font-size:1.05rem;color:var(--purple-dark);font-weight:500;}
   .song .meta p{font-size:.82rem;color:#9a6dae;font-style:italic;}
-  .song a{margin-left:auto;color:var(--gold);font-size:.85rem;text-decoration:none;white-space:nowrap;}
-  .song a:hover{color:var(--purple-dark);}
 
   /* ===== Envelope + Letter ===== */
-  #letter{background:#f3eafb;}
-  .envelope{max-width:640px;margin:0 auto;position:relative;}
-  .env-flap{position:relative;z-index:3;height:0;border-left:320px solid transparent;border-right:320px solid transparent;border-top:120px solid #d8b6f0;margin:0 auto;transform-origin:top;transition:transform .8s ease .2s;border-radius:0 0 4px 4px;max-width:640px;width:100%;}
-  .env-body{position:relative;z-index:1;background:#e8d5f5;height:16px;border-radius:0 0 10px 10px;margin-top:-2px;}
-  .letter-card{max-width:620px;margin:-260px auto 0;background:#fff;border-radius:24px;padding:2.5rem 2rem;box-shadow:0 20px 50px rgba(142,68,173,.14);border:1px solid #ead9f5;position:relative;z-index:2;transform:translateY(-60px);opacity:0;transition:transform 1s ease .6s,opacity 1s ease .6s;}
+  .envelope{max-width:620px;margin:0 auto;position:relative;}
+  .env-flap{position:relative;z-index:3;height:0;border-left:310px solid transparent;border-right:310px solid transparent;border-top:110px solid #d8b6f0;margin:0 auto;transform-origin:top;transition:transform .8s ease .2s;border-radius:0 0 4px 4px;max-width:620px;width:100%;}
+  .env-body{position:relative;z-index:1;background:#e8d5f5;height:14px;border-radius:0 0 10px 10px;margin-top:-2px;}
+  .letter-card{max-width:600px;margin:-250px auto 0;background:#fff;border-radius:24px;padding:2.5rem 2rem;box-shadow:0 20px 50px rgba(142,68,173,.14);border:1px solid #ead9f5;position:relative;z-index:2;transform:translateY(-60px);opacity:0;transition:transform 1s ease .6s,opacity 1s ease .6s;}
   .envelope.open .env-flap{transform:rotateX(180deg);}
   .envelope.open .letter-card{transform:translateY(0);opacity:1;}
   .letter-card .wax{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--purple),var(--purple-dark));display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;box-shadow:0 6px 16px rgba(91,44,111,.4);}
   .letter-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--purple-dark);margin:2rem 0 1rem;text-align:center;}
   .letter-card p{font-weight:300;line-height:1.85;color:#5d414b;margin-bottom:1.1rem;text-align:justify;}
   .letter-card .sig{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--purple-dark);text-align:right;font-style:italic;}
-  .type-cursor{display:inline-block;border-right:2px solid var(--purple-dark);animation:blink .8s step-end infinite;}
 
   /* ===== Surprise ===== */
-  .surprise-sec{text-align:center;padding:5rem 1.5rem;background:linear-gradient(160deg,#1a0b2e,#2a1150);color:#fff;}
+  .surprise-sec{text-align:center;padding:4rem 1.5rem;background:linear-gradient(160deg,#1a0b2e,#2a1150);color:#fff;border-radius:18px;}
   .surprise-sec .kicker{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:#d9c2f0;margin-bottom:1rem;}
   #surpriseBtn{font-family:'Poppins',sans-serif;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:#2a1150;background:#fff;border:none;padding:1rem 2.4rem;border-radius:50px;cursor:pointer;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.3);margin-top:1rem;transition:transform .2s;}
   #surpriseBtn:hover{transform:scale(1.05);}
   #surpriseMsg{max-width:34ch;margin:2rem auto 0;font-family:'Playfair Display',serif;font-size:clamp(1.3rem,4vw,1.8rem);line-height:1.5;color:#ffd76a;opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s;}
   #surpriseMsg.show{opacity:1;transform:translateY(0);}
+
+  .section-label{text-align:center;font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--purple);margin-bottom:.7rem;}
+  h2.title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.7rem,5vw,2.4rem);font-weight:600;color:var(--purple-dark);margin-bottom:.8rem;}
+  .section-intro{text-align:center;max-width:46rem;margin:0 auto 2.5rem;font-weight:300;color:#6d4a7e;line-height:1.7;}
+  .sub-sec{padding:2.5rem 0;}
 
   footer{text-align:center;padding:3rem 1rem 5rem;color:#9a6dae;font-size:.85rem;background:var(--purple-bg);}
   footer .big{font-size:1.6rem;}
@@ -212,9 +220,11 @@
     .tl-item{padding-left:54px;}
     .tl-dot{left:11px;}
     .tl-photos{grid-template-columns:repeat(3,1fr);}
-    .env-flap{border-left-width:48vw;border-right-width:48vw;border-top-width:90px;}
-    .letter-card{margin-top:-200px;padding:2rem 1.3rem;}
+    .env-flap{border-left-width:46vw;border-right-width:46vw;border-top-width:84px;}
+    .letter-card{margin-top:-190px;padding:2rem 1.3rem;}
     .polaroid{padding:.35rem .35rem .75rem;}
+    .chapters{padding:0 .7rem;}
+    .chapter-body{padding:0 1rem 1.6rem;}
   }
 </style>
 </head>
@@ -225,7 +235,7 @@
   <div class="heart-pulse">💜</div>
   <div class="o-etoile">for the love of my life</div>
   <h2>Pocha ♥ Pocho</h2>
-  <div class="o-sub">Three months across 4,000 km…<br>and now, a countdown to finally holding you.</div>
+  <div class="o-sub">Our story, told in chapters —<br>and every one of them is you.</div>
   <button id="startBtn">✦ Enter ✦</button>
 </div>
 
@@ -256,189 +266,206 @@
   <!-- HERO -->
   <header class="hero">
     <div class="eyebrow">for the love of my life</div>
-    <h1>Three Months<br><span class="amper">&</span> Forever To Come</h1>
+    <h1>Our Story<br><span class="amper">&</span> The Forever After</h1>
     <div class="sub" id="typeSub"><span class="cursor"></span></div>
     <div class="names">Pocha <span>&</span> Pocho</div>
-    <div class="scroll-cue">▼ scroll to relive it</div>
+    <div class="scroll-cue">▼ open a chapter</div>
   </header>
 
-  <!-- COUNTDOWN -->
-  <section class="countdown-sec">
-    <canvas class="stars-bg" id="cdCanvas"></canvas>
-    <div class="cd-label">counting down</div>
-    <h2 class="cd-title">Until I See You Again</h2>
-    <p class="cd-sub">November 6. The next time I get to hold you.</p>
-    <div class="cd-grid" id="cdGrid">
-      <div class="cd-box"><div class="n" id="cdD">0</div><div class="l">days</div></div>
-      <div class="cd-box"><div class="n" id="cdH">0</div><div class="l">hours</div></div>
-      <div class="cd-box"><div class="n" id="cdM">0</div><div class="l">min</div></div>
-      <div class="cd-box"><div class="n" id="cdS">0</div><div class="l">sec</div></div>
-    </div>
-  </section>
+  <div class="chapters">
 
-  <!-- RING REVEAL -->
-  <section class="ring-sec">
-    <canvas class="stars-bg" id="ringCanvas"></canvas>
-    <div class="ring-kicker">there's something for you…</div>
-    <p class="ring-hint">A promise I wanted to put into words — but only when you're ready to find it.</p>
-    <button class="ring-btn" id="ringBtn" title="Open">
-      <span class="rheart">💜</span>
-      <span class="rlabel">tap here</span>
-    </button>
-  </section>
+    <!-- CHAPTER 1 -->
+    <div class="chapter open" id="chapter1">
+      <button class="chapter-head">
+        <span class="ch-num">I</span>
+        <span class="ch-titles"><span class="ch-title">How We Began</span><span class="ch-sub">from a heart emote to falling in love</span></span>
+        <span class="ch-arrow">▾</span>
+      </button>
+      <div class="chapter-body">
 
-  <!-- RING MODAL -->
-  <div class="ring-modal" id="ringModal">
-    <div class="ring-card">
-      <button class="ring-close" id="ringClose">&times;</button>
-      <img class="ring-photo" src="fotos/nuestra-primera-foto.jpg" alt="Us">
-      <div class="ring-letters" id="ringLetters">
-        <div class="rletter"><div class="big">T</div><div class="word">Through</div></div>
-        <div class="rletter"><div class="big">O</div><div class="word">Our</div></div>
-        <div class="rletter"><div class="big">K</div><div class="word">Kindred</div></div>
-        <div class="rletter"><div class="big">Y</div><div class="word">Years</div></div>
-      </div>
-      <div class="ring-acronym" id="ringAcronym">Through Our Kindred Years</div>
-      <div class="ring-msg" id="ringMsg" style="display:none;">
-        <div class="l1">Four letters. One promise.</div>
-        <p><strong>T — Through.</strong> Through every mile that once separated us, and every step we still have to take.</p>
-        <p><strong>O — Our.</strong> Our story, our love, our life — always built together.</p>
-        <p><strong>K — Kindred.</strong> Kindred souls — two people who understand each other without a single word.</p>
-        <p><strong>Y — Years.</strong> Through our kindred years — all of them — I'll love you, stand beside you, and hold you up.</p>
-        <p>This ring isn't a question. It's a promise.<br>To love you, to be loyal to you, and to walk with you — no matter what we have to face, no matter how long it takes.</p>
-        <p>I choose you. Today, and for every year to come.</p>
-        <div class="sig">Forever yours, Pocho ♥</div>
+        <!-- UNDER THE SAME SKY -->
+        <div class="sub-sec">
+          <div class="sky-sec">
+            <canvas id="skyCanvas"></canvas>
+            <div class="sky-moon" id="eggMoon" data-file="nueva01.jpg" data-text="You lit up my darkest sky long before I could ever hold you. ✨"></div>
+            <button class="egg-sparkle" id="eggSparkle1" data-file="nueva02.jpg" data-text="Every wish I made on a star was you." style="top:22%;left:14%;">✨</button>
+            <button class="egg-sparkle" id="eggSparkle2" data-file="nueva03.jpg" data-text="Out of a whole sky, I'd still find you." style="top:62%;right:10%;">✨</button>
+            <div class="sky-text">
+              <div class="kicker">4,000 km apart</div>
+              <h2>Under the <em>same sky</em>,<br>I was always with you.</h2>
+              <p>Every night we fell asleep to each other's voice — the sky above you was the same sky above me. Distance was never a wall. It was a bridge.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIMELINE PART 1 -->
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">Day one</span>
+            <div class="tl-title">A Heart in Ragnarok</div>
+            <p class="tl-text">I saw you first in <span class="egg-word" data-file="nueva11.jpg" data-egg="e3">Ragnarok Online</span>. I sent you a heart emote… and you sent one back. From that moment, every time I saw you online, I sent you a heart — until one day I finally built up the courage to say <em>"hola, nos casamos?"</em> You said no. But that's the day we started talking. And it changed everything.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">TokyDoki & Nh2</span>
+            <div class="tl-title">Two Strangers, Two Languages</div>
+            <p class="tl-text">For two or three months we talked as <strong>TokyDoki</strong> and <strong>Nh2</strong>. You in English, me in Spanish. I barely spoke a word of English — I used a translator for almost everything. But I didn't care. I just wanted to understand <em>you</em>. So I made a decision that changed my life: I would learn, for you.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">The first photo</span>
+            <div class="tl-title">Discord & Real Faces</div>
+            <p class="tl-text">Then came Discord. Daily calls. And soon, our first photos. I still remember the feeling of finally seeing <span class="egg-word" data-file="nueva05.jpg" data-egg="e2">your face</span> — the person behind the words, the one who made my heart race across the ocean.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">The first call</span>
+            <div class="tl-title">Our First Video Call</div>
+            <p class="tl-text">I was so nervous. On a video call there was no translator to hide behind — so I memorized phrases, nodded, smiled, and let you talk while I pretended to understand. And then I went home and studied English an hour or two every single day. First I learned to understand you without you slowing down. Then, slowly, I started completing sentences of my own. Today we have whole conversations with almost no translator — and when I forget a word, I describe it, or make a sound, or give you synonyms until it's a game of pictionary that makes you laugh. That laugh is worth every hour I studied.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">Officially ours</span>
+            <div class="tl-title">From "2D Boyfriend" to the Real Thing</div>
+            <p class="tl-text">Not long after, the evening calls became night calls, and the night calls became hours… and then we made it official. You used to call me your "2D boyfriend" — but we became real. From that moment we started planning the day we'd finally meet.</p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- CHAPTER 2 -->
+    <div class="chapter" id="chapter2">
+      <button class="chapter-head">
+        <span class="ch-num">II</span>
+        <span class="ch-titles"><span class="ch-title">The Journey to You</span><span class="ch-sub">the plan, the promise, the ring</span></span>
+        <span class="ch-arrow">▾</span>
+      </button>
+      <div class="chapter-body">
+
+        <!-- TIMELINE PART 2 -->
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">Every single night</span>
+            <div class="tl-title">Falling Asleep Together, 4,000 km Apart</div>
+            <p class="tl-text">Since the very first night, we have not spent a single night apart. We fall asleep together on a video call and wake up to each other's voice — different countries, <span class="egg-word" data-file="nueva13.jpg" data-egg="e4">same heartbeat</span>. The call only pauses while you're at work. We eat together, we shower together, we share TikToks and songs every day. It's never about always talking. It's about knowing the other person is there. And you always are.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">What you gave me</span>
+            <div class="tl-title">You Changed My Life</div>
+            <p class="tl-text">When we met, I had just lost my job and I was deep in a depression — not even wanting to get out of bed. Then I met you, and I wanted to be <span class="egg-word" data-file="nueva10.jpg" data-egg="e1">worthy of you</span>. I finished a book I'd been writing for months in two nights, and I translated it chapter by chapter to share with you. You showed me what I was capable of. You believed in me before I believed in myself. I owe you more than I can ever repay — but I'll spend my whole life trying.</p>
+          </div>
+
+          <div class="tl-item reveal">
+            <span class="tl-dot"></span>
+            <span class="tl-tag">the plan</span>
+            <div class="tl-title">Our Forever</div>
+            <p class="tl-text">This is where our story is headed. I'm coming to you — to <span class="egg-word" data-file="nueva04.jpg" data-egg="e6">the airport</span>, to Canada, to Cancún, to a wedding, to a life. Because we both know — this is for the rest of our lives.</p>
+          </div>
+        </div>
+
+        <!-- RING REVEAL -->
+        <div class="sub-sec">
+          <div class="ring-sec">
+            <canvas class="stars-bg" id="ringCanvas"></canvas>
+            <div class="ring-kicker">there's something for you…</div>
+            <p class="ring-hint">A promise I wanted to put into words — but only when you're ready to find it.</p>
+            <button class="ring-btn" id="ringBtn" title="Open">
+              <span class="rheart">💜</span>
+              <span class="rlabel">tap here</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAPTER 3 -->
+    <div class="chapter" id="chapter3">
+      <button class="chapter-head">
+        <span class="ch-num">III</span>
+        <span class="ch-titles"><span class="ch-title">Us, Now</span><span class="ch-sub">counting down and missing you</span></span>
+        <span class="ch-arrow">▾</span>
+      </button>
+      <div class="chapter-body">
+
+        <!-- COUNTDOWN -->
+        <div class="sub-sec">
+          <div class="countdown-sec">
+            <canvas class="stars-bg" id="cdCanvas"></canvas>
+            <div class="cd-label">counting down</div>
+            <h2 class="cd-title">Until I See You Again</h2>
+            <p class="cd-sub">November 6. The next time I get to hold you.</p>
+            <div class="cd-grid" id="cdGrid">
+              <div class="cd-box"><div class="n" id="cdD">0</div><div class="l">days</div></div>
+              <div class="cd-box"><div class="n" id="cdH">0</div><div class="l">hours</div></div>
+              <div class="cd-box"><div class="n" id="cdM">0</div><div class="l">min</div></div>
+              <div class="cd-box"><div class="n" id="cdS">0</div><div class="l">sec</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MOMENTS WE KEEP -->
+        <div class="sub-sec">
+          <div class="section-label">moments we keep</div>
+          <h2 class="title">New Memories With You</h2>
+          <p class="section-intro">Some of these are hiding around the page — keep your eyes open. 💜</p>
+          <div class="gallery" id="momentsGallery"></div>
+        </div>
+
+        <!-- SONGS -->
+        <div class="sub-sec">
+          <div class="section-label">our soundtrack</div>
+          <h2 class="title">The Songs That Are Us</h2>
+          <p class="section-intro">Every love has music. These songs carry the feeling of us.</p>
+          <div class="songs">
+            <div class="song reveal"><div class="num">1</div><div class="meta"><h3>Antología</h3><p>Shakira</p></div></div>
+            <div class="song reveal"><div class="num">2</div><div class="meta"><h3>Aprovéchate</h3><p>Café Tacvba</p></div></div>
+            <div class="song reveal"><div class="num">3</div><div class="meta"><h3>Enjoy the Silence</h3><p>Depeche Mode</p></div></div>
+          </div>
+        </div>
+
+        <!-- LETTER -->
+        <div class="sub-sec">
+          <div class="section-label">to my pocha</div>
+          <div class="envelope" id="envelope">
+            <div class="env-flap"></div>
+            <div class="env-body"></div>
+            <div class="letter-card">
+              <div class="wax">♥</div>
+              <h3>My dearest Pocha,</h3>
+              <p>I've always known I wasn't an ordinary guy. And from the very first moment, I knew you weren't an ordinary girl. I've never met anyone who thinks like me, acts like me, who carries that same mix of innocence, humor, intelligence, and beautiful madness. And every day, you prove it to me a little more.</p>
+              <p>People ask how we do this — how a connection across thousands of kilometers feels so deep. But it's not about distance. It's that I understand you like I'm reading my own heart. And you understand me like I'm describing you. You even asked once if I'd hacked you — because I'd always say exactly what you were thinking, right before you said it. I never have. We're just… <span class="egg-word" data-file="nueva07.jpg" data-egg="e5"><em>the same soul</em></span>. It's like we've been partners for more than one lifetime. And we both love believing that.</p>
+              <p>You pulled me out of the dark. You gave me a reason to move, to learn, to build, to dream. The man I'm becoming exists because of you. And the future I see — an airport, Canada, Cancún, a home, a wedding, a life — it all has you in it.</p>
+              <p>Three months. It feels like no time at all and like I've known you my whole life. Thank you for being my best friend, my love, my everything. I'm coming to you, Pocha. And I'm never letting go.</p>
+              <p class="sig">Forever yours,<br>Pocho ♥</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SURPRISE -->
+        <div class="sub-sec">
+          <div class="surprise-sec">
+            <div class="kicker">one last thing…</div>
+            <h2 class="title" style="color:#fff;">A Secret For You</h2>
+            <button id="surpriseBtn">💌 Touch Here 💌</button>
+            <div id="surpriseMsg">On the 26th, at midnight,<br>when you walk through those doors…<br>I'll finally get to tell you in person:<br><em>I love you.</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <!-- UNDER THE SAME SKY -->
-  <section class="sky-sec">
-    <canvas id="skyCanvas"></canvas>
-    <div class="sky-moon" id="eggMoon" data-file="nueva01.jpg" data-text="You lit up my darkest sky long before I could ever hold you. ✨"></div>
-    <button class="egg-sparkle" id="eggSparkle1" data-file="nueva02.jpg" data-text="Every wish I made on a star was you." style="top:22%;left:16%;">✨</button>
-    <button class="egg-sparkle" id="eggSparkle2" data-file="nueva03.jpg" data-text="Out of a whole sky, I'd still find you." style="top:60%;right:10%;">✨</button>
-    <div class="sky-text">
-      <div class="kicker">4,000 km apart</div>
-      <h2>Under the <em>same sky</em>,<br>I was always with you.</h2>
-      <p>Every night we fell asleep to each other's voice — the sky above you was the same sky above me. Distance was never a wall. It was a bridge.</p>
-    </div>
-  </section>
-
-  <!-- TIMELINE -->
-  <section id="story">
-    <div class="section-label">our story</div>
-    <h2 class="title">How We Began</h2>
-    <p class="section-intro">Every love has a beginning. Ours started in a world made of pixels… and became the most real thing I've ever known.</p>
-
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">Day one</span>
-        <div class="tl-title">A Heart in Ragnarok</div>
-        <p class="tl-text">I saw you first in <span class="egg-word" data-file="nueva04.jpg" data-egg="t3">Ragnarok Online</span>. I sent you a heart emote… and you sent one back. From that moment, every time I saw you online, I sent you a heart — until one day I finally built up the courage to say <em>"hola, nos casamos?"</em> You said no. But that's the day we started talking. And it changed everything.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">TokyDoki & Nh2</span>
-        <div class="tl-title">Two Strangers, Two Languages</div>
-        <p class="tl-text">For two or three months we talked as <strong>TokyDoki</strong> and <strong>Nh2</strong>. You in English, me in Spanish. I barely spoke a word of English — I used a translator for almost everything. But I didn't care. I just wanted to understand <em>you</em>. So I made a decision that changed my life: I would learn, for you.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">The first photo</span>
-        <div class="tl-title">Discord & Real Faces</div>
-        <p class="tl-text">Then came Discord. Daily calls. And soon, our first photos. I still remember the feeling of finally seeing <span class="egg-word" data-file="nueva05.jpg" data-egg="t2">your face</span> — the person behind the words, the one who made my heart race across the ocean.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">The first call</span>
-        <div class="tl-title">Our First Video Call</div>
-        <p class="tl-text">I was so nervous. On a video call there was no translator to hide behind — so I memorized phrases, nodded, smiled, and let you talk while I pretended to understand. And then I went home and studied English an hour or two every single day. First I learned to understand you without you slowing down. Then, slowly, I started completing sentences of my own. Today we have whole conversations with almost no translator — and when I forget a word, I describe it, or make a sound, or give you synonyms until it's a game of pictionary that makes you laugh. That laugh is worth every hour I studied.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">Officially ours</span>
-        <div class="tl-title">From "2D Boyfriend" to the Real Thing</div>
-        <p class="tl-text">Not long after, the evening calls became night calls, and the night calls became hours… and then we made it official. You used to call me your "2D boyfriend" — but we became real. From that moment we started planning the day we'd finally meet.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">Every single night</span>
-        <div class="tl-title">Falling Asleep Together, 4,000 km Apart</div>
-        <p class="tl-text">Since the very first night, we have not spent a single night apart. We fall asleep together on a video call and wake up to each other's voice — different countries, <span class="egg-word" data-file="nueva06.jpg" data-egg="t4">same heartbeat</span>. The call only pauses while you're at work. We eat together, we shower together, we share TikToks and songs every day. It's never about always talking. It's about knowing the other person is there. And you always are.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">What you gave me</span>
-        <div class="tl-title">You Changed My Life</div>
-        <p class="tl-text">When we met, I had just lost my job and I was deep in a depression — not even wanting to get out of bed. Then I met you, and I wanted to be worthy of you. I finished a book I'd been writing for months in two nights, and I translated it chapter by chapter to share with you. You showed me what I was capable of. You believed in me before I believed in myself. I owe you more than I can ever repay — but I'll spend my whole life trying.</p>
-      </div>
-
-      <div class="tl-item reveal">
-        <span class="tl-dot"></span>
-        <span class="tl-tag">the plan</span>
-        <div class="tl-title">Our Forever</div>
-        <p class="tl-text">This is where our story is headed. I'm coming to you — to the airport, to Canada, to Cancún, to a wedding, to a life. Because we both know — this is for the rest of our lives.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MOMENTS WE KEEP -->
-  <section id="moments">
-    <div class="section-label">moments we keep</div>
-    <h2 class="title">New Memories With You</h2>
-    <p class="section-intro">Some of these are hiding around the page — keep your eyes open. 💜</p>
-    <div class="gallery" id="momentsGallery"></div>
-  </section>
-
-  <!-- SONGS -->
-  <section id="songs" style="background:#f3eafb;">
-    <div class="section-label">our soundtrack</div>
-    <h2 class="title">The Songs That Are Us</h2>
-    <p class="section-intro">Every love has music. These songs carry the feeling of us.</p>
-    <div class="songs">
-      <div class="song reveal"><div class="num">1</div><div class="meta"><h3>Antología</h3><p>Shakira</p></div></div>
-      <div class="song reveal"><div class="num">2</div><div class="meta"><h3>Aprovéchate</h3><p>Café Tacvba</p></div></div>
-      <div class="song reveal"><div class="num">3</div><div class="meta"><h3>Enjoy the Silence</h3><p>Depeche Mode</p></div></div>
-    </div>
-  </section>
-
-  <!-- LETTER (envelope) -->
-  <section id="letter">
-    <div class="section-label">to my pocha</div>
-    <div class="envelope" id="envelope">
-      <div class="env-flap"></div>
-      <div class="env-body"></div>
-      <div class="letter-card">
-        <div class="wax">♥</div>
-        <h3>My dearest Pocha,</h3>
-        <p>I've always known I wasn't an ordinary guy. And from the very first moment, I knew you weren't an ordinary girl. I've never met anyone who thinks like me, acts like me, who carries that same mix of innocence, humor, intelligence, and beautiful madness. And every day, you prove it to me a little more.</p>
-        <p>People ask how we do this — how a connection across thousands of kilometers feels so deep. But it's not about distance. It's that I understand you like I'm reading my own heart. And you understand me like I'm describing you. You even asked once if I'd hacked you — because I'd always say exactly what you were thinking, right before you said it. I never have. We're just… <span class="egg-word" data-file="nueva07.jpg" data-egg="t1"><em>the same soul</em></span>. It's like we've been partners for more than one lifetime. And we both love believing that.</p>
-        <p>You pulled me out of the dark. You gave me a reason to move, to learn, to build, to dream. The man I'm becoming exists because of you. And the future I see — an airport, Canada, Cancún, a home, a wedding, a life — it all has you in it.</p>
-        <p>Three months. It feels like no time at all and like I've known you my whole life. Thank you for being my best friend, my love, my everything. I'm coming to you, Pocha. And I'm never letting go.</p>
-        <p class="sig">Forever yours,<br>Pocho ♥</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SURPRISE -->
-  <section class="surprise-sec">
-    <div class="kicker">one last thing…</div>
-    <h2 class="title" style="color:#fff;">A Secret For You</h2>
-    <button id="surpriseBtn">💌 Touch Here 💌</button>
-    <div id="surpriseMsg">On the 26th, at midnight,<br>when you walk through those doors…<br>I'll finally get to tell you in person:<br><em>I love you.</em></div>
-  </section>
 
   <footer>
     <div class="big">TokyDoki ♥ Nh2</div>
-    <div>Mexico → Canada · 3 months · infinite more to come</div>
+    <div>Mexico → Canada · infinite chapters to come</div>
   </footer>
 
 </div>
@@ -484,6 +511,18 @@
       if(!started&&player)startMusic(); else if(player&&player.playVideo)player.playVideo();
       this.classList.add('playing');
     }
+  });
+
+  // ============ CHAPTERS (accordion) ============
+  var chapterHeads=document.querySelectorAll('.chapter-head');
+  chapterHeads.forEach(function(head){
+    head.addEventListener('click',function(){
+      var ch=head.parentElement;
+      var wasOpen=ch.classList.contains('open');
+      // close all
+      document.querySelectorAll('.chapter').forEach(function(c){ c.classList.remove('open'); });
+      if(!wasOpen){ ch.classList.add('open'); }
+    });
   });
 
   // ============ ENTRY + HEART BURST ============
@@ -607,12 +646,14 @@
   eggClose.addEventListener('click',function(){ eggModal.classList.remove('show'); });
   eggModal.addEventListener('click',function(e){ if(e.target===eggModal){ eggModal.classList.remove('show'); } });
 
-  // Easter egg: hidden words
+  // Easter egg: hidden words (literal translations of your texts)
   var EGG_TEXTS={
-    t1:"I wouldn't change a single second of what we lived — not even this ache of missing you, because it's the proof of how immense my love for you is.",
-    t2:"Look at you. You're so perfect, so painfully beautiful, that sometimes I don't understand how so much light fits in such a small, lovely body. You're everything I want and need.",
-    t3:"Sometimes I catch myself calculating the odds. The thousands of variables that had to align, the microscopic decisions we each made, the kilometers that separated us, and the exact instant we happened to cross paths — casually hunting monsters.",
-    t4:"Saying I miss you falls short. There's a very specific kind of ache that appears right after being ridiculously happy with you, and then having to wait to see you again. :'("
+    e1:"I wouldn't change a single second of what we lived, not even this pain of missing you, because it's the proof of how immense my love for you is.",
+    e2:"Look at yourself. You're so perfect, so painfully beautiful, that sometimes I don't understand how so much light fits in a body so small and beautiful. You're everything I want and need!",
+    e3:"Sometimes I start calculating the probabilities. The thousands of variables that had to align, the microscopic decisions that each of us made, the kilometers of distance that separated us, and the precise instant in which we coincidentally crossed paths hunting monsters.",
+    e4:"Saying that I miss you falls short. There's a very specific kind of pain that appears just after having been ridiculously happy with you and having to wait to see you again. :'(",
+    e5:"Here I still didn't know how much I was going to miss you.",
+    e6:"I hate the wait, I hate the kilometers, but I choose you through them a thousand times over. Every second of waiting is worth it if at the end of the road there's you."
   };
   function bindEggWords(){
     var words=document.querySelectorAll('.egg-word');
@@ -645,11 +686,17 @@
   // ============ STARRY SKIES ============
   function makeStars(canvas,count,shooters){
     var ctx=canvas.getContext('2d');
-    var W,H;
-    function size(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
-    size(); window.addEventListener('resize',size);
+    var W=canvas.offsetWidth, H=canvas.offsetHeight;
     var stars=[];
-    for(var i=0;i<count;i++){stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.4,p:Math.random()*Math.PI*2,s:0.01+Math.random()*0.03});}
+    function build(){
+      W=canvas.width=canvas.offsetWidth;
+      H=canvas.height=canvas.offsetHeight;
+      stars=[];
+      for(var i=0;i<count;i++){stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.4,p:Math.random()*Math.PI*2,s:0.01+Math.random()*0.03});}
+    }
+    build();
+    var ro=new ResizeObserver(function(){ build(); });
+    ro.observe(canvas);
     var shoot=[];
     function frame(t){
       ctx.clearRect(0,0,W,H);
@@ -659,7 +706,6 @@
         ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
         ctx.fillStyle='rgba(255,255,255,'+a+')';ctx.fill();
       }
-      // shooting stars
       if(shooters && Math.random()<0.012 && shoot.length<2){
         shoot.push({x:Math.random()*W*0.7+W*0.2,y:Math.random()*H*0.3,life:0});
       }
@@ -693,8 +739,7 @@
     this.style.display='none';burstHearts(30);
   });
 
-  // ============ POLAROID PHOTOS ============
-  // 26 memories, distributed per timeline section (chronological). Swap any file in /fotos keeping the name.
+  // ============ POLAROID PHOTOS (timeline) ============
   var IMG_GROUPS=[
     ['memoria1.jpg','memoria2.jpg','memoria3.jpg','memoria4.jpg'],
     ['memoria5.jpg','memoria6.jpg','memoria7.png'],
@@ -729,8 +774,8 @@
     item.appendChild(strip);
   });
 
-  // ============ MOMENTS GALLERY (new visible photos) ============
-  var MOMENTS=['nueva08.jpg','nueva09.jpg','nueva10.jpg','nueva11.jpg','nueva12.jpg','nueva13.jpg','nueva14.jpg'];
+  // ============ MOMENTS GALLERY (visible new photos) ============
+  var MOMENTS=['nueva06.jpg','nueva08.jpg','nueva09.jpg','nueva12.jpg','nueva14.jpg'];
   var momentsGallery=document.getElementById('momentsGallery');
   MOMENTS.forEach(function(name){
     var f=document.createElement('div');f.className='polaroid';
