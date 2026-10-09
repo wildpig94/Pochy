@@ -215,6 +215,20 @@
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
   .reveal.visible{opacity:1;transform:translateY(0);}
 
+  /* ===== Password gate ===== */
+  .gate{position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#1a0b2e 0%,#2a1150 55%,#4a1d7a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;transition:opacity .8s ease,visibility .8s;}
+  .gate.hidden{opacity:0;visibility:hidden;}
+  .gate .g-heart{font-size:3.2rem;animation:beat 1.2s infinite;margin-bottom:1.2rem;}
+  .gate .g-etoile{font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:#e8d5f5;margin-bottom:.8rem;}
+  .gate h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.2rem);color:#fff;margin-bottom:.5rem;}
+  .gate .g-q{color:#dcc7ee;font-weight:300;max-width:30ch;margin:0 auto 1.6rem;line-height:1.6;font-size:.95rem;}
+  .gate .g-input{font-family:'Poppins',sans-serif;font-size:1.05rem;letter-spacing:.12em;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(216,182,240,.4);border-radius:50px;padding:.8rem 1.4rem;text-align:center;width:min(280px,80vw);outline:none;transition:border .2s;}
+  .gate .g-input:focus{border-color:#ffd76a;}
+  .gate .g-input::placeholder{color:#cbb3e8;letter-spacing:.05em;}
+  .gate .g-btn{font-family:'Poppins',sans-serif;font-size:.95rem;letter-spacing:.15em;text-transform:uppercase;color:#2a1150;background:#fff;border:none;padding:.85rem 2.2rem;border-radius:50px;cursor:pointer;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.25);margin-top:1rem;transition:transform .2s;}
+  .gate .g-btn:hover{transform:scale(1.05);}
+  .gate .g-err{color:#ff9db0;font-size:.8rem;margin-top:.7rem;min-height:1.2em;}
+
   @media(max-width:600px){
     .timeline::before{left:20px;}
     .tl-item{padding-left:54px;}
@@ -229,6 +243,17 @@
 </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="g-heart">🔒</div>
+  <div class="g-etoile">a secret for you</div>
+  <h2>Only she can enter</h2>
+  <p class="g-q">What does your ring say?</p>
+  <input class="g-input" id="gateInput" type="text" placeholder="type the answer…" autocomplete="off">
+  <div class="g-err" id="gateErr"></div>
+  <button class="g-btn" id="gateBtn">Enter</button>
+</div>
 
 <!-- ENTRY OVERLAY -->
 <div id="overlay">
@@ -474,6 +499,23 @@
 <div id="player" style="position:absolute;left:-9999px;top:0;width:200px;height:200px;"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
+  // ============ PASSWORD GATE ============
+  var gate=document.getElementById('gate');
+  var gateInput=document.getElementById('gateInput');
+  var gateErr=document.getElementById('gateErr');
+  function tryEnter(){
+    var v=gateInput.value.trim().toLowerCase();
+    if(v==='toky'){
+      gate.classList.add('hidden');
+    }else{
+      gateErr.textContent='Not quite… try again.';
+      gateInput.value='';
+      gateInput.focus();
+    }
+  }
+  document.getElementById('gateBtn').addEventListener('click',tryEnter);
+  gateInput.addEventListener('keydown',function(e){ if(e.key==='Enter'){ tryEnter(); } });
+
   // ============ MUSIC ============
   var SONG_IDS=['MCH1tA-6JWs','N9eroXvvCiI','ojvldIzbaMo'];
   var SONG_NAMES=['Antología — Shakira','Aprovéchate — Café Tacvba','Enjoy the Silence — Depeche Mode'];
