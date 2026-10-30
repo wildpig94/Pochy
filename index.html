@@ -987,9 +987,12 @@
   // no data, no video — and only fall back to the YouTube player if it is not.
   // Add ?source=yt to the URL to force YouTube.
   var SONGS=[
-    {name:'ADMV',who:'Maluma',yt:'wo7PBOCie9w',file:'audio/admv.m4a'},
-    {name:'Perdonar y Agradecer',who:'Sharif',yt:'b31goMKtEXc',file:'audio/perdonar-y-agradecer.m4a'}
+    {name:'ADMV',who:'Maluma',yt:'wo7PBOCie9w',file:'audio/admv'},
+    {name:'Perdonar y Agradecer',who:'Sharif',yt:'b31goMKtEXc',file:'audio/perdonar-y-agradecer'}
   ];
+  // el archivo puede estar en cualquiera de estas dos extensiones
+  var EXTS=['.m4a','.mp3'];
+  var extTry=0;
   var SONG_IDS=SONGS.map(function(s){return s.yt;});
   var SONG_NAMES=SONGS.map(function(s){return s.name+' — '+s.who;});
   var audioEl=document.getElementById('track');
@@ -1027,12 +1030,26 @@
     if(mode==='local') return !!audioEl.src && !audioEl.paused;
     return !!(player&&player.getPlayerState&&player.getPlayerState()===1);
   }
+  function localSource(){ return SONGS[cur].file+EXTS[extTry]; }
+  var countedFail=null; /* el fallo de una fuente se cuenta una sola vez */
+  function failLocal(src){
+    if(mode!=='local'||countedFail===src) return;
+    countedFail=src;
+    nextExtensionOrYouTube();
+  }
   function playCurrent(){
     if(mode==='local'){
-      if(audioEl.getAttribute('src')!==SONGS[cur].file) audioEl.src=SONGS[cur].file;
+      var src=localSource();
+      if(audioEl.getAttribute('src')!==src) audioEl.src=src;
       musicSrcLabel.textContent='file';
       var p=audioEl.play();
-      if(p&&p.catch){ p.catch(function(){ fallbackToYouTube(); }); }
+      if(p&&p.catch){
+        p.catch(function(err){
+          // un bloqueo de reproduccion no significa que falte el archivo
+          if(err&&err.name==='NotAllowedError') return;
+          failLocal(src);
+        });
+      }
     }else{
       musicSrcLabel.textContent='youtube';
       if(!window.YT||!player){ pendingStart=true; loadYouTubeAPI(); return; }
@@ -1040,18 +1057,24 @@
       if(player.playVideo) player.playVideo();
     }
   }
+  function nextExtensionOrYouTube(){
+    if(mode!=='local') return;
+    if(extTry<EXTS.length-1){ extTry++; playCurrent(); return; }
+    fallbackToYouTube();
+  }
   function fallbackToYouTube(){
     if(mode==='yt') return;
     mode='yt'; pendingStart=true;
     musicSrcLabel.textContent='youtube';
     loadYouTubeAPI();
   }
-  audioEl.addEventListener('error',function(){ if(mode==='local'){ fallbackToYouTube(); } });
+  audioEl.addEventListener('error',function(){ failLocal(audioEl.getAttribute('src')); });
   audioEl.addEventListener('ended',function(){ step(1); });
 
   function startMusic(){ started=true; setSong(cur); playCurrent(); setPlaying(true); showLyrics(); }
   function step(dir){
     cur=(cur+dir+SONGS.length)%SONGS.length;
+    extTry=0; countedFail=null;
     setSong(cur);
     if(started){ playCurrent(); setPlaying(true); }
   }
@@ -1070,7 +1093,7 @@
     b.addEventListener('click',function(){
       var i=parseInt(b.getAttribute('data-song'),10);
       if(i===cur&&started){ playCurrent(); setPlaying(true); return; }
-      cur=i; startMusic();
+      cur=i; extTry=0; countedFail=null; startMusic();
     });
   });
 
@@ -1530,7 +1553,7 @@
 
   // ============ THE DATE, LIVE ============
   var CONFIG={
-    togetherSince:'2026-05-27',   // el día en que empezó todo
+    togetherSince:'2026-05-26',   // el día en que empezó todo
     door:'2026-11-06'             // la fecha de la puerta
   };
   var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];

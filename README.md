@@ -39,9 +39,8 @@ var CONFIG={
 ```
 
 `door` comes from the old countdown ("November 6 — the next time I get to hold
-you"). `togetherSince` was worked out backwards from "five months", so check it:
-if it started on another day, change that one line and everything that counts
-days fixes itself. Both work in the past too — after the date, the masthead says
+you"); `togetherSince` is May 26, confirmed. Change either line and everything
+that counts days fixes itself. Both work in the past too — after the date, the masthead says
 *"open · N days"* instead of counting down.
 
 ## ♫ Music
@@ -49,11 +48,11 @@ days fixes itself. Both work in the past too — after the date, the masthead sa
 Two songs, two sources:
 
 1. If the file exists in `audio/`, it plays from there — no ads, no data, and the
-   lyrics stay in sync because they are timed against the audio itself. Put the
-   files with these exact names:
+   lyrics stay in sync because they are timed against the audio itself. Either
+   extension works, the player tries `.m4a` first and then `.mp3`:
    ```
-   audio/admv.m4a
-   audio/perdonar-y-agradecer.m4a
+   audio/admv.m4a            audio/admv.mp3
+   audio/perdonar-y-agradecer.m4a    audio/perdonar-y-agradecer.mp3
    ```
 2. If the file is missing, that song falls back to the YouTube player on its own.
 3. `?source=yt` on the URL forces YouTube even when the files are there.
