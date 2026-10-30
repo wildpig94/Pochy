@@ -81,14 +81,35 @@ The page never loads those originals while reading. It loads the light versions 
 **`fotos/web/`** (480 px and 900 px WebP) and only reaches for the original when a
 photo is opened full size or printed. That is 10.8 MB → 1.9 MB.
 
-When you add or replace a photo in `fotos/`, run:
+### One table for every photo
+
+The photo/caption pairing lives in **one place only**: `SECCIONES` in
+`tools/fotos.py`. Each line is one photo and its caption, grouped by where it
+sits in the page:
+
+```python
+('I · First contact — A heart, because I had nothing better', 'wide', [
+    ('memoria11.jpg', 'the two of us, in a world made of pixels'),
+    ('memoria13.jpg', 'where it started'),
+]),
+```
+
+From that table, one command writes both things:
 
 ```
-python3 tools/webp.py
+python3 tools/fotos.py
 ```
 
-Then add the `<figure class="plate">` line in `index.html` the way the others are
-written: `srcset` and `data-full` are what keep it light and sharp.
+- rewrites the photo blocks inside `index.html` (srcset, `data-full`, sizes and
+  all), and if nothing changed in the table the file comes out byte for byte
+  identical;
+- builds **`revisar.html`**, a local page where every photo sits next to its
+  caption and its file name, with a dropdown to change which photo goes where.
+  It is gitignored and never published.
+
+When you add a photo: run `python3 tools/webp.py`, then add its line to the
+table and run `python3 tools/fotos.py`. To fix a pairing: open `revisar.html`,
+change the photo, copy the list, and swap that line.
 
 ## 🦎 The axolotl
 
@@ -128,4 +149,7 @@ GitHub Pages rebuilds in 1–2 minutes.
 - `fotos/` — originals. `fotos/web/` — the light versions.
 - `audio/` — put the two songs here.
 - `tools/webp.py` — rebuilds `fotos/web/`.
+- `tools/fotos.py` — the photo/caption table, and the script that writes it into
+  `index.html` and into `revisar.html`.
+- `tools/revisar.plantilla.html` — the shell of the review page.
 - `robots.txt` — keeps search engines out.
