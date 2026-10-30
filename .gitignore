@@ -5,3 +5,6 @@ nueva.html
 # Ruido del sistema
 .DS_Store
 Thumbs.db
+
+# Herramienta de revisión: se genera en local y no se publica.
+revisar.html
