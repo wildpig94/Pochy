@@ -1,0 +1,7 @@
+# Copias locales viejas del sitio: no se publican.
+original.html
+nueva.html
+
+# Ruido del sistema
+.DS_Store
+Thumbs.db
