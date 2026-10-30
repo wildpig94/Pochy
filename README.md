@@ -49,10 +49,12 @@ Two songs, two sources:
 
 1. If the file exists in `audio/`, it plays from there — no ads, no data, and the
    lyrics stay in sync because they are timed against the audio itself. Either
-   extension works, the player tries `.m4a` first and then `.mp3`:
+   extension works, the player tries `.m4a` first and then `.mp3`. What ships now
+   is AAC 128 kbps with `faststart` (3.1 MB and 3.7 MB, from 8.8 and 10.6 MB),
+   which starts playing without waiting for the whole file:
    ```
-   audio/admv.m4a            audio/admv.mp3
-   audio/perdonar-y-agradecer.m4a    audio/perdonar-y-agradecer.mp3
+   audio/admv.m4a
+   audio/perdonar-y-agradecer.m4a
    ```
 2. If the file is missing, that song falls back to the YouTube player on its own.
 3. `?source=yt` on the URL forces YouTube even when the files are there.
