@@ -23,3 +23,8 @@ Después de dejarlos aquí, subir:
 
   cd ~/Trabajo/Clientes/carmen-3-meses
   git add audio && git commit -m "Songs" && git push
+
+Nota: las letras del sitio están cronometradas a las versiones de estudio.
+Si la versión que pusiste tiene la entrada más larga, la letra se adelanta o
+se atrasa; se corrige con el número `offset` de esa canción en index.html
+(segundos: positivo atrasa la letra). Solo aplica a la reproducción local.

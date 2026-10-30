@@ -57,6 +57,18 @@ Two songs, two sources:
 2. If the file is missing, that song falls back to the YouTube player on its own.
 3. `?source=yt` on the URL forces YouTube even when the files are there.
 
+The lyrics are timed against the studio cuts. The files in `audio/` are the live
+and study-session versions, so a song whose intro runs longer will start its
+lyrics a little late or early — that is what `offset` is for, in seconds, per
+song:
+
+```js
+{name:'ADMV',who:'Maluma',yt:'wo7PBOCie9w',file:'audio/admv',offset:0},
+```
+
+Positive numbers delay the lyrics. Check the first thirty seconds by ear; if the
+highlight lands on the wrong line, nudge it. The YouTube player ignores `offset`.
+
 ## 📸 Photographs
 
 Originals live in **`fotos/`**; `memoria1` … `memoria26` are the timeline,

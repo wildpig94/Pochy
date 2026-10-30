@@ -987,8 +987,8 @@
   // no data, no video — and only fall back to the YouTube player if it is not.
   // Add ?source=yt to the URL to force YouTube.
   var SONGS=[
-    {name:'ADMV',who:'Maluma',yt:'wo7PBOCie9w',file:'audio/admv'},
-    {name:'Perdonar y Agradecer',who:'Sharif',yt:'b31goMKtEXc',file:'audio/perdonar-y-agradecer'}
+    {name:'ADMV',who:'Maluma',yt:'wo7PBOCie9w',file:'audio/admv',offset:0},
+    {name:'Perdonar y Agradecer',who:'Sharif',yt:'b31goMKtEXc',file:'audio/perdonar-y-agradecer',offset:0}
   ];
   // el archivo puede estar en cualquiera de estas dos extensiones
   var EXTS=['.m4a','.mp3'];
@@ -1243,7 +1243,7 @@
     });
   }
   function playedSeconds(){
-    if(mode==='local') return audioEl.currentTime||0;
+    if(mode==='local') return (audioEl.currentTime||0)-(SONGS[cur].offset||0);
     if(player&&typeof player.getCurrentTime==='function') return player.getCurrentTime()||0;
     return 0;
   }
