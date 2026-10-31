@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Pocha &amp; Pocho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#05060d;--ink:#e9e6f3;--muted:#9d96b6;--dim:#6c6684;
+    --lilac:#c3a6f5;--pink:#f5aac6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    min-height:100vh;background:var(--void);color:var(--ink);
+    font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.72;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:2rem;-webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(70vw 55vh at 50% 0%, rgba(58,86,170,.22), transparent 70%),
+               radial-gradient(60vw 50vh at 50% 100%, rgba(103,62,168,.20), transparent 70%);
+  }
+  .g-mark{font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim);margin-bottom:2.4rem;position:relative;}
+  h1{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(1.9rem,6vw,3rem);line-height:1.15;margin-bottom:1rem;position:relative;}
+  p.sub{color:var(--muted);font-size:15px;margin-bottom:2rem;position:relative;}
+  #clave{
+    font-family:'Lora',serif;font-size:17px;color:var(--ink);
+    background:transparent;border:0;border-bottom:1px solid var(--lilac);
+    padding:.5rem 1rem;text-align:center;width:min(240px,70vw);outline:none;letter-spacing:.2em;
+    position:relative;
+  }
+  #clave::placeholder{color:var(--dim);letter-spacing:.05em;}
+  button{
+    font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    background:var(--ink);color:var(--void);border:0;padding:.85rem 2.4rem;margin-top:2rem;
+    cursor:pointer;transition:opacity .2s;position:relative;
+  }
+  button:hover{opacity:.82;}
+  button:disabled{opacity:.45;cursor:default;}
+  .err{font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.12em;color:#e6889c;margin-top:1rem;min-height:1em;position:relative;}
+  .work{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:1.2rem;min-height:1em;position:relative;}
+</style>
+</head>
+<body>
+<div class="g-mark">Carmen</div>
+<h1>What does your ring say?</h1>
+<p class="sub">Four letters. You know them.</p>
+<input id="clave" type="text" placeholder="type the answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+<div class="err" id="err"></div>
+<button id="go">Enter</button>
+<div class="work" id="work"></div>
+
+<script>
+(function(){
+  // La pagina y las fotos estan cifradas con AES-GCM. Sin la contrasena no hay nada
+  // que ver: lo unico publico es este candado.
+  var SAL = '__SAL__';
+  var ITER = __ITER__;
+  var CACHE = {};
+  var llave = null;
+
+  function b64a(bytes){
+    var s = '';
+    for (var i = 0; i < bytes.length; i++) { s += String.fromCharCode(bytes[i]); }
+    return s;
+  }
+  function desdeB64(txt){
+    var bin = atob(txt);
+    var out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) { out[i] = bin.charCodeAt(i); }
+    return out;
+  }
+  function tipoDe(ruta){
+    var e = ruta.split('.').pop().toLowerCase();
+    if (e === 'jpg' || e === 'jpeg') { return 'image/jpeg'; }
+    if (e === 'png') { return 'image/png'; }
+    if (e === 'webp') { return 'image/webp'; }
+    if (e === 'm4a') { return 'audio/mp4'; }
+    if (e === 'mp3') { return 'audio/mpeg'; }
+    return 'application/octet-stream';
+  }
+  async function buscar(ruta){
+    var res = await fetch('cifrado/' + ruta + '.enc', { cache: 'force-cache' });
+    if (!res.ok) { throw new Error('404 ' + ruta); }
+    return new Uint8Array(await res.arrayBuffer());
+  }
+  async function descifrar(ruta, k){
+    var buf = await buscar(ruta);
+    var iv = buf.slice(0, 12);
+    var cuerpo = buf.slice(12);
+    return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, k, cuerpo));
+  }
+  window.__abrir = async function(ruta){
+    if (CACHE[ruta]) { return CACHE[ruta]; }
+    var plano = await descifrar(ruta, llave);
+    var url = URL.createObjectURL(new Blob([plano], { type: tipoDe(ruta) }));
+    CACHE[ruta] = url;
+    return url;
+  };
+
+  var clave = document.getElementById('clave');
+  var go = document.getElementById('go');
+  var err = document.getElementById('err');
+  var work = document.getElementById('work');
+  var buscando = false;
+
+  async function destrabar(){
+    if (buscando) { return; }
+    var pass = clave.value.trim();
+    if (!pass) { clave.focus(); return; }
+    buscando = true;
+    go.disabled = true;
+    err.textContent = '';
+    work.textContent = 'opening';
+    try {
+      var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+      llave = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: desdeB64(SAL), iterations: ITER, hash: 'SHA-256' },
+        base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      var pagina = await descifrar('pagina', llave);
+      document.open();
+      document.write(new TextDecoder().decode(pagina));
+      document.close();
+    } catch (e) {
+      llave = null;
+      buscando = false;
+      go.disabled = false;
+      work.textContent = '';
+      err.textContent = 'Not quite.';
+      clave.value = '';
+      clave.focus();
+    }
+  }
+  go.addEventListener('click', destrabar);
+  clave.addEventListener('keydown', function(e){ if (e.key === 'Enter') { destrabar(); } });
+  clave.focus();
+})();
+</script>
+</body>
+</html>

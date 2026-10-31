@@ -21,7 +21,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INDEX = os.path.join(ROOT, 'index.html')
+INDEX = os.path.join(ROOT, 'fuente', 'index.html')
 REVIEW = os.path.join(ROOT, 'revisar.html')
 INICIO = '<!-- FOTOS:inicio'
 FIN = '<!-- FOTOS:fin'
@@ -83,32 +83,21 @@ GRUPOS = [
 ]
 
 
-def width_of(name):
+def measure(path):
+    """Ancho y alto, para que la reticula reserve el espacio antes de descifrar."""
     from PIL import Image
-    return Image.open(os.path.join(ROOT, 'fotos', name)).size[0]
-
-
-def sources(name):
-    """Las versiones de una foto, de la mas chica a la mas grande."""
-    base = os.path.splitext(name)[0]
-    salida = []
-    for ancho in (480, 900):
-        ruta = 'fotos/web/%s-%d.webp' % (base, ancho)
-        if os.path.exists(os.path.join(ROOT, ruta)):
-            salida.append((ancho, ruta))
-    original = width_of(name)
-    salida = [(a, r) for (a, r) in salida if a < original]
-    salida.append((original, 'fotos/' + name))
-    salida.sort()
-    return salida
+    return Image.open(os.path.join(ROOT, path)).size
 
 
 def figure(name, alt):
-    srcs = sources(name)
-    srcset = ', '.join('%s %dw' % (ruta, ancho) for ancho, ruta in srcs)
-    return ('<figure class="plate"><img src="%s" srcset="%s" sizes="(max-width:640px) 45vw, 24vw"'
-            ' alt="%s" loading="lazy" data-full="fotos/%s" decoding="async"></figure>'
-            % (srcs[0][1], srcset, alt, name))
+    """Sin src: la foto la entrega el candado ya descifrada (ver tools/candado.mjs)."""
+    chica = 'fotos/web/%s-480.webp' % os.path.splitext(name)[0]
+    if not os.path.exists(os.path.join(ROOT, chica)):
+        chica = 'fotos/' + name
+    ancho, alto = measure(chica)
+    return ('<figure class="plate"><img data-abrir="%s" width="%d" height="%d" alt="%s" loading="lazy"'
+            ' data-full="fotos/%s" decoding="async"></figure>'
+            % (chica, ancho, alto, alt, name))
 
 
 def gallery():

@@ -5,7 +5,33 @@ of a long-distance story between Mexico 🇲🇽 and Canada 🇨🇦, behind a p
 and one page at the end that is hers to write.
 
 Published with GitHub Pages at `https://wildpig94.github.io/Pochy/`.
-The password is the four letters on her ring.
+The page and every photograph are **encrypted**; the URL alone shows a password
+box and nothing else. The password is the four letters on her ring — and it is
+not used anywhere else.
+
+## 🔐 How the lock works
+
+`index.html` in the repository is not the site: it is the lock. It asks for the
+password, derives a key with PBKDF2-SHA256 (300 000 rounds), and decrypts, in
+the browser, two things:
+
+- `cifrado/pagina.enc` — the whole page. It does not exist in the DOM until the
+  password is right.
+- `cifrado/fotos/**` — each photograph, decrypted on demand as you scroll, as a
+  `blob:` URL that is not shareable and dies with the tab.
+
+What this does and does not cover:
+
+- ✅ The URL alone reveals nothing. There is no plaintext page, no plaintext
+  photograph, no "view source" shortcut.
+- ✅ A wrong password fails at the AES-GCM tag — there is nothing to brute-force
+  offline except the password itself.
+- ⚠️ The **file names** of the photographs are visible (`memoria1.jpg` and so
+  on). Names, not contents.
+- ⚠️ The music in `audio/` is public: it is not about her.
+- ❗ **The git history still contains the old plaintext** (page and photographs,
+  from before the lock). To clean it, the history has to be rewritten and
+  force-pushed; until then, the old commits are still readable on GitHub.
 
 ## ✨ What's inside
 
@@ -138,25 +164,41 @@ there is no progress bar and no visit counter on purpose. What it feeds is the
 returning-visitor line in the opening screen and the axolotl. Clearing browser
 data resets all of it.
 
-## 🚀 Publish (GitHub Pages)
+## 🚀 Edit and publish
+
+There are two files, not one. `fuente/index.html` is the page you edit; it is
+gitignored, along with `fotos/`. What gets published is generated:
 
 ```
-git add .
-git commit -m "Update"
-git push
+python3 tools/fotos.py                 # photos -> fuente/index.html (the gallery)
+node tools/candado.mjs 'the-password'  # fuente/ + fotos/ -> index.html + cifrado/
+git add -A && git commit -m "..." && git push
 ```
 
-GitHub Pages rebuilds in 1–2 minutes.
+`node tools/candado.mjs` re-encrypts everything with a fresh salt, so after
+every change the whole site is re-keyed with the same password. GitHub Pages
+rebuilds in a minute or two.
+
+To read the page without the lock while working (no encryption, plaintext
+photos), open `fuente/index.html` directly: when `window.__abrir` does not
+exist, the page falls back to the plain URLs.
 
 ## 🗂️ Files
 
-- `index.html` — the site. Everything is in this one file.
+- `index.html` — **the lock**: the password box and the decryption. Generated;
+  do not edit it by hand.
+- `fuente/index.html` — the page itself, in the clear. This is the file to edit.
+  Gitignored, never published.
+- `cifrado/` — the encrypted page and the 117 encrypted photographs.
 - `nueva.html` — an old copy (before the blue/purple/black version). Safe to delete.
 - `original.html` — the very first version, kept for reference.
-- `fotos/` — originals. `fotos/web/` — the light versions.
+- `fotos/` — originals and light versions, in the clear. Gitignored, never
+  published.
 - `audio/` — put the two songs here.
 - `tools/webp.py` — rebuilds `fotos/web/`.
 - `tools/fotos.py` — the photograph/group table, and the script that writes the
   gallery into `index.html` and builds `revisar.html`.
 - `tools/revisar.plantilla.html` — the shell of the review page.
+- `tools/candado.mjs` — encrypts the page and the photographs and writes the lock.
+- `tools/candado.plantilla.html` — the lock's own HTML.
 - `robots.txt` — keeps search engines out.
