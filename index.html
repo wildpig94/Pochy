@@ -409,6 +409,38 @@
   .sky-inner h2{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(1.5rem,4.6vw,2.3rem);line-height:1.25;max-width:20ch;margin:0 auto;}
   .sky-inner h2 em{font-style:italic;color:var(--lilac);}
 
+  /* ===== Coupons: terms, redeem, stamp ===== */
+  .de-cupon{margin:22px 0 26px;max-width:64ch;border-left:2px solid rgba(195,166,245,.42);padding:4px 0 4px 18px;}
+  .de-cupon p{font-family:'Lora',serif;font-style:italic;font-size:14.5px;line-height:1.7;color:var(--muted);}
+  .voucher .yapa{margin:0 0 12px;border-top:1px solid var(--rule);padding-top:10px;}
+  .voucher .yapa summary{cursor:pointer;list-style:none;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+  .voucher .yapa summary::-webkit-details-marker{display:none;}
+  .voucher .yapa summary::before{content:'\25B8  ';display:inline-block;transition:transform .2s;}
+  .voucher .yapa[open] summary::before{transform:rotate(90deg);}
+  .voucher .yapa p{margin-top:10px;font-size:13px;line-height:1.65;color:var(--muted);font-style:italic;}
+  .redeem{
+    font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+    background:none;border:1px solid var(--rule);color:var(--muted);padding:8px 12px;cursor:pointer;
+    transition:border-color .2s,color .2s;
+  }
+  .redeem:hover{border-color:var(--lilac);color:var(--lilac);}
+  .redeem:disabled{border-color:var(--rule);color:var(--dim);cursor:default;}
+  .voucher .stamp{
+    position:absolute;right:12px;top:44%;transform:translateY(-50%) rotate(-12deg);
+    padding:3px 11px;border:3px double rgba(245,170,198,.7);border-radius:8px;
+    color:var(--pink);font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;
+    letter-spacing:.08em;opacity:0;pointer-events:none;
+  }
+  .voucher.redeemed{filter:saturate(.65);}
+  .voucher.redeemed .stamp{opacity:.9;animation:slam .35s cubic-bezier(.2,1.6,.4,1);}
+  @keyframes slam{from{transform:translateY(-50%) rotate(-12deg) scale(2);opacity:0;}}
+  .voucher.sealed{opacity:.55;}
+  .voucher .yapa summary:focus-visible,.redeem:focus-visible{outline:2px solid var(--lilac);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    .voucher.redeemed .stamp{animation:none;}
+    .voucher .yapa summary::before{transition:none;}
+  }
+
   /* ===== Plates: the appendix ===== */
   .plates-group{margin-top:40px;}
   .plates-group:first-child{margin-top:8px;}
@@ -481,6 +513,12 @@
     #printArea .voucher{break-inside:avoid;margin-bottom:10px;background:#fff;border:1px solid #1b1815;}
     #printArea .voucher .v-desc,#printArea .voucher .v-cond{color:#2e2925;}
     #printArea .voucher .v-serial,#printArea .voucher .v-sig{color:#6b5a2f;}
+    #printArea .voucher .redeem,#printArea .voucher .yapa summary{display:none !important;}
+    #printArea .voucher .yapa{border-top:1px solid #d6d0c6;}
+    #printArea .voucher .yapa p{display:block !important;color:#4a4450;}
+    #printArea .voucher .stamp{border-color:#8a5a6a;color:#8a5a6a;}
+    #printArea .de-cupon{border-left-color:#4a2c52;margin:0 0 14px;}
+    #printArea .de-cupon p{color:#4a4450;}
     .axo,.axo-say,#musicBtn,.music-bar,footer,.hearts{display:none !important;}
   }
 </style>
@@ -575,7 +613,7 @@
 
   <div class="quick">
     <span>shortcuts</span>
-    <button type="button" data-go="ch4" data-block="vouchersBlock">the five coupons</button>
+    <button type="button" data-go="ch4" data-block="vouchersBlock">the coupons</button>
     <button type="button" data-go="ch6">the photographs</button>
     <button type="button" data-go="ch5">your page</button>
   </div>
@@ -774,47 +812,125 @@
 
     <div class="block">
       <div class="kicker">Redeemable in person</div>
-      <h2 id="vouchersBlock">Five coupons</h2>
+      <h2 id="vouchersBlock">Eleven coupons</h2>
       <p>Print them. Bring them. No expiration.</p>
+      <div class="de-cupon">
+        <p>Issued by Pocho, hereinafter “the dog”, to Pocha, hereinafter “the rabbit”. No expiration. Dogs do not understand deadlines. Void where prohibited by the rabbit. Not transferable, except to the dog.</p>
+      </div>
       <div class="vouchers">
-        <div class="voucher">
-          <div class="v-serial">No. 001</div>
+        <div class="voucher" data-cupon="001">
+          <div class="v-serial">No. 001 of ∞</div>
           <h4>Two hours of foot massage</h4>
           <p class="v-desc">Valid after a hard day of work or a long walk.</p>
           <p class="v-cond">You sit. I do the rest. No arguing about who is more tired.</p>
+          <details class="yapa"><summary>Terms</summary><p>Duration may be extended at the issuer’s discretion, never shortened. The issuer will not comment on the state of the feet. Complaints may be addressed to the dog.</p></details>
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
         </div>
 
-        <div class="voucher">
-          <div class="v-serial">No. 002</div>
+        <div class="voucher" data-cupon="002">
+          <div class="v-serial">No. 002 of ∞</div>
           <h4>A ride on my back</h4>
           <p class="v-desc">One ride, wherever you want to go.</p>
           <p class="v-cond">Conditions: no covering the eyes, no screaming, no being afraid to fall, no falling, and no making me fall.</p>
+          <details class="yapa"><summary>Terms</summary><p>The issuer is not liable for altitude, wind, or sudden rabbit jumps. Carrots accepted as a tip. Pace is set by the rider, and the dog complains in silence.</p></details>
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
         </div>
 
-        <div class="voucher gold">
-          <div class="v-serial">No. 003 — gold</div>
+        <div class="voucher gold" data-cupon="003">
+          <div class="v-serial">No. 003 of ∞ — gold</div>
           <h4>Comodín Pochy</h4>
           <p class="v-desc">Anything. No limits. No questions.</p>
           <p class="v-cond">Only condition: ask for it in Spanish.</p>
+          <details class="yapa"><summary>Terms</summary><p>Pronunciation mistakes are charming and fully accepted. Saying “por favor” increases the odds. Cannot be used to obtain another Comodín. The issuer saw that coming.</p></details>
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
         </div>
 
-        <div class="voucher">
-          <div class="v-serial">No. 004</div>
+        <div class="voucher" data-cupon="004">
+          <div class="v-serial">No. 004 of ∞</div>
           <h4>Movie night, she picks</h4>
           <p class="v-desc">You choose. No vetoes.</p>
           <p class="v-cond">I will try to stay awake. Try.</p>
+          <details class="yapa"><summary>Terms</summary><p>Veto rights waived. The issuer may fall asleep within forty minutes; this does not constitute a breach. Snacks are provided by the issuer, and the popcorn is not up for debate.</p></details>
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
         </div>
 
-        <div class="voucher">
-          <div class="v-serial">No. 005</div>
+        <div class="voucher" data-cupon="005">
+          <div class="v-serial">No. 005 of ∞</div>
           <h4>Breakfast in bed</h4>
           <p class="v-desc">Coffee included.</p>
           <p class="v-cond">Valid until the coffee gets cold. Then we make more.</p>
+          <details class="yapa"><summary>Terms</summary><p>Crumbs in the bed are a shared responsibility. Coffee refills are covered by this coupon. The issuer is not responsible for what the coffee does to the rabbit before 9 a.m.</p></details>
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher" data-cupon="006">
+          <div class="v-serial">No. 006 of ∞</div>
+          <h4>One heart</h4>
+          <p class="v-desc">We began with one. This coupon restores it. For one hour, the only words allowed are hearts. You send one, I send one back.</p>
+          <details class="yapa"><summary>Terms</summary><p>Any spoken word during the hour costs one hug. Fluent speakers of the heart emote get a discount.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher" data-cupon="007">
+          <div class="v-serial">No. 007 of ∞</div>
+          <h4>One night, no line</h4>
+          <p class="v-desc">The first night we sleep without a call, because there is no line.</p>
+          <details class="yapa"><summary>Terms</summary><p>If the connection drops, the word carrot is not required. Snoring, if any, is not covered by warranty and will be denied.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher" data-cupon="008">
+          <div class="v-serial">No. 008 of ∞</div>
+          <h4>The right to be right</h4>
+          <p class="v-desc">One argument, conceded. Any argument, no matter how wrong you are.</p>
+          <details class="yapa"><summary>Terms</summary><p>Not valid retroactively. Not valid for deciding what to eat. The issuer may smile while conceding. This is not a breach.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher" data-cupon="009">
+          <div class="v-serial">No. 009 of ∞</div>
+          <h4>A portrait of Pocho</h4>
+          <p class="v-desc">You draw and paint. This one is a commission. One portrait, drawn by Pocha, subject: the dog.</p>
+          <details class="yapa"><summary>Terms</summary><p>The subject will sit still for the entire session. The subject will not critique the result, even if he looks like a potato. The final piece will be framed and hung where visitors see it.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher" data-cupon="010">
+          <div class="v-serial">No. 010 of ∞</div>
+          <h4>One airport</h4>
+          <p class="v-desc">You run. I catch. Ten seconds, with a running start.</p>
+          <details class="yapa"><summary>Terms</summary><p>Redeemable anywhere with a long enough hallway. The issuer may be out of breath. Silence for the first ten seconds is mandatory.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
+        </div>
+
+        <div class="voucher gold sellado" data-cupon="011" data-gold="1">
+          <div class="v-serial">No. 011 of ∞ — sealed</div>
+          <h4>Comodín del Comodín</h4>
+          <p class="v-desc">The one behind the gold one. It opens when the other ten are spent, and it does not ask what it is for.</p>
+          <details class="yapa"><summary>Terms</summary><p>Sealed until Nos. 001–010 have been redeemed. One use. No explanation required, in either language.</p></details>
+          <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
+          <button class="redeem" type="button">Redeem</button>
+          <span class="stamp" aria-hidden="true">Redeemed</span>
         </div>
       </div>
       <div class="btn-row"><a class="btn" id="printVouchersBtn" href="pdf/cupones.pdf" target="_blank" rel="noopener">Print the coupons</a></div>
@@ -1644,7 +1760,7 @@
   // What has already been opened stays open next time: chapters, plates, secrets.
   var STORE='pochy-archive-v1';
   var memory=(function(){
-    var data={first:null,last:null,visits:0,chapters:[],plates:[],eggs:[],page:{text:'',at:null}};
+    var data={first:null,last:null,visits:0,chapters:[],plates:[],eggs:[],coupons:[],page:{text:'',at:null}};
     try{
       var raw=localStorage.getItem(STORE);
       if(raw){
@@ -1686,7 +1802,8 @@
     togetherSince:'2026-05-26',   // el día en que empezó todo
     door:'2026-11-06',            // la fecha de la puerta
     zonaMia:'America/Mexico_City',// donde estoy yo
-    zonaSuya:'America/Vancouver'  // donde está ella
+    zonaSuya:'America/Vancouver', // donde está ella
+    whatsapp:''                   // tu número con lada, sin + ni espacios; vacío = ella elige
   };
   function parseDay(s){ var p=String(s).split('-'); return new Date(+p[0],(+p[1])-1,+p[2],0,0,0,0); }
   function plural(n,one,many){ return n+' '+(n===1?one:many); }
@@ -1842,6 +1959,68 @@
     }
   });
   renderPage();
+
+  // ============ COUPONS ============
+  var cupones=Array.prototype.slice.call(document.querySelectorAll('.voucher[data-cupon]'));
+  var cuponOro=document.querySelector('.voucher[data-gold]');
+  function canjeados(){ return (memory&&memory.data&&memory.data.coupons)||[]; }
+  function waLink(texto){
+    var base=CONFIG.whatsapp?('https://wa.me/'+CONFIG.whatsapp):'https://wa.me/';
+    return base+'?text='+encodeURIComponent(texto);
+  }
+  function sellado(){
+    var hechos=canjeados();
+    return cupones.filter(function(c){
+      return !c.hasAttribute('data-gold') && hechos.indexOf(c.getAttribute('data-cupon'))<0;
+    }).length>0;
+  }
+  function pintarCupones(){
+    var hechos=canjeados();
+    cupones.forEach(function(c){
+      var id=c.getAttribute('data-cupon');
+      var hecho=hechos.indexOf(id)>=0;
+      c.classList.toggle('redeemed',hecho);
+      var b=c.querySelector('.redeem');
+      if(b&&!c.hasAttribute('data-gold')){
+        b.disabled=hecho;
+        b.textContent=hecho?'Redeemed':'Redeem';
+      }
+    });
+    if(cuponOro){
+      var cerrado=sellado();
+      cuponOro.classList.toggle('sealed',cerrado);
+      var serie=cuponOro.querySelector('.v-serial');
+      if(serie) serie.textContent='No. 011 of ∞ — '+(cerrado?'sealed':'gold');
+      var boton=cuponOro.querySelector('.redeem');
+      if(boton){
+        boton.disabled=cerrado||hechos.indexOf('011')>=0;
+        boton.textContent=hechos.indexOf('011')>=0?'Redeemed':(cerrado?'Sealed':'Redeem');
+      }
+    }
+  }
+  cupones.forEach(function(c){
+    var boton=c.querySelector('.redeem');
+    if(!boton) return;
+    boton.addEventListener('click',function(){
+      var id=c.getAttribute('data-cupon');
+      var titulo=c.querySelector('h4').textContent.trim();
+      if(c.hasAttribute('data-gold')&&sellado()) return;
+      if(!confirm('Redeem No. '+id+'? This will send Pocho a message.')) return;
+      if(!memory.data.coupons) memory.data.coupons=[];
+      if(memory.data.coupons.indexOf(id)<0) memory.data.coupons.push(id);
+      memory.save();
+      pintarCupones();
+      if(c.hasAttribute('data-gold')){ axoCheer(); }
+      var enlace=waLink('Pocha has redeemed No. '+id+': '+titulo+'. The dog is ready. 💜');
+      var ventana=window.open(enlace,'_blank','noopener');
+      if(!ventana){
+        var a=document.createElement('a');
+        a.href=enlace; a.target='_blank'; a.rel='noopener';
+        document.body.appendChild(a); a.click(); a.remove();
+      }
+    });
+  });
+  pintarCupones();
 
   // ============ THE AXOLOTL ============
   var axo=document.getElementById('axo');

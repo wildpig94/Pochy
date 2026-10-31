@@ -104,9 +104,16 @@ async function main() {
       (document.getElementById('overlay')||document.body).classList.add('hidden');
       (function(){
         var src = document.querySelectorAll('.voucher');
+        var preambulo = document.querySelector('.de-cupon');
         var html = '<div class="print-sheet cols-1">';
         html += '<div class="print-title">Coupons &mdash; Pocha &amp; Pocho</div>';
-        for (var i=0;i<src.length;i++){ html += '<div class="print-item voucher-wrap">' + src[i].outerHTML + '</div>'; }
+        if (preambulo) html += '<div class="print-item">' + preambulo.outerHTML + '</div>';
+        for (var i=0;i<src.length;i++){
+          var copia = src[i].cloneNode(true);
+          var yapas = copia.querySelectorAll('details');
+          for (var j=0;j<yapas.length;j++){ yapas[j].open = true; }
+          html += '<div class="print-item voucher-wrap">' + copia.outerHTML + '</div>';
+        }
         html += '</div>';
         document.getElementById('printArea').innerHTML = html;
       })();
