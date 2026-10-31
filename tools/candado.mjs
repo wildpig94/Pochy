@@ -23,7 +23,10 @@ const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const ITERACIONES = 300000;
 const CARPETA_CIFRADA = join(ROOT, 'cifrado');
 
-const password = process.argv[2] || process.env.POCHY_PASS;
+// La clave se normaliza igual que en el candado: sin espacios en las orillas y
+// sin mayusculas. Asi "toky", "TOKY" y " Toky " abren lo mismo.
+const normalizar = (t) => String(t).trim().toLowerCase();
+const password = normalizar(process.argv[2] || process.env.POCHY_PASS || '');
 if (!password) {
   console.error("falta la contrasena:\n\n  node tools/candado.mjs 'la-contrasena'\n");
   process.exit(1);

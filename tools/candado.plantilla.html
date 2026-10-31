@@ -111,7 +111,7 @@
 
   async function destrabar(){
     if (buscando) { return; }
-    var pass = clave.value.trim();
+    var pass = clave.value.trim().toLowerCase();
     if (!pass) { clave.focus(); return; }
     buscando = true;
     go.disabled = true;
