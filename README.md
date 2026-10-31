@@ -40,7 +40,8 @@ re-encrypts what changed.
   captions at all, grouped by the part of the wait they belong to; full size on
   tap, arrows and Escape on a keyboard.
 - ♫ **Two songs** with lyrics timed to the audio.
-- 🎟️ **Five coupons** and a **print room** to make her own sheet.
+- 🎟️ **Five coupons** and a **print room**, plus two ready-made PDFs she can
+  print from any phone: `pdf/cupones.pdf` and `pdf/fotos.pdf`.
 - 🦎 **The axolotl** — a small mascot in the corner. It talks when tapped, and it
   knows what has been read and what is still waiting.
 - ✍️ **Her page** — the last chapter is empty; what she writes is kept in her
@@ -137,6 +138,24 @@ python3 tools/fotos.py
 
 When you add a photograph: run `python3 tools/webp.py`, add its line to a group
 in the table, and run `python3 tools/fotos.py`.
+
+## 🖨️ Printing
+
+Printing from a phone through the browser's print dialog is where it broke, so
+the two fixed sheets are real PDFs, linked straight from the page:
+
+- `pdf/cupones.pdf` — the five coupons, one per row, Letter size.
+- `pdf/fotos.pdf` — all 45 photographs, two per row, 12 pages.
+
+Rebuild them after changing the coupons or adding photographs:
+
+```
+node tools/imprimir.mjs
+```
+
+It drives its own headless Chrome over `index.html` (so the sheet matches the
+site's styles) and writes both files. The print room's "Print selected" still
+uses `window.print()` for a custom pick.
 
 ## 🦎 The axolotl
 

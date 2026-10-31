@@ -275,6 +275,7 @@
     font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
     background:var(--ink);color:var(--void);border:0;padding:.9rem 2rem;cursor:pointer;transition:opacity .2s;
   }
+  .btn{display:inline-block;text-decoration:none;}
   .btn:hover{opacity:.84;}
   .btn:disabled,.btn:disabled:hover{opacity:.4;cursor:default;}
   .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule);}
@@ -816,7 +817,7 @@
           <div class="v-sig"><span>signed</span><span class="line"></span><span>Pocho 💜</span></div>
         </div>
       </div>
-      <div class="btn-row"><button class="btn" id="printVouchersBtn">Print the coupons</button></div>
+      <div class="btn-row"><a class="btn" id="printVouchersBtn" href="pdf/cupones.pdf" target="_blank" rel="noopener">Print the coupons</a></div>
     </div>
 
     <div class="block">
@@ -866,7 +867,10 @@
           </div>
         </div>
       </div>
-      <div class="btn-row"><button class="btn" id="printPhotosBtn" disabled>Print selected</button></div>
+      <div class="btn-row">
+        <button class="btn" id="printPhotosBtn" disabled>Print selected</button>
+        <a class="btn ghost" href="pdf/fotos.pdf" target="_blank" rel="noopener">Every photograph, on paper</a>
+      </div>
     </div>
 
   </section>
@@ -1590,16 +1594,6 @@
 
   // ============ PRINT: VOUCHERS ============
   var printArea=document.getElementById('printArea');
-  document.getElementById('printVouchersBtn').addEventListener('click',function(){
-    var vouchers=document.querySelectorAll('.voucher');
-    var html='<div class="print-sheet cols-1">';
-    html+='<div class="print-title">Coupons — Pocha &amp; Pocho</div>';
-    vouchers.forEach(function(v){ html+=v.outerHTML; });
-    html+='</div>';
-    printArea.innerHTML=html;
-    window.print();
-  });
-
   // ============ PRINT: PHOTOS ============
   var STUDIO=['nueva01.jpg','nueva02.jpg','nueva03.jpg','nueva04.jpg','nueva05.jpg','nueva06.jpg','nueva07.jpg','nueva08.jpg','nueva09.jpg','nueva10.jpg','nueva11.jpg','nueva12.jpg','nueva13.jpg','nueva14.jpg','cap4-1.jpg','cap4-2.jpg','cap4-3.jpg','cap4-4.jpg','cap4-5.jpg','cap4-6.jpg','cap4-7.jpg','cap4-8.jpg'];
   var selected={};
