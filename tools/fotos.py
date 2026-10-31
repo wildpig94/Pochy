@@ -103,18 +103,21 @@ def sources(name):
     return salida
 
 
-def figure(name):
+def figure(name, alt):
     srcs = sources(name)
     srcset = ', '.join('%s %dw' % (ruta, ancho) for ancho, ruta in srcs)
     return ('<figure class="plate"><img src="%s" srcset="%s" sizes="(max-width:640px) 45vw, 24vw"'
-            ' alt="" loading="lazy" data-full="fotos/%s" decoding="async"></figure>'
-            % (srcs[0][1], srcset, name))
+            ' alt="%s" loading="lazy" data-full="fotos/%s" decoding="async"></figure>'
+            % (srcs[0][1], srcset, alt, name))
 
 
 def gallery():
     bloques = []
     for titulo, sub, fotos in GRUPOS:
-        filas = '\n'.join(IND_FIGURE + figure(f) for f in fotos)
+        total = len(fotos)
+        filas = '\n'.join(
+            IND_FIGURE + figure(f, 'Photograph from &ldquo;%s&rdquo;, %d of %d.' % (titulo, i, total))
+            for i, f in enumerate(fotos, 1))
         bloques.append(
             '%s<div class="plates-group">\n'
             '%s  <div class="g-label">%s</div>\n'
