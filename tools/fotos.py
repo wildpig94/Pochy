@@ -77,10 +77,10 @@ GRUPOS = [
         'cap4-2.jpg',
         'cap4-3.jpg',
         'cap4-4.jpg',
-        'cap4-5.jpg',
         'cap4-6.jpg',
-        'cap4-7.jpg',
-        'cap4-8.jpg',
+        'cap4-9.jpg',
+        'cap4-10.jpg',
+        'cap4-11.jpg',
     ]),
 ]
 
