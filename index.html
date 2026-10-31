@@ -267,6 +267,7 @@
     background:var(--ink);color:var(--void);border:0;padding:.9rem 2rem;cursor:pointer;transition:opacity .2s;
   }
   .btn:hover{opacity:.84;}
+  .btn:disabled,.btn:disabled:hover{opacity:.4;cursor:default;}
   .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule);}
   .btn.ghost:hover{border-color:var(--lilac);color:var(--lilac);opacity:1;}
   .btn-row{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
@@ -288,7 +289,6 @@
     padding:.4rem .9rem;cursor:pointer;margin-left:-1px;
   }
   .layout-opts button.sel{background:var(--lilac);color:var(--void);border-color:var(--lilac);}
-  .studio-count{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
 
   /* ===== Her page ===== */
   .her-page{padding:44px 0 20px;}
@@ -773,8 +773,8 @@
 
     <div class="block">
       <div class="kicker">Print room</div>
-      <h2>Print your own set</h2>
-      <p>Pick the frames you want, add a line at the top, choose how many per row, and print them on your photo paper.</p>
+      <h2>On paper.</h2>
+      <p>Choose the ones you want. If you want a line above them, write it. Then print them on your photo paper.</p>
       <div class="studio-grid" id="studioGrid"></div>
       <div class="studio-controls">
         <div>
@@ -789,9 +789,8 @@
             <button data-cols="3">3</button>
           </div>
         </div>
-        <div class="studio-count" id="studioCount">0 selected</div>
       </div>
-      <div class="btn-row"><button class="btn" id="printPhotosBtn">Print selected</button></div>
+      <div class="btn-row"><button class="btn" id="printPhotosBtn" disabled>Print selected</button></div>
     </div>
 
   </section>
@@ -1481,7 +1480,7 @@
   var STUDIO=['nueva01.jpg','nueva02.jpg','nueva03.jpg','nueva04.jpg','nueva05.jpg','nueva06.jpg','nueva07.jpg','nueva08.jpg','nueva09.jpg','nueva10.jpg','nueva11.jpg','nueva12.jpg','nueva13.jpg','nueva14.jpg','cap4-1.jpg','cap4-2.jpg','cap4-3.jpg','cap4-4.jpg','cap4-5.jpg','cap4-6.jpg','cap4-7.jpg','cap4-8.jpg'];
   var selected={};
   var studioGrid=document.getElementById('studioGrid');
-  var studioCount=document.getElementById('studioCount');
+  var printPhotosBtn=document.getElementById('printPhotosBtn');
   var layoutCols=2;
 
   STUDIO.forEach(function(name){
@@ -1492,7 +1491,7 @@
     cell.addEventListener('click',function(){
       if(selected[name]){ delete selected[name]; cell.classList.remove('sel'); }
       else{ selected[name]=true; cell.classList.add('sel'); }
-      studioCount.textContent=Object.keys(selected).length+' selected';
+      printPhotosBtn.disabled=Object.keys(selected).length===0;
     });
     studioGrid.appendChild(cell);
   });
@@ -1504,9 +1503,9 @@
     });
   });
 
-  document.getElementById('printPhotosBtn').addEventListener('click',function(){
+  printPhotosBtn.addEventListener('click',function(){
     var names=Object.keys(selected);
-    if(names.length===0){ studioCount.textContent='select at least one'; return; }
+    if(names.length===0){ return; }
     var title=document.getElementById('printTitle').value.trim();
     var html='<div class="print-sheet cols-'+layoutCols+'">';
     if(title){ html+='<div class="print-title">'+escapeHtml(title)+'</div>'; }
