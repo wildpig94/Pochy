@@ -25,6 +25,8 @@ INDEX = os.path.join(ROOT, 'fuente', 'index.html')
 REVIEW = os.path.join(ROOT, 'revisar.html')
 INICIO = '<!-- FOTOS:inicio'
 FIN = '<!-- FOTOS:fin'
+INICIO_FAN = '<!-- FAN:inicio'
+FIN_FAN = '<!-- FAN:fin'
 IND_GROUP = ' ' * 6
 IND_FIGURE = ' ' * 10
 
@@ -100,6 +102,24 @@ def figure(name, alt):
             % (chica, ancho, alto, alt, name))
 
 
+# Las fotos del bloque "The fan", en el capitulo III. Mismo orden que en la pagina.
+FAN = [
+    'fan1-1.jpg',
+    'fan1-2.jpg',
+    'fan1-3.jpg',
+    'fan1-4.jpg',
+    'fan1-5.jpg',
+    'fan1-6.jpg',
+]
+
+
+def fan_gallery():
+    total = len(FAN)
+    return '\n'.join(
+        IND_FIGURE + figure(f, 'Photograph from &ldquo;The fan&rdquo;, %d of %d.' % (i, total))
+        for i, f in enumerate(FAN, 1))
+
+
 def gallery():
     bloques = []
     for titulo, sub, fotos in GRUPOS:
@@ -119,19 +139,25 @@ def gallery():
     return '\n'.join(bloques)
 
 
-def apply_index(dry=False):
-    src = open(INDEX, encoding='utf-8').read()
-    a, b = src.find(INICIO), src.find(FIN)
+def rewrite(src, inicio, fin, contenido):
+    a, b = src.find(inicio), src.find(fin)
     if a < 0 or b < a:
-        raise SystemExit('no encuentro los marcadores FOTOS:inicio y FOTOS:fin')
+        raise SystemExit('no encuentro los marcadores %s / %s' % (inicio, fin))
     desde = src.find('\n', a) + 1
     hasta = src.rfind('\n', 0, b) + 1
-    nuevo = gallery() + '\n'
+    nuevo = contenido + '\n'
     if src[desde:hasta] == nuevo:
-        return 0
-    if not dry:
-        open(INDEX, 'w', encoding='utf-8').write(src[:desde] + nuevo + src[hasta:])
-    return 1
+        return src, 0
+    return src[:desde] + nuevo + src[hasta:], 1
+
+
+def apply_index(dry=False):
+    src = open(INDEX, encoding='utf-8').read()
+    src, uno = rewrite(src, INICIO, FIN, gallery())
+    src, dos = rewrite(src, INICIO_FAN, FIN_FAN, fan_gallery())
+    if not dry and (uno or dos):
+        open(INDEX, 'w', encoding='utf-8').write(src)
+    return uno + dos
 
 
 CARD = """      <article class="card" data-grupo="%s">
@@ -181,6 +207,7 @@ def main():
     total = write_review()
     print('index.html: %s' % ('galeria reescrita' if cambios else 'sin cambios, ya estaba igual'))
     print('revisar.html: %d fotos en %d grupos' % (total, len(GRUPOS)))
+    print('bloque del fan: %d fotos' % len(FAN))
     print('para publicar: git add . && git commit -m "Fotos" && git push')
 
 

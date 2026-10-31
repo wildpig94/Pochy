@@ -52,6 +52,8 @@ What this does and does not cover:
   knows what has been read and what is still waiting.
 - ✍️ **Her page** — the last chapter is empty; what she writes is kept in her
   phone and can be sent back with one tap.
+- 👏 **The fan** — a block in chapter III that says why, with its own six
+  photographs (the `FAN` list in `tools/fotos.py`).
 - 🤫 **10-minute secret** — a toast that only shows up if she stays that long.
 
 ## ⚠️ Two dates to confirm
