@@ -9,29 +9,22 @@ The page and every photograph are **encrypted**; the URL alone shows a password
 box and nothing else. The password is not written anywhere in this repository
 and is not reused for anything else.
 
-## 🔐 How the lock works
+## 🔓 No lock (for now)
 
-`index.html` in the repository is not the site: it is the lock. It asks for the
-password, derives a key with PBKDF2-SHA256 (300 000 rounds), and decrypts, in
-the browser, two things:
+The password gate is off: `index.html` is the page itself and the photographs in
+`fotos/` are plain files. **Anyone with the link reads everything**, and a
+photograph can be opened by its direct URL.
 
-- `cifrado/pagina.enc` — the whole page. It does not exist in the DOM until the
-  password is right.
-- `cifrado/fotos/**` — each photograph, decrypted on demand as you scroll, as a
-  `blob:` URL that is not shareable and dies with the tab.
+The tooling is still here if you want the lock back:
 
-What this does and does not cover:
+```
+node tools/candado.mjs 'the-password'    # writes the lock + cifrado/, 15 MB
+```
 
-- ✅ The URL alone reveals nothing. There is no plaintext page, no plaintext
-  photograph, no "view source" shortcut.
-- ✅ A wrong password fails at the AES-GCM tag — there is nothing to brute-force
-  offline except the password itself.
-- ⚠️ The **file names** of the photographs are visible (`memoria1.jpg` and so
-  on). Names, not contents.
-- ⚠️ The music in `audio/` is public: it is not about her.
-- ❗ **The git history still contains the old plaintext** (page and photographs,
-  from before the lock). To clean it, the history has to be rewritten and
-  force-pushed; until then, the old commits are still readable on GitHub.
+It encrypts the page and every photograph with AES-GCM (PBKDF2-SHA256, 300 000
+rounds) and leaves `index.html` as a password box. The salt lives in
+`tools/sal.txt` and the build is incremental, so turning it on again only
+re-encrypts what changed.
 
 ## ✨ What's inside
 

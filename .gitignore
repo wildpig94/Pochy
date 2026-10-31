@@ -12,9 +12,3 @@ revisar.html
 # Basura de Python
 __pycache__/
 *.pyc
-
-# La pagina y las fotos en claro se quedan en la computadora: lo que se publica
-# es el candado (index.html) y cifrado/. Se regeneran con:
-#   python3 tools/fotos.py && node tools/candado.mjs 'la-contrasena'
-/fuente/
-/fotos/

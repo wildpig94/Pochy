@@ -21,7 +21,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INDEX = os.path.join(ROOT, 'fuente', 'index.html')
+INDEX = os.path.join(ROOT, 'index.html')
 REVIEW = os.path.join(ROOT, 'revisar.html')
 INICIO = '<!-- FOTOS:inicio'
 FIN = '<!-- FOTOS:fin'
@@ -92,7 +92,7 @@ def measure(path):
 
 
 def figure(name, alt):
-    """Sin src: la foto la entrega el candado ya descifrada (ver tools/candado.mjs)."""
+    """La foto se pide sola: con candado la entrega descifrada, sin candado es su URL."""
     chica = 'fotos/web/%s-480.webp' % os.path.splitext(name)[0]
     if not os.path.exists(os.path.join(ROOT, chica)):
         chica = 'fotos/' + name
