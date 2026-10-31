@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Revisión: cada foto con su leyenda</title>
+<title>Revisión: las fotos y su grupo</title>
 <style>
   :root{
     --bg:#07080f;--card:#0d1224;--ink:#e9e6f3;--soft:#c9c3dc;--muted:#9d96b6;
@@ -16,7 +16,7 @@
   header p{color:var(--muted);font-size:15px;max-width:76ch;margin:0 0 10px;}
   header b{color:var(--ink);}
   header code{font:13px ui-monospace,Menlo,monospace;color:var(--blue);}
-  .bar{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#07080f 70%,rgba(7,8,15,.85));
+  .bar{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#07080f 72%,rgba(7,8,15,.86));
        border-bottom:1px solid var(--line);padding:12px 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
   .bar .spacer{flex:1;}
   button{font:11px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;background:transparent;
@@ -25,90 +25,92 @@
   button.primary{background:var(--lilac);border-color:var(--lilac);color:#0a0a14;}
   button.primary:hover{opacity:.88;color:#0a0a14;}
   .count{font:11px/1.4 system-ui,sans-serif;letter-spacing:.08em;color:var(--muted);}
-  main{max-width:1280px;margin:0 auto;padding:16px 22px 60px;display:grid;gap:12px;
-       grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
-  .card{background:var(--card);border:1px solid var(--line);padding:10px;display:flex;gap:12px;position:relative;}
+  main{max-width:1280px;margin:0 auto;padding:8px 22px 70px;}
+  .grupo{margin-top:34px;}
+  .grupo h2{font-family:'Poppins',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:12px;
+            font-weight:400;margin:0 0 4px;color:var(--lilac);}
+  .grupo h2 .sub{color:var(--muted);text-transform:none;letter-spacing:0;font-family:Georgia,serif;
+                 font-style:italic;font-size:14px;margin-left:8px;}
+  .grupo h2 .n{color:var(--muted);font-size:11px;margin-left:8px;letter-spacing:.08em;}
+  .cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:12px;}
+  .card{background:var(--card);border:1px solid var(--line);padding:8px;position:relative;}
   .card.changed{border-color:var(--pink);}
-  .shot{flex:0 0 auto;}
-  .shot img{width:126px;height:158px;object-fit:cover;display:block;border:1px solid var(--line);background:#0b1022;}
-  .meta{min-width:0;display:flex;flex-direction:column;gap:7px;flex:1;}
-  .cap{font-size:15px;line-height:1.35;}
-  .pick{font:10px/1.4 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;gap:6px;align-items:center;}
-  select{font:11px/1.3 ui-monospace,Menlo,monospace;background:#0a1024;color:var(--blue);
-         border:1px solid var(--line);padding:5px 6px;max-width:100%;}
-  .where{font:10px/1.4 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);opacity:.8;}
-  .num{position:absolute;top:6px;right:9px;font:11px/1 system-ui,sans-serif;color:var(--lilac);}
-  #out{display:none;width:100%;height:190px;background:#0a1024;color:var(--soft);border:1px solid var(--line);
+  .shot img{width:100%;height:auto;display:block;border:1px solid var(--line);background:#0b1022;}
+  .num{position:absolute;top:4px;right:7px;font:10px/1 system-ui,sans-serif;color:var(--lilac);
+       text-shadow:0 1px 3px #000;}
+  .meta{margin-top:7px;display:flex;flex-direction:column;gap:5px;}
+  .file{font:10px/1.3 ui-monospace,Menlo,monospace;color:var(--blue);word-break:break-all;}
+  .pick{font:9px/1.4 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  select{width:100%;font:10px/1.3 ui-monospace,Menlo,monospace;background:#0a1024;color:var(--soft);
+         border:1px solid var(--line);padding:4px;}
+  #out{display:none;width:100%;height:180px;background:#0a1024;color:var(--soft);border:1px solid var(--line);
        font:12px/1.55 ui-monospace,Menlo,monospace;padding:12px;margin:12px 0 0;}
-  .wrap{max-width:1280px;margin:0 auto;padding:0 22px 30px;}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Revisión: cada foto con su leyenda</h1>
-  <p>Van en el <b>mismo orden</b> del sitio. Si una foto no corresponde a su leyenda, elige la correcta en
-  <b>«va con»</b> y la miniatura cambia en el momento. Al final pulsa <b>copiar el emparejamiento</b> y pégame
-  la lista: con eso corrijo la tabla de <code>tools/fotos.py</code> y se arregla la página.</p>
-  <p style="color:var(--muted);font-size:13px;">Esta página no se publica ni se sube a GitHub: vive solo en tu
-  computadora.</p>
+  <h1>Revisión: las fotos, sin leyendas</h1>
+  <p>Las fotos ya no cargan texto: viven en su propio capítulo del sitio y solo están agrupadas por la
+  parte de la espera a la que pertenecen. Aquí las ves todas con su nombre de archivo. Si alguna no va en
+  el grupo donde está, cámbialo en <b>«grupo»</b>; al final pulsa <b>copiar el orden</b> y pégame la lista.</p>
+  <p style="color:var(--muted);font-size:13px;">Página local: no se publica ni se sube a GitHub.</p>
 </header>
 
 <div class="bar">
-  <button class="primary" id="copy">Copiar el emparejamiento</button>
+  <button class="primary" id="copy">Copiar el orden</button>
   <button id="reset">Deshacer mis cambios</button>
   <span class="spacer"></span>
-  <span class="count" id="count">__TOTAL__ fotos</span>
+  <span class="count" id="count">__TOTAL__ fotos en __GRUPOS__ grupos</span>
 </div>
-<div class="wrap"><textarea id="out" readonly></textarea></div>
-
 <main>
-__CARDS__
+<textarea id="out" readonly></textarea>
+__SECCIONES__
 </main>
 
 <script>
   var cards = [].slice.call(document.querySelectorAll('.card'));
   var original = {};
-
-  cards.forEach(function (card) {
-    var sel = card.querySelector('select');
-    original[sel.getAttribute('data-n')] = sel.value;
+  cards.forEach(function (c) {
+    var sel = c.querySelector('select');
+    original[c.querySelector('.file').textContent] = sel.value;
     sel.addEventListener('change', function () {
-      var n = sel.getAttribute('data-n');
-      card.classList.toggle('changed', sel.value !== original[n]);
-      var base = sel.value.replace(/\.[^.]+$/, '');
-      var img = card.querySelector('.shot img');
-      var web = 'fotos/web/' + base + '-480.webp';
-      img.onerror = function () { img.onerror = null; img.src = 'fotos/' + sel.value; };
-      img.src = web;
-      card.querySelector('.shot').setAttribute('href', 'fotos/' + sel.value);
-      updateCount();
+      var nombre = c.querySelector('.file').textContent;
+      c.classList.toggle('changed', sel.value !== original[nombre]);
+      count();
     });
   });
 
-  function changed() {
+  function cambiadas() {
     return cards.filter(function (c) {
-      var s = c.querySelector('select');
-      return s.value !== original[s.getAttribute('data-n')];
+      var nombre = c.querySelector('.file').textContent;
+      return c.querySelector('select').value !== original[nombre];
     }).length;
   }
 
-  function updateCount() {
-    var n = changed();
+  function count() {
+    var n = cambiadas();
     document.getElementById('count').textContent =
-      n ? n + ' de __TOTAL__ cambiadas' : '__TOTAL__ fotos';
+      n ? n + ' de __TOTAL__ movidas' : '__TOTAL__ fotos en __GRUPOS__ grupos';
   }
 
-  function pairing() {
-    return cards.map(function (card) {
-      var sel = card.querySelector('select');
-      return '#' + card.getAttribute('data-n') + '\t' + sel.value + '\t' +
-        card.querySelector('.cap').textContent;
-    }).join('\n');
+  function orden() {
+    var porGrupo = {};
+    cards.forEach(function (c) {
+      var sel = c.querySelector('select').value;
+      var nombre = c.querySelector('.file').textContent;
+      (porGrupo[sel] = porGrupo[sel] || []).push(nombre);
+    });
+    var lineas = [];
+    Object.keys(porGrupo).forEach(function (g) {
+      lineas.push('== ' + g);
+      porGrupo[g].forEach(function (n) { lineas.push('   ' + n); });
+    });
+    return lineas.join('\n');
   }
 
   document.getElementById('copy').addEventListener('click', function () {
-    var texto = pairing();
+    var texto = orden();
     var out = document.getElementById('out');
     out.style.display = 'block';
     out.value = texto;
@@ -117,23 +119,20 @@ __CARDS__
     if (navigator.clipboard) { navigator.clipboard.writeText(texto).catch(function () {}); }
     this.textContent = 'copiado';
     var self = this;
-    setTimeout(function () { self.textContent = 'copiar el emparejamiento'; }, 1600);
+    setTimeout(function () { self.textContent = 'copiar el orden'; }, 1600);
   });
 
   document.getElementById('reset').addEventListener('click', function () {
-    cards.forEach(function (card) {
-      var sel = card.querySelector('select');
-      sel.value = original[sel.getAttribute('data-n')];
-      card.classList.remove('changed');
-      var base = sel.value.replace(/\.[^.]+$/, '');
-      card.querySelector('.shot img').src = 'fotos/web/' + base + '-480.webp';
-      card.querySelector('.shot').setAttribute('href', 'fotos/' + sel.value);
+    cards.forEach(function (c) {
+      var nombre = c.querySelector('.file').textContent;
+      c.querySelector('select').value = original[nombre];
+      c.classList.remove('changed');
     });
     document.getElementById('out').style.display = 'none';
-    updateCount();
+    count();
   });
 
-  updateCount();
+  count();
 </script>
 </body>
 </html>

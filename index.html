@@ -161,6 +161,7 @@
   #ch3{background:linear-gradient(180deg, rgba(4,5,11,.85) 0%, rgba(8,10,26,.6) 100%);}
   #ch4{background:linear-gradient(180deg, rgba(12,13,36,.85) 0%, rgba(23,14,43,.55) 100%);}
   #ch5{background:linear-gradient(180deg, rgba(30,16,52,.7) 0%, rgba(5,6,13,0) 100%);}
+  #ch6{background:linear-gradient(180deg, rgba(14,20,46,.62) 0%, rgba(23,14,43,.35) 55%, rgba(5,6,13,0) 100%);}
   .chapter{position:relative;}
   .chapter::before,.chapter::after{
     content:'';position:absolute;left:0;right:0;height:1px;background:var(--rule);
@@ -414,6 +415,17 @@
   .sky-inner h2{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(1.5rem,4.6vw,2.3rem);line-height:1.25;max-width:20ch;margin:0 auto;}
   .sky-inner h2 em{font-style:italic;color:var(--lilac);}
 
+  /* ===== Plates: the appendix ===== */
+  .plates-group{margin-top:40px;}
+  .plates-group:first-child{margin-top:8px;}
+  .plates-group .g-label{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--blue);}
+  .plates-group .g-sub{font-family:'Lora',serif;font-style:italic;font-size:13px;color:var(--muted);margin:6px 0 16px;}
+  .plates-grid{column-count:4;column-gap:10px;}
+  .plates-grid .plate{break-inside:avoid;margin:0 0 10px;display:block;}
+  .plates-grid .plate img{width:100%;height:auto;aspect-ratio:auto;object-fit:initial;border:1px solid var(--rule);background:#0b1022;}
+  @media(max-width:980px){.plates-grid{column-count:3;}}
+  @media(max-width:640px){.plates-grid{column-count:2;column-gap:8px;}}
+
   #printArea{display:none;}
 
   /* Reduced motion */
@@ -557,6 +569,11 @@
       <span class="t">Your page<span class="badge">written</span><span class="s">the only one I left empty</span></span>
       <span class="mark">+</span>
     </button>
+    <button class="toc-row" data-target="ch6" aria-expanded="false">
+      <span class="num">VI</span>
+      <span class="t">The plates<span class="badge">read</span><span class="s">appendix · every photograph, no captions</span></span>
+      <span class="mark">+</span>
+    </button>
   </nav>
 
   <!-- CHAPTER I -->
@@ -579,10 +596,6 @@
         <h3>A heart, because I had nothing better</h3>
         <p>We met in <span class="egg-word" data-file="nueva11.jpg" data-egg="e3">Ragnarok Online</span>. The first thing I ever sent you was a heart, because I had nothing better to offer than that. You sent one back. For weeks, that was the entire conversation.</p>
         <p>Then one day I asked, half as a joke, if you'd marry me. You said no. We have not stopped talking since.</p>
-        <div class="sheet wide">
-          <figure class="plate"><img src="fotos/web/memoria11-480.webp" srcset="fotos/web/memoria11-480.webp 480w, fotos/memoria11.jpg 545w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria11.jpg" decoding="async"><figcaption>the two of us, in a world made of pixels</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria13-480.webp" srcset="fotos/web/memoria13-480.webp 480w, fotos/memoria13.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria13.jpg" decoding="async"><figcaption>where it started</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -591,10 +604,6 @@
       <div>
         <h3>Behind a translator</h3>
         <p>You wrote in English. I wrote in Spanish, badly, with a translator sitting between us like a chaperone. So I learned — not romantically, out of necessity. Every night, a little more. Until one day the translator was no longer needed and the sentences were mine.</p>
-        <div class="sheet wide">
-          <figure class="plate"><img src="fotos/web/memoria19-480.webp" srcset="fotos/web/memoria19-480.webp 480w, fotos/web/memoria19-900.webp 900w, fotos/memoria19.jpg 901w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria19.jpg" decoding="async"><figcaption>the conversations that taught me a language</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria25-480.webp" srcset="fotos/web/memoria25-480.webp 480w, fotos/web/memoria25-900.webp 900w, fotos/memoria25.jpg 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria25.jpg" decoding="async"><figcaption>late replies, my fault</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -603,10 +612,6 @@
       <div>
         <h3>The voice had a face</h3>
         <p>It is a strange thing to meet someone you already know. Then came Discord, then the calls, then the first photograph. I remember thinking the face did not match the voice, in the best way.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria5-480.webp" srcset="fotos/web/memoria5-480.webp 480w, fotos/web/memoria5-900.webp 900w, fotos/memoria5.jpg 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria5.jpg" decoding="async"><figcaption>the first she sent me</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria6-480.webp" srcset="fotos/web/memoria6-480.webp 480w, fotos/web/memoria6-900.webp 900w, fotos/memoria6.jpg 1080w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria6.jpg" decoding="async"><figcaption>where she was standing</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -615,10 +620,6 @@
       <div>
         <h3>Nowhere to hide an accent</h3>
         <p>On a call there is nowhere to hide your accent. I nodded too much and spoke too little. She talked; I pretended to follow. Then I went and learned the language properly, so I would not have to pretend.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria14-480.webp" srcset="fotos/web/memoria14-480.webp 480w, fotos/memoria14.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria14.jpg" decoding="async"><figcaption>the afternoon call</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria15-480.webp" srcset="fotos/web/memoria15-480.webp 480w, fotos/web/memoria15-900.webp 900w, fotos/memoria15.png 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria15.png" decoding="async"><figcaption>the hour that became four</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -627,9 +628,6 @@
       <div>
         <h3>One night the call didn't end</h3>
         <p>She used to call me her 2D boyfriend. Then the evening calls turned into night calls, and the night calls turned into sleeping with the line open. Nobody decided it. It just stopped ending.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria16-480.webp" srcset="fotos/web/memoria16-480.webp 480w, fotos/memoria16.jpg 553w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria16.jpg" decoding="async"><figcaption>2D, and then not</figcaption></figure>
-        </div>
       </div>
     </div>
   </section>
@@ -643,12 +641,6 @@
         <h3>One word for a bad line</h3>
         <p>We sleep on a call. When the connection drops, we say one word — <em>carrot</em> — and it means: the line is bad, but I am still here.</p>
         <p>Different countries, <span class="egg-word" data-file="nueva13.jpg" data-egg="e4">same heartbeat</span>. The call only stops when she is at work. We eat on it. We shower on it. It is not really about talking.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria1-480.webp" srcset="fotos/web/memoria1-480.webp 480w, fotos/memoria1.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria1.jpg" decoding="async"><figcaption>night one</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria2-480.webp" srcset="fotos/web/memoria2-480.webp 480w, fotos/memoria2.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria2.jpg" decoding="async"><figcaption>still on the call</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria3-480.webp" srcset="fotos/web/memoria3-480.webp 480w, fotos/memoria3.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria3.jpg" decoding="async"><figcaption>carrot</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria4-480.webp" srcset="fotos/web/memoria4-480.webp 480w, fotos/memoria4.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria4.jpg" decoding="async"><figcaption>the line stayed open</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -657,13 +649,6 @@
       <div>
         <h3>Two people getting better</h3>
         <p>We are both working on how we think — the machinery under the thoughts. That is the part I am proudest of. Not the romance. The fact that we make each other <span class="egg-word" data-file="nueva10.jpg" data-egg="e1">better</span>, and neither of us pretends the work is easy.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria7-480.webp" srcset="fotos/web/memoria7-480.webp 480w, fotos/web/memoria7-900.webp 900w, fotos/memoria7.png 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria7.png" decoding="async"><figcaption>the year we started keeping notes</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria8-480.webp" srcset="fotos/web/memoria8-480.webp 480w, fotos/memoria8.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria8.jpg" decoding="async"><figcaption>long conversations</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria9-480.webp" srcset="fotos/web/memoria9-480.webp 480w, fotos/web/memoria9-900.webp 900w, fotos/memoria9.png 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria9.png" decoding="async"><figcaption>unfinished business</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria10-480.webp" srcset="fotos/web/memoria10-480.webp 480w, fotos/memoria10.jpg 545w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria10.jpg" decoding="async"><figcaption>better, slowly</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria12-480.webp" srcset="fotos/web/memoria12-480.webp 480w, fotos/memoria12.jpg 553w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria12.jpg" decoding="async"><figcaption>her side of it</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -672,16 +657,6 @@
       <div>
         <h3>One piece of paper</h3>
         <p>Everything narrows to <span class="egg-word" data-file="nueva04.jpg" data-egg="e6">a single document</span> now. We have named the cities, the months, the order in which things happen. The rest is waiting on a stamp.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/memoria17-480.webp" srcset="fotos/web/memoria17-480.webp 480w, fotos/memoria17.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria17.jpg" decoding="async"><figcaption>the plan, in writing</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria18-480.webp" srcset="fotos/web/memoria18-480.webp 480w, fotos/memoria18.jpg 799w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria18.jpg" decoding="async"><figcaption>the list we keep adding to</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria20-480.webp" srcset="fotos/web/memoria20-480.webp 480w, fotos/memoria20.png 896w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria20.png" decoding="async"><figcaption>paper, patience</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria21-480.webp" srcset="fotos/web/memoria21-480.webp 480w, fotos/web/memoria21-900.webp 900w, fotos/memoria21.png 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria21.png" decoding="async"><figcaption>one door</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria22-480.webp" srcset="fotos/web/memoria22-480.webp 480w, fotos/memoria22.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria22.jpg" decoding="async"><figcaption>almost</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria23-480.webp" srcset="fotos/web/memoria23-480.webp 480w, fotos/web/memoria23-900.webp 900w, fotos/memoria23.jpg 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria23.jpg" decoding="async"><figcaption>the countdown we stopped counting</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria24-480.webp" srcset="fotos/web/memoria24-480.webp 480w, fotos/memoria24.jpg 676w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria24.jpg" decoding="async"><figcaption>the waiting, kept</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/memoria26-480.webp" srcset="fotos/web/memoria26-480.webp 480w, fotos/memoria26.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/memoria26.jpg" decoding="async"><figcaption>still waiting</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -707,13 +682,6 @@
       <div>
         <h3>Not the same as a screen</h3>
         <p>Everything we had practised on a call — the rhythm, the pauses, the jokes — survived the landing. What did not survive was the distance. That part was over the moment she let go.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/nueva06-480.webp" srcset="fotos/web/nueva06-480.webp 480w, fotos/web/nueva06-900.webp 900w, fotos/nueva06.jpg 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/nueva06.jpg" decoding="async"><figcaption>Mexico</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/nueva08-480.webp" srcset="fotos/web/nueva08-480.webp 480w, fotos/web/nueva08-900.webp 900w, fotos/nueva08.jpg 901w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/nueva08.jpg" decoding="async"><figcaption>in person</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/nueva09-480.webp" srcset="fotos/web/nueva09-480.webp 480w, fotos/web/nueva09-900.webp 900w, fotos/nueva09.jpg 901w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/nueva09.jpg" decoding="async"><figcaption>the week we had</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/nueva12-480.webp" srcset="fotos/web/nueva12-480.webp 480w, fotos/web/nueva12-900.webp 900w, fotos/nueva12.jpg 901w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/nueva12.jpg" decoding="async"><figcaption>before she flew back</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/nueva14-480.webp" srcset="fotos/web/nueva14-480.webp 480w, fotos/web/nueva14-900.webp 900w, fotos/nueva14.jpg 901w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/nueva14.jpg" decoding="async"><figcaption>the last morning</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -750,16 +718,6 @@
       <div>
         <h3>The last stretch</h3>
         <p>These carried me through the waiting. Most of them are ordinary. That is the point.</p>
-        <div class="sheet">
-          <figure class="plate"><img src="fotos/web/cap4-1-480.webp" srcset="fotos/web/cap4-1-480.webp 480w, fotos/web/cap4-1-900.webp 900w, fotos/cap4-1.jpg 1200w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-1.jpg" decoding="async"><figcaption>a Tuesday</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-2-480.webp" srcset="fotos/web/cap4-2-480.webp 480w, fotos/cap4-2.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-2.jpg" decoding="async"><figcaption>the dog</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-3-480.webp" srcset="fotos/web/cap4-3-480.webp 480w, fotos/cap4-3.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-3.jpg" decoding="async"><figcaption>the rabbit</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-4-480.webp" srcset="fotos/web/cap4-4-480.webp 480w, fotos/cap4-4.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-4.jpg" decoding="async"><figcaption>a rose, for no reason</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-5-480.webp" srcset="fotos/web/cap4-5-480.webp 480w, fotos/cap4-5.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-5.jpg" decoding="async"><figcaption>already knew</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-6-480.webp" srcset="fotos/web/cap4-6-480.webp 480w, fotos/cap4-6.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-6.jpg" decoding="async"><figcaption>in her arms</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-7-480.webp" srcset="fotos/web/cap4-7-480.webp 480w, fotos/cap4-7.jpg 900w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-7.jpg" decoding="async"><figcaption>an altar to something ordinary</figcaption></figure>
-          <figure class="plate"><img src="fotos/web/cap4-8-480.webp" srcset="fotos/web/cap4-8-480.webp 480w, fotos/cap4-8.jpg 675w" sizes="(max-width:720px) 45vw, 210px" alt="" loading="lazy" data-full="fotos/cap4-8.jpg" decoding="async"><figcaption>one more night of the call</figcaption></figure>
-        </div>
       </div>
     </div>
 
@@ -883,6 +841,86 @@
         <button class="btn ghost" id="herCopy">Copy the text</button>
       </div>
     </div>
+  </section>
+
+  <!-- CHAPTER VI — the plates -->
+  <section class="chapter" id="ch6">
+
+    <div class="block" style="border-top:0;">
+      <div class="kicker">The plates</div>
+      <h2>Every photograph, <em style="font-style:italic;color:var(--lilac);">on its own.</em></h2>
+      <p>The story is in the chapters above. These are the pieces it was made from, grouped by the part of the wait they belong to and in the order they arrived. No captions: the words stay with the story, the photographs stay here.</p>
+      <p>Tap any of them to see it full size.</p>
+    </div>
+
+    <div id="platesWrap">
+      <!-- FOTOS:inicio — lo escribe tools/fotos.py; no editar a mano -->
+      <div class="plates-group">
+        <div class="g-label">Before the airport</div>
+        <div class="g-sub">screens, 2026</div>
+        <div class="plates-grid">
+          <figure class="plate"><img src="fotos/web/memoria11-480.webp" srcset="fotos/web/memoria11-480.webp 480w, fotos/memoria11.jpg 545w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria11.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria13-480.webp" srcset="fotos/web/memoria13-480.webp 480w, fotos/memoria13.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria13.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria19-480.webp" srcset="fotos/web/memoria19-480.webp 480w, fotos/web/memoria19-900.webp 900w, fotos/memoria19.jpg 901w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria19.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria25-480.webp" srcset="fotos/web/memoria25-480.webp 480w, fotos/web/memoria25-900.webp 900w, fotos/memoria25.jpg 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria25.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria5-480.webp" srcset="fotos/web/memoria5-480.webp 480w, fotos/web/memoria5-900.webp 900w, fotos/memoria5.jpg 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria5.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria6-480.webp" srcset="fotos/web/memoria6-480.webp 480w, fotos/web/memoria6-900.webp 900w, fotos/memoria6.jpg 1080w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria6.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria14-480.webp" srcset="fotos/web/memoria14-480.webp 480w, fotos/memoria14.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria14.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria15-480.webp" srcset="fotos/web/memoria15-480.webp 480w, fotos/web/memoria15-900.webp 900w, fotos/memoria15.png 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria15.png" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria16-480.webp" srcset="fotos/web/memoria16-480.webp 480w, fotos/memoria16.jpg 553w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria16.jpg" decoding="async"></figure>
+        </div>
+      </div>
+      <div class="plates-group">
+        <div class="g-label">The wait</div>
+        <div class="g-sub">the part nobody photographs</div>
+        <div class="plates-grid">
+          <figure class="plate"><img src="fotos/web/memoria1-480.webp" srcset="fotos/web/memoria1-480.webp 480w, fotos/memoria1.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria1.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria2-480.webp" srcset="fotos/web/memoria2-480.webp 480w, fotos/memoria2.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria2.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria3-480.webp" srcset="fotos/web/memoria3-480.webp 480w, fotos/memoria3.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria3.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria4-480.webp" srcset="fotos/web/memoria4-480.webp 480w, fotos/memoria4.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria4.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria7-480.webp" srcset="fotos/web/memoria7-480.webp 480w, fotos/web/memoria7-900.webp 900w, fotos/memoria7.png 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria7.png" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria8-480.webp" srcset="fotos/web/memoria8-480.webp 480w, fotos/memoria8.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria8.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria9-480.webp" srcset="fotos/web/memoria9-480.webp 480w, fotos/web/memoria9-900.webp 900w, fotos/memoria9.png 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria9.png" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria10-480.webp" srcset="fotos/web/memoria10-480.webp 480w, fotos/memoria10.jpg 545w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria10.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria12-480.webp" srcset="fotos/web/memoria12-480.webp 480w, fotos/memoria12.jpg 553w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria12.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria17-480.webp" srcset="fotos/web/memoria17-480.webp 480w, fotos/memoria17.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria17.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria18-480.webp" srcset="fotos/web/memoria18-480.webp 480w, fotos/memoria18.jpg 799w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria18.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria20-480.webp" srcset="fotos/web/memoria20-480.webp 480w, fotos/memoria20.png 896w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria20.png" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria21-480.webp" srcset="fotos/web/memoria21-480.webp 480w, fotos/web/memoria21-900.webp 900w, fotos/memoria21.png 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria21.png" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria22-480.webp" srcset="fotos/web/memoria22-480.webp 480w, fotos/memoria22.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria22.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria23-480.webp" srcset="fotos/web/memoria23-480.webp 480w, fotos/web/memoria23-900.webp 900w, fotos/memoria23.jpg 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria23.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria24-480.webp" srcset="fotos/web/memoria24-480.webp 480w, fotos/memoria24.jpg 676w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria24.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/memoria26-480.webp" srcset="fotos/web/memoria26-480.webp 480w, fotos/memoria26.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/memoria26.jpg" decoding="async"></figure>
+        </div>
+      </div>
+      <div class="plates-group">
+        <div class="g-label">Ten seconds</div>
+        <div class="g-sub">the airport, then Mexico</div>
+        <div class="plates-grid">
+          <figure class="plate"><img src="fotos/web/nueva06-480.webp" srcset="fotos/web/nueva06-480.webp 480w, fotos/web/nueva06-900.webp 900w, fotos/nueva06.jpg 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/nueva06.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/nueva08-480.webp" srcset="fotos/web/nueva08-480.webp 480w, fotos/web/nueva08-900.webp 900w, fotos/nueva08.jpg 901w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/nueva08.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/nueva09-480.webp" srcset="fotos/web/nueva09-480.webp 480w, fotos/web/nueva09-900.webp 900w, fotos/nueva09.jpg 901w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/nueva09.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/nueva12-480.webp" srcset="fotos/web/nueva12-480.webp 480w, fotos/web/nueva12-900.webp 900w, fotos/nueva12.jpg 901w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/nueva12.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/nueva14-480.webp" srcset="fotos/web/nueva14-480.webp 480w, fotos/web/nueva14-900.webp 900w, fotos/nueva14.jpg 901w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/nueva14.jpg" decoding="async"></figure>
+        </div>
+      </div>
+      <div class="plates-group">
+        <div class="g-label">The last door</div>
+        <div class="g-sub">five months, almost</div>
+        <div class="plates-grid">
+          <figure class="plate"><img src="fotos/web/cap4-1-480.webp" srcset="fotos/web/cap4-1-480.webp 480w, fotos/web/cap4-1-900.webp 900w, fotos/cap4-1.jpg 1200w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-1.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-2-480.webp" srcset="fotos/web/cap4-2-480.webp 480w, fotos/cap4-2.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-2.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-3-480.webp" srcset="fotos/web/cap4-3-480.webp 480w, fotos/cap4-3.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-3.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-4-480.webp" srcset="fotos/web/cap4-4-480.webp 480w, fotos/cap4-4.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-4.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-5-480.webp" srcset="fotos/web/cap4-5-480.webp 480w, fotos/cap4-5.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-5.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-6-480.webp" srcset="fotos/web/cap4-6-480.webp 480w, fotos/cap4-6.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-6.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-7-480.webp" srcset="fotos/web/cap4-7-480.webp 480w, fotos/cap4-7.jpg 900w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-7.jpg" decoding="async"></figure>
+          <figure class="plate"><img src="fotos/web/cap4-8-480.webp" srcset="fotos/web/cap4-8-480.webp 480w, fotos/cap4-8.jpg 675w" sizes="(max-width:640px) 45vw, 24vw" alt="" loading="lazy" data-full="fotos/cap4-8.jpg" decoding="async"></figure>
+        </div>
+      </div>
+      <!-- FOTOS:fin -->
+    </div>
+
   </section>
 
   <footer>
@@ -1425,7 +1463,7 @@
     var img=fig.querySelector('img');
     var cap=fig.querySelector('figcaption');
     lbImg.src=img.getAttribute('data-full')||img.getAttribute('src');
-    lbCap.textContent=cap?cap.textContent:'';
+    lbCap.textContent=cap&&cap.textContent?cap.textContent:(i+1)+' of '+plates.length;
     lb.classList.add('show');
     fig.classList.add('seen');
     memory.markPlate(i);
@@ -1435,7 +1473,8 @@
     var img=fig.querySelector('img');
     fig.setAttribute('role','button');
     fig.setAttribute('tabindex','0');
-    fig.setAttribute('aria-label',(fig.querySelector('figcaption')||{textContent:''}).textContent||'photograph');
+    var aria=(fig.querySelector('figcaption')||{textContent:''}).textContent;
+    fig.setAttribute('aria-label',aria||('photograph '+(i+1)+' of '+plates.length));
     fig.addEventListener('click',function(){ showPlate(i); });
     fig.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showPlate(i); } });
   });
@@ -1623,7 +1662,7 @@
     var line=document.getElementById('progressLine');
     if(line){
       var parts=[
-        '<b>'+memory.data.chapters.length+'</b> of 5 chapters',
+        '<b>'+memory.data.chapters.length+'</b> of '+document.querySelectorAll('.toc-row').length+' chapters',
         '<b>'+memory.data.plates.length+'</b> of '+plates.length+' photographs',
         '<b>'+memory.data.eggs.length+'</b> of '+TREASURES+' hidden things'
       ];

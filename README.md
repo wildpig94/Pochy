@@ -17,8 +17,9 @@ The password is the four letters on her ring.
 - 💍 **The ring** — the T.O.K.Y. promise, one letter at a time.
 - 🙈 **Hidden texts** — words in the story, a moon and two sparkles open a photo
   and a note.
-- 📸 **Photographs** — 39 plates with captions, full size on tap, arrows and
-  Escape on a keyboard.
+- 📸 **The plates** — 39 photographs in their own appendix chapter, with no
+  captions at all, grouped by the part of the wait they belong to; full size on
+  tap, arrows and Escape on a keyboard.
 - ♫ **Two songs** with lyrics timed to the audio.
 - 🎟️ **Five coupons** and a **print room** to make her own sheet.
 - 🦎 **The axolotl** — a small mascot in the corner. It talks when tapped, and it
@@ -81,16 +82,22 @@ The page never loads those originals while reading. It loads the light versions 
 **`fotos/web/`** (480 px and 900 px WebP) and only reaches for the original when a
 photo is opened full size or printed. That is 10.8 MB → 1.9 MB.
 
-### One table for every photo
+### The photographs live in their own chapter
 
-The photo/caption pairing lives in **one place only**: `SECCIONES` in
-`tools/fotos.py`. Each line is one photo and its caption, grouped by where it
-sits in the page:
+No photograph carries a caption anymore. The story is text; the photographs are
+in **chapter VI — The plates**, grouped by the part of the wait they belong to
+and in the order they arrived. A group label can be wrong, but a group label
+does not sit on top of one photograph pretending to describe it, so there is no
+`photo ↔ caption` pairing left to get wrong.
+
+The only thing left to decide is which group each photograph is in, and that
+lives in **one place**: `GRUPOS` in `tools/fotos.py`.
 
 ```python
-('I · First contact — A heart, because I had nothing better', 'wide', [
-    ('memoria11.jpg', 'the two of us, in a world made of pixels'),
-    ('memoria13.jpg', 'where it started'),
+('The wait', 'the part nobody photographs', [
+    'memoria1.jpg',
+    'memoria2.jpg',
+    ...
 ]),
 ```
 
@@ -100,16 +107,15 @@ From that table, one command writes both things:
 python3 tools/fotos.py
 ```
 
-- rewrites the photo blocks inside `index.html` (srcset, `data-full`, sizes and
-  all), and if nothing changed in the table the file comes out byte for byte
-  identical;
-- builds **`revisar.html`**, a local page where every photo sits next to its
-  caption and its file name, with a dropdown to change which photo goes where.
-  It is gitignored and never published.
+- rewrites the gallery inside `index.html`, between the `FOTOS:inicio` and
+  `FOTOS:fin` markers, with srcset and `data-full` already built — and if
+  nothing changed in the table the file comes out byte for byte identical;
+- builds **`revisar.html`**, a local page with every photograph, its file name
+  and a dropdown to move it to another group. It is gitignored and never
+  published.
 
-When you add a photo: run `python3 tools/webp.py`, then add its line to the
-table and run `python3 tools/fotos.py`. To fix a pairing: open `revisar.html`,
-change the photo, copy the list, and swap that line.
+When you add a photograph: run `python3 tools/webp.py`, add its line to a group
+in the table, and run `python3 tools/fotos.py`.
 
 ## 🦎 The axolotl
 
@@ -149,7 +155,7 @@ GitHub Pages rebuilds in 1–2 minutes.
 - `fotos/` — originals. `fotos/web/` — the light versions.
 - `audio/` — put the two songs here.
 - `tools/webp.py` — rebuilds `fotos/web/`.
-- `tools/fotos.py` — the photo/caption table, and the script that writes it into
-  `index.html` and into `revisar.html`.
+- `tools/fotos.py` — the photograph/group table, and the script that writes the
+  gallery into `index.html` and builds `revisar.html`.
 - `tools/revisar.plantilla.html` — the shell of the review page.
 - `robots.txt` — keeps search engines out.
