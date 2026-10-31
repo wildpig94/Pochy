@@ -109,7 +109,6 @@
   .music-bar{position:fixed;bottom:74px;right:24px;z-index:89;background:var(--plum);border:1px solid rgba(195,166,245,.28);color:var(--ink);padding:.5rem .8rem;font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.1em;max-width:min(240px,72vw);display:none;align-items:center;gap:10px;}
   .music-bar.show{display:flex;}
   .music-bar .m-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .music-bar .m-src{color:var(--dim);font-size:9px;letter-spacing:.14em;text-transform:uppercase;}
   .m-btn{background:none;border:0;color:var(--ink);cursor:pointer;font-size:12px;line-height:1;padding:0;opacity:.8;min-width:28px;min-height:28px;display:inline-flex;align-items:center;justify-content:center;}
   .m-btn:hover{opacity:1;color:var(--lilac);}
 
@@ -124,12 +123,6 @@
   .masthead .meta strong{display:block;font-family:'Playfair Display',serif;font-weight:400;font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:4px;}
   .masthead .meta .live strong{color:var(--blue);font-variant-numeric:tabular-nums;}
   .masthead .meta .live.door strong{color:var(--lilac);}
-  .progress-line{
-    margin-top:34px;font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--dim);display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-  }
-  .progress-line b{color:var(--blue);font-weight:500;}
-  .progress-line .dot{opacity:.4;}
 
   /* ===== Contents ===== */
   .contents{padding:8px 0 40px;}
@@ -146,10 +139,6 @@
   .toc-row .s{display:block;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
   .toc-row .mark{font-family:'Poppins',sans-serif;font-size:18px;color:var(--lilac);justify-self:end;transition:transform .3s;}
   .toc-row[aria-expanded="true"] .mark{transform:rotate(45deg);}
-  .toc-row.read .num::after{content:'·';margin-left:6px;color:var(--dim);}
-  .toc-row.read .t{color:var(--ink-soft);}
-  .toc-row .badge{display:none;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-left:10px;border:1px solid var(--rule);padding:2px 6px;vertical-align:middle;}
-  .toc-row.read .badge{display:inline-block;}
 
   /* ===== Chapter ===== */
   .chapter{display:none;padding:44px 0 56px;}
@@ -183,8 +172,6 @@
   .plate img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border:1px solid var(--rule);transition:opacity .2s,border-color .2s;background:#0b1022;}
   .plate:hover img{opacity:.86;border-color:rgba(195,166,245,.5);}
   .plate figcaption{font-family:'Lora',serif;font-style:italic;font-size:12px;color:var(--muted);margin-top:7px;line-height:1.4;}
-  .plate.seen img{border-color:rgba(138,180,236,.42);}
-  .plate.seen figcaption::after{content:' ·';color:var(--blue);}
   .sheet.wide{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
   .sheet.wide .plate img{aspect-ratio:16/10;}
 
@@ -332,11 +319,6 @@
   }
   .her-saved .tick{color:var(--pink);opacity:0;transition:opacity .4s;}
   .her-saved .tick.on{opacity:1;}
-  .her-echo{margin-top:34px;border-left:2px solid rgba(245,170,198,.45);padding:6px 0 6px 20px;display:none;}
-  .her-echo.show{display:block;}
-  .her-echo .when{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-  .her-echo .what{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.6;color:var(--ink);white-space:pre-wrap;max-width:56ch;}
-
   /* ===== Axolotl ===== */
   .axo{
     position:fixed;left:20px;bottom:20px;z-index:88;
@@ -370,7 +352,6 @@
   footer{border-top:1px solid rgba(195,166,245,.28);margin-top:64px;padding:36px 0 110px;}
   footer .mark{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:10px;}
   footer .col{font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.9;}
-  footer .stamp{margin-top:22px;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);opacity:.85;}
 
   /* Lightbox */
   #lightbox{position:fixed;inset:0;z-index:300;background:rgba(3,4,10,.97);display:none;align-items:center;justify-content:center;flex-direction:column;cursor:zoom-out;}
@@ -500,8 +481,7 @@
 
 <button id="musicBtn" title="Music" aria-label="Music">♫</button>
 <div class="music-bar" id="musicBar">
-  <div class="m-title" id="musicTitle">Ready</div>
-  <span class="m-src" id="musicSrc"></span>
+  <div class="m-title" id="musicTitle"></div>
   <button class="m-btn" id="prevBtn" aria-label="Previous song" title="Previous">⏮</button>
   <button class="m-btn" id="nextBtn" aria-label="Next song" title="Next">⏭</button>
 </div>
@@ -537,7 +517,6 @@
       <div class="live"><span id="liveTogetherLabel">Together</span><div><strong id="liveTogether">five months</strong></div></div>
       <div class="live door"><span id="liveDoorLabel">The door</span><div><strong id="liveDoor">&mdash;</strong></div></div>
     </div>
-    <div class="progress-line" id="progressLine"></div>
   </header>
 
   <hr class="rule">
@@ -546,32 +525,32 @@
   <nav class="contents" id="contents">
     <button class="toc-row" data-target="ch1" aria-expanded="true">
       <span class="num">I</span>
-      <span class="t">Before the airport<span class="badge">read</span><span class="s">screens, 2026</span></span>
+      <span class="t">Before the airport<span class="s">screens, 2026</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch2" aria-expanded="false">
       <span class="num">II</span>
-      <span class="t">The wait<span class="badge">read</span><span class="s">the part nobody photographs</span></span>
+      <span class="t">The wait<span class="s">the part nobody photographs</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch3" aria-expanded="false">
       <span class="num">III</span>
-      <span class="t">Ten seconds<span class="badge">read</span><span class="s">the airport, then Mexico</span></span>
+      <span class="t">Ten seconds<span class="s">the airport, then Mexico</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch4" aria-expanded="false">
       <span class="num">IV</span>
-      <span class="t">The last door<span class="badge">read</span><span class="s">five months, almost</span></span>
+      <span class="t">The last door<span class="s">five months, almost</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch5" aria-expanded="false">
       <span class="num">V</span>
-      <span class="t">Your page<span class="badge">written</span><span class="s">the only one I left empty</span></span>
+      <span class="t">Your page<span class="s">the only one I left empty</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch6" aria-expanded="false">
       <span class="num">VI</span>
-      <span class="t">The plates<span class="badge">read</span><span class="s">appendix · every photograph, no captions</span></span>
+      <span class="t">The plates<span class="s">the photographs, in the order they arrived</span></span>
       <span class="mark">+</span>
     </button>
   </nav>
@@ -717,7 +696,7 @@
       <div class="when">Almost home</div>
       <div>
         <h3>The last stretch</h3>
-        <p>These carried me through the waiting. Most of them are ordinary. That is the point.</p>
+        <p>Most of the waiting was ordinary. That is the point.</p>
       </div>
     </div>
 
@@ -820,9 +799,9 @@
   <!-- CHAPTER V — her page -->
   <section class="chapter" id="ch5">
     <div class="her-page">
-      <div class="kicker">The one page that is not mine</div>
-      <h2>Five chapters of me. <em>One of you.</em></h2>
-      <p>Everything above this line I wrote. This part is blank on purpose, and it stays blank until you fill it. Whatever you leave here is kept in this phone, waiting for the next time you open the archive — and if you want, you can send it to me with one tap.</p>
+      <div class="kicker">Your page</div>
+      <h2>The rest is mine. <em>This is yours.</em></h2>
+      <p>Write it, and it will still be here when you come back. When you want me to read it, send it to me.</p>
       <div class="prompts" id="promptRow">
         <button class="prompt" type="button" data-prompt="What I never told you: ">what I never told you</button>
         <button class="prompt" type="button" data-prompt="The first day, in my head: ">the first day, in my head</button>
@@ -830,15 +809,13 @@
         <button class="prompt" type="button" data-prompt="Something I want you to know before the door opens: ">before the door opens</button>
         <button class="prompt" type="button" data-prompt="Something ordinary I want to do with you: ">something ordinary</button>
       </div>
-      <div id="herList"></div>
       <textarea class="her-text" id="herText" maxlength="4000" aria-label="Your page" placeholder="A line, a paragraph, whatever it is. It saves itself as you type, and it waits here for the next visit."></textarea>
       <div class="her-saved">
-        <span id="herCount">0 characters</span>
-        <span class="tick" id="herTick">saved in this phone</span>
+        <span class="tick" id="herTick"></span>
       </div>
       <div class="btn-row">
         <button class="btn" id="herSend">Send it to me</button>
-        <button class="btn ghost" id="herCopy">Copy the text</button>
+        <button class="btn ghost" id="herCopy">Copy it</button>
       </div>
     </div>
   </section>
@@ -848,9 +825,8 @@
 
     <div class="block" style="border-top:0;">
       <div class="kicker">The plates</div>
-      <h2>Every photograph, <em style="font-style:italic;color:var(--lilac);">on its own.</em></h2>
-      <p>The story is in the chapters above. These are the pieces it was made from, grouped by the part of the wait they belong to and in the order they arrived. No captions: the words stay with the story, the photographs stay here.</p>
-      <p>Tap any of them to see it full size.</p>
+      <h2>The pieces <em style="font-style:italic;color:var(--lilac);">it was made from.</em></h2>
+      <p>In the order they arrived.</p>
     </div>
 
     <div id="platesWrap">
@@ -930,7 +906,6 @@
       No templates. No borrowed words.<br>
       The dog and the rabbit.
     </div>
-    <div class="stamp" id="footerStamp"></div>
   </footer>
 
 </div>
@@ -1036,7 +1011,7 @@
   var audioEl=document.getElementById('track');
   var musicBtn=document.getElementById('musicBtn');
   var musicBar=document.getElementById('musicBar');
-  var musicSrcLabel=document.getElementById('musicSrc');
+  var musicSrcLabel=document.getElementById('musicSrc')||{textContent:''};
   var player=null, cur=0, mode=/[?&]source=yt/.test(location.search)?'yt':'local';
   var pendingStart=false, started=false, ytRequested=false;
 
@@ -1465,7 +1440,6 @@
     lbImg.src=img.getAttribute('data-full')||img.getAttribute('src');
     lbCap.textContent=cap&&cap.textContent?cap.textContent:(i+1)+' of '+plates.length;
     lb.classList.add('show');
-    fig.classList.add('seen');
     memory.markPlate(i);
   }
   function hideLightbox(){ lb.classList.remove('show'); }
@@ -1580,33 +1554,19 @@
   })();
 
   var previousVisit=memory.data.last||null;
-  var visitCount=(memory.data.visits||0)+1;
   if(!memory.data.first) memory.data.first=Date.now();
   memory.data.last=Date.now();
-  memory.data.visits=visitCount;
+  memory.data.visits=(memory.data.visits||0)+1;
   memory.save();
-
-  var TREASURES=document.querySelectorAll('.egg-word,.sky-moon,.egg-sparkle').length;
-  function unseenPlates(){ return Math.max(0,plates.length-memory.data.plates.length); }
-  function unseenTreasures(){ return Math.max(0,TREASURES-memory.data.eggs.length); }
 
   // ============ THE DATE, LIVE ============
   var CONFIG={
     togetherSince:'2026-05-26',   // el día en que empezó todo
     door:'2026-11-06'             // la fecha de la puerta
   };
-  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
   function parseDay(s){ var p=String(s).split('-'); return new Date(+p[0],(+p[1])-1,+p[2],0,0,0,0); }
   function plural(n,one,many){ return n+' '+(n===1?one:many); }
   function pad2(n){ return (n<10?'0':'')+n; }
-  function longDay(d){ return d.getDate()+' '+MONTHS[d.getMonth()]; }
-  function sameDay(a,b){ return new Date(a).toDateString()===new Date(b).toDateString(); }
-  function ago(ts){
-    var d=Math.floor((Date.now()-ts)/864e5);
-    if(d<=0) return 'earlier today';
-    if(d===1) return 'yesterday';
-    return d+' days ago';
-  }
   function sinceMonths(from,to){
     var m=(to.getFullYear()-from.getFullYear())*12+(to.getMonth()-from.getMonth());
     var anchor=new Date(from.getFullYear(),from.getMonth()+m,from.getDate());
@@ -1653,81 +1613,29 @@
   renderLive();
   setInterval(renderLive,1000);
 
-  function refresh(){
-    memory.data.chapters.forEach(function(id){
-      var row=document.querySelector('.toc-row[data-target="'+id+'"]');
-      if(row) row.classList.add('read');
-    });
-    plates.forEach(function(fig,i){ if(memory.data.plates.indexOf(i)>=0) fig.classList.add('seen'); });
-    var line=document.getElementById('progressLine');
-    if(line){
-      var parts=[
-        '<b>'+memory.data.chapters.length+'</b> of '+document.querySelectorAll('.toc-row').length+' chapters',
-        '<b>'+memory.data.plates.length+'</b> of '+plates.length+' photographs',
-        '<b>'+memory.data.eggs.length+'</b> of '+TREASURES+' hidden things'
-      ];
-      if(previousVisit) parts.push('last time here '+ago(previousVisit));
-      line.innerHTML=parts.join('<span class="dot">·</span>');
-    }
-    var stamp=document.getElementById('footerStamp');
-    if(stamp){
-      var bits=[];
-      if(memory.data.first) bits.push('kept since '+longDay(new Date(memory.data.first)));
-      bits.push('opened '+visitCount+(visitCount===1?' time':' times'));
-      stamp.textContent=bits.join(' · ');
-    }
-    var vRow=document.querySelector('.toc-row[data-target="ch5"]');
-    if(vRow && memory.data.page && memory.data.page.text) vRow.classList.add('read');
-  }
+  // La memoria ya no se publica en pantalla: solo alimenta el saludo y el ajolote.
+  function refresh(){}
   refresh();
 
   // ============ HER PAGE ============
   var herText=document.getElementById('herText');
-  var herCount=document.getElementById('herCount');
   var herTick=document.getElementById('herTick');
-  var herList=document.getElementById('herList');
   var herTimer=null;
   function pageText(){ return (memory.data.page&&memory.data.page.text)||''; }
-  function renderPage(){
-    var page=memory.data.page||{text:'',at:null};
-    herText.value=page.text||'';
-    updateHerCount();
-    herList.innerHTML='';
-    if(page.text && page.at && !sameDay(page.at,Date.now())){
-      var wrap=document.createElement('div');
-      wrap.className='her-echo show';
-      var when=document.createElement('div');
-      when.className='when';
-      when.textContent='what you left here on '+longDay(new Date(page.at));
-      var what=document.createElement('div');
-      what.className='what';
-      what.textContent=page.text.length>260?page.text.slice(0,260)+'…':page.text;
-      wrap.appendChild(when);
-      wrap.appendChild(what);
-      herList.appendChild(wrap);
-    }
-  }
-  function updateHerCount(){
-    var n=herText.value.length;
-    herCount.textContent=n+(n===1?' character':' characters');
-  }
+  function renderPage(){ herText.value=(memory.data.page&&memory.data.page.text)||''; }
   function flashTick(text){
     herTick.textContent=text;
     herTick.classList.add('on');
     clearTimeout(flashTick.t);
-    flashTick.t=setTimeout(function(){
-      herTick.textContent='saved in this phone';
-      herTick.classList.remove('on');
-    },2600);
+    flashTick.t=setTimeout(function(){ herTick.classList.remove('on'); },2600);
   }
   herText.addEventListener('input',function(){
-    updateHerCount();
     herTick.classList.remove('on');
     clearTimeout(herTimer);
     herTimer=setTimeout(function(){
       memory.data.page={text:herText.value,at:Date.now()};
       memory.save();
-      herTick.classList.add('on');
+      flashTick('kept');
       refresh();
     },700);
   });
@@ -1747,7 +1655,7 @@
   });
   document.getElementById('herSend').addEventListener('click',function(){
     var t=(herText.value||'').trim();
-    if(!t){ flashTick('write something first'); return; }
+    if(!t){ herText.focus(); return; }
     memory.data.page={text:t,at:Date.now()};
     memory.save();
     refresh();
@@ -1760,7 +1668,7 @@
   });
   document.getElementById('herCopy').addEventListener('click',function(){
     var t=(herText.value||'').trim();
-    if(!t){ flashTick('nothing to copy yet'); return; }
+    if(!t){ herText.focus(); return; }
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(t).then(function(){ flashTick('copied'); },legacyCopy);
     }else{
@@ -1797,16 +1705,13 @@
   function axoLines(){
     var out=[];
     var diff=doorDiff();
-    if(unseenTreasures()>0) out.push('Some words in here open things. Tap the ones with the line under them.');
-    if(unseenPlates()>0) out.push(unseenPlates()+' photographs you have not opened yet. I checked.');
     if(diff>0 && diff<10*864e5){
       var dl=Math.floor(diff/864e5);
       out.push(dl===0?'Hours left. I have been counting since the first night.':dl+' days left. I have been counting since the first night.');
     }
-    if(!pageText().trim()) out.push('Chapter five is yours. It is still blank. Just saying.');
-    out.push('I live behind the archive. I blink when somebody is reading.');
+    out.push('I live here now. Nobody asked me, but nobody objected either.');
+    out.push('I am an axolotl. I grow back. It is the only trick I have.');
     out.push('The moon is clickable too. Nobody ever tries the moon.');
-    out.push('I am an axolotl. I regenerate. So does this page.');
     return out;
   }
   function axoGreet(){
@@ -1820,11 +1725,6 @@
       var d=Math.floor(diff/864e5);
       lines.push(d===0?'Today. It is today, in case you forgot.':(d===1?'One day left. I am not calm either.':d+' days left. I am counting too.'));
     }
-    if(unseenPlates()>0){
-      var u=unseenPlates();
-      lines.push(u===1?'One photograph is still unopened. It is a good one.':u+' photographs are still waiting for you.');
-    }
-    if(!pageText().trim()) lines.push('And chapter five is still blank. No pressure.');
     axoTalk(lines);
   }
   axo.addEventListener('click',function(){ axoTalk(axoLines()); });
@@ -1834,16 +1734,7 @@
   (function(){
     var sub=document.getElementById('oSub');
     if(!sub||!previousVisit) return;
-    var bits=['Welcome back.'];
-    var diff=doorDiff();
-    if(diff>0){
-      var d=Math.floor(diff/864e5);
-      bits.push(d===0?'The door is today.':(d===1?'The door is one day away.':'The door is '+d+' days away.'));
-    }
-    var u=unseenPlates();
-    if(u>0) bits.push(u===1?'One photograph is still waiting.':u+' photographs are still waiting.');
-    if(!pageText().trim()) bits.push('And page five is still blank.');
-    sub.textContent=bits.join(' ');
+    sub.textContent='Welcome back. It is still all here.';
   })();
 
   function escapeHtml(s){

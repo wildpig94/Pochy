@@ -125,17 +125,18 @@ a hidden text is found, and it hides when printing.
 
 ## ✍️ Her page
 
-Chapter V. It autosaves to `localStorage` as she types ("saved in this phone"),
-shows what she left on a previous day above the empty box, and **Send it to me**
-opens the share sheet (or WhatsApp) with the text already written. Nothing leaves
-her phone until she presses send.
+Chapter V. It autosaves to `localStorage` as she types (a small "kept" flashes
+for two seconds and then goes), and **Send it to me** opens the share sheet (or
+WhatsApp) with the text already written. Nothing leaves her phone until she
+presses send.
 
 ## 🧠 What the page remembers
 
 `localStorage`, key `pochy-archive-v1`: chapters opened, plates opened, hidden
-texts found, her page, first and last visit. The masthead reads `3 of 5 chapters ·
-12 of 39 photographs · 2 of 7 hidden things`, and a returning visit gets a
-different opening line. Clearing browser data resets all of it.
+texts found, her page, first and last visit. None of it is shown as a number —
+there is no progress bar and no visit counter on purpose. What it feeds is the
+returning-visitor line in the opening screen and the axolotl. Clearing browser
+data resets all of it.
 
 ## 🚀 Publish (GitHub Pages)
 
