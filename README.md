@@ -40,10 +40,10 @@ re-encrypts what changed.
   captions at all, grouped by the part of the wait they belong to; full size on
   tap, arrows and Escape on a keyboard.
 - ♫ **Two songs** with lyrics timed to the audio.
-- 🎟️ **Eleven coupons** with terms and conditions, a Redeem button that opens
-  WhatsApp, a REDEEMED stamp she keeps in the browser, and a gold
-  *Comodín del Comodín* that stays sealed until the other ten are redeemed. Plus
-  a **print room** and two ready-made PDFs she can print from any phone:
+- 🎟️ **Eleven coupons in their own chapter**, each with terms and conditions, a
+  Redeem button that stamps it REDEEMED (kept in the browser), and a gold
+  *Comodín del Comodín* sealed until the other ten are redeemed. Plus a **print
+  room** and two ready-made PDFs she can print from any phone:
   `pdf/cupones.pdf` and `pdf/fotos.pdf`.
 - 🦎 **The axolotl** — a small mascot in the corner. It talks when tapped, and it
   knows what has been read and what is still waiting.
@@ -177,15 +177,9 @@ presses send.
 ## 🎟️ The coupons
 
 Each card opens its own **Terms** (a `<details>`, so the fine print is one tap
-away, like a real contract). **Redeem** asks for confirmation, stamps the card,
-keeps it in `localStorage` and opens WhatsApp with the message already written:
-
-```
-Pocha has redeemed No. 006: One heart. The dog is ready.
-```
-
-Set `CONFIG.whatsapp` to your number (digits with country code, no `+`) so it
-goes straight to you; left empty, WhatsApp asks her which contact.
+away, like a real contract). **Redeem** asks for confirmation, slams the stamp on
+the card and keeps it in `localStorage`. There is no WhatsApp and no network: the
+coupon is redeemed in her browser and nowhere else.
 
 No. 011 is sealed until Nos. 001–010 have been redeemed. Nothing is checked on a
 server: the count lives in her browser, so clearing the site's data unseals

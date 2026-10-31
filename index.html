@@ -158,8 +158,9 @@
   #ch2{background:linear-gradient(180deg, rgba(23,14,43,.78) 0%, rgba(5,6,13,0) 70%);}
   #ch3{background:linear-gradient(180deg, rgba(4,5,11,.85) 0%, rgba(8,10,26,.6) 100%);}
   #ch4{background:linear-gradient(180deg, rgba(12,13,36,.85) 0%, rgba(23,14,43,.55) 100%);}
-  #ch5{background:linear-gradient(180deg, rgba(30,16,52,.7) 0%, rgba(5,6,13,0) 100%);}
-  #ch6{background:linear-gradient(180deg, rgba(14,20,46,.62) 0%, rgba(23,14,43,.35) 55%, rgba(5,6,13,0) 100%);}
+  #ch5{background:linear-gradient(180deg, rgba(40,20,64,.62) 0%, rgba(5,6,13,0) 100%);}
+  #ch6{background:linear-gradient(180deg, rgba(30,16,52,.7) 0%, rgba(5,6,13,0) 100%);}
+  #ch7{background:linear-gradient(180deg, rgba(14,20,46,.62) 0%, rgba(23,14,43,.35) 55%, rgba(5,6,13,0) 100%);}
   .chapter{position:relative;}
   .chapter::before,.chapter::after{
     content:'';position:absolute;left:0;right:0;height:1px;background:var(--rule);
@@ -601,11 +602,16 @@
     </button>
     <button class="toc-row" data-target="ch5" aria-expanded="false">
       <span class="num">V</span>
-      <span class="t">Your page<span class="s">the only one I left empty</span></span>
+      <span class="t">The coupons<span class="s">redeemable in person · eleven of them</span></span>
       <span class="mark">+</span>
     </button>
     <button class="toc-row" data-target="ch6" aria-expanded="false">
       <span class="num">VI</span>
+      <span class="t">Your page<span class="s">the only one I left empty</span></span>
+      <span class="mark">+</span>
+    </button>
+    <button class="toc-row" data-target="ch7" aria-expanded="false">
+      <span class="num">VII</span>
       <span class="t">The plates<span class="s">the photographs, in the order they arrived</span></span>
       <span class="mark">+</span>
     </button>
@@ -613,9 +619,9 @@
 
   <div class="quick">
     <span>shortcuts</span>
-    <button type="button" data-go="ch4" data-block="vouchersBlock">the coupons</button>
-    <button type="button" data-go="ch6">the photographs</button>
-    <button type="button" data-go="ch5">your page</button>
+    <button type="button" data-go="ch5">the coupons</button>
+    <button type="button" data-go="ch7">the photographs</button>
+    <button type="button" data-go="ch6">your page</button>
   </div>
 
   <!-- CHAPTER I -->
@@ -810,9 +816,69 @@
       </div>
     </div>
 
+
+
     <div class="block">
+      <div class="kicker">Spanish, briefly</div>
+      <h2>The words we made up.</h2>
+      <p>For the coupon that has to be asked for in Spanish, and for the rest of it.</p>
+      <dl class="dict">
+        <div class="dict-row">
+          <dt>pocho, pocha</dt>
+          <dd>A Mexican who grew up away from Mexico. It is not an insult when it is said kindly. We took the words and made them our names.</dd>
+        </div>
+        <div class="dict-row">
+          <dt>carrot</dt>
+          <dd>Not the vegetable. Our word for a bad line: <em>the connection died, I am still here.</em> Say it and I answer.</dd>
+        </div>
+        <div class="dict-row">
+          <dt>comodín</dt>
+          <dd>The card that fits any hand. Ours is No. 003, in gold, and the only condition is that you ask for it in Spanish.</dd>
+        </div>
+        <div class="dict-row">
+          <dt>delacarmen</dt>
+          <dd>The password I used for years before I knew whose name I was carrying. Carbajal and Mendoza make car-men.</dd>
+        </div>
+        <div class="dict-row">
+          <dt>ajolote</dt>
+          <dd>The animal at the bottom of this page. It lives in the canals of Xochimilco, it grows back what it loses, and it never quite grows up.</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="block">
+      <div class="kicker">Print room</div>
+      <h2>On paper.</h2>
+      <p>Choose the ones you want. If you want a line above them, write it. Then print them on your photo paper.</p>
+      <div class="studio-grid" id="studioGrid"></div>
+      <div class="studio-controls">
+        <div>
+          <label for="printTitle">A line for the top of the sheet</label>
+          <input type="text" id="printTitle" placeholder="e.g. Mexico, October" maxlength="80">
+        </div>
+        <div>
+          <label>Frames per row</label>
+          <div class="layout-opts" id="layoutOpts">
+            <button data-cols="1">1</button>
+            <button data-cols="2" class="sel">2</button>
+            <button data-cols="3">3</button>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="printPhotosBtn" disabled>Print selected</button>
+        <a class="btn ghost" href="pdf/fotos.pdf" target="_blank" rel="noopener">Every photograph, on paper</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CHAPTER V — the coupons -->
+  <section class="chapter" id="ch5">
+
+    <div class="block" style="border-top:0;">
       <div class="kicker">Redeemable in person</div>
-      <h2 id="vouchersBlock">Eleven coupons</h2>
+      <h2>Eleven coupons</h2>
       <p>Print them. Bring them. No expiration.</p>
       <div class="de-cupon">
         <p>Issued by Pocho, hereinafter “the dog”, to Pocha, hereinafter “the rabbit”. No expiration. Dogs do not understand deadlines. Void where prohibited by the rabbit. Not transferable, except to the dog.</p>
@@ -936,63 +1002,10 @@
       <div class="btn-row"><a class="btn" id="printVouchersBtn" href="pdf/cupones.pdf" target="_blank" rel="noopener">Print the coupons</a></div>
     </div>
 
-    <div class="block">
-      <div class="kicker">Spanish, briefly</div>
-      <h2>The words we made up.</h2>
-      <p>For the coupon that has to be asked for in Spanish, and for the rest of it.</p>
-      <dl class="dict">
-        <div class="dict-row">
-          <dt>pocho, pocha</dt>
-          <dd>A Mexican who grew up away from Mexico. It is not an insult when it is said kindly. We took the words and made them our names.</dd>
-        </div>
-        <div class="dict-row">
-          <dt>carrot</dt>
-          <dd>Not the vegetable. Our word for a bad line: <em>the connection died, I am still here.</em> Say it and I answer.</dd>
-        </div>
-        <div class="dict-row">
-          <dt>comodín</dt>
-          <dd>The card that fits any hand. Ours is No. 003, in gold, and the only condition is that you ask for it in Spanish.</dd>
-        </div>
-        <div class="dict-row">
-          <dt>delacarmen</dt>
-          <dd>The password I used for years before I knew whose name I was carrying. Carbajal and Mendoza make car-men.</dd>
-        </div>
-        <div class="dict-row">
-          <dt>ajolote</dt>
-          <dd>The animal at the bottom of this page. It lives in the canals of Xochimilco, it grows back what it loses, and it never quite grows up.</dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="block">
-      <div class="kicker">Print room</div>
-      <h2>On paper.</h2>
-      <p>Choose the ones you want. If you want a line above them, write it. Then print them on your photo paper.</p>
-      <div class="studio-grid" id="studioGrid"></div>
-      <div class="studio-controls">
-        <div>
-          <label for="printTitle">A line for the top of the sheet</label>
-          <input type="text" id="printTitle" placeholder="e.g. Mexico, October" maxlength="80">
-        </div>
-        <div>
-          <label>Frames per row</label>
-          <div class="layout-opts" id="layoutOpts">
-            <button data-cols="1">1</button>
-            <button data-cols="2" class="sel">2</button>
-            <button data-cols="3">3</button>
-          </div>
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn" id="printPhotosBtn" disabled>Print selected</button>
-        <a class="btn ghost" href="pdf/fotos.pdf" target="_blank" rel="noopener">Every photograph, on paper</a>
-      </div>
-    </div>
-
   </section>
 
-  <!-- CHAPTER V — her page -->
-  <section class="chapter" id="ch5">
+  <!-- CHAPTER VI — her page -->
+  <section class="chapter" id="ch6">
     <div class="her-page">
       <div class="kicker">Your page</div>
       <h2>The rest is mine. <em>This is yours.</em></h2>
@@ -1015,8 +1028,8 @@
     </div>
   </section>
 
-  <!-- CHAPTER VI — the plates -->
-  <section class="chapter" id="ch6">
+  <!-- CHAPTER VII — the plates -->
+  <section class="chapter" id="ch7">
 
     <div class="block" style="border-top:0;">
       <div class="kicker">The plates</div>
@@ -1803,7 +1816,6 @@
     door:'2026-11-06',            // la fecha de la puerta
     zonaMia:'America/Mexico_City',// donde estoy yo
     zonaSuya:'America/Vancouver', // donde está ella
-    whatsapp:''                   // tu número con lada, sin + ni espacios; vacío = ella elige
   };
   function parseDay(s){ var p=String(s).split('-'); return new Date(+p[0],(+p[1])-1,+p[2],0,0,0,0); }
   function plural(n,one,many){ return n+' '+(n===1?one:many); }
@@ -1940,8 +1952,8 @@
     var msg='My page in the archive:\n\n'+t;
     if(navigator.share){
       navigator.share({title:'Pocha & Pocho — my page',text:msg}).catch(function(){});
-    }else{
-      window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');
+    }else if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){ flashTick('copied'); },function(){});
     }
   });
   document.getElementById('herCopy').addEventListener('click',function(){
@@ -1964,10 +1976,6 @@
   var cupones=Array.prototype.slice.call(document.querySelectorAll('.voucher[data-cupon]'));
   var cuponOro=document.querySelector('.voucher[data-gold]');
   function canjeados(){ return (memory&&memory.data&&memory.data.coupons)||[]; }
-  function waLink(texto){
-    var base=CONFIG.whatsapp?('https://wa.me/'+CONFIG.whatsapp):'https://wa.me/';
-    return base+'?text='+encodeURIComponent(texto);
-  }
   function sellado(){
     var hechos=canjeados();
     return cupones.filter(function(c){
@@ -2011,13 +2019,7 @@
       memory.save();
       pintarCupones();
       if(c.hasAttribute('data-gold')){ axoCheer(); }
-      var enlace=waLink('Pocha has redeemed No. '+id+': '+titulo+'. The dog is ready. 💜');
-      var ventana=window.open(enlace,'_blank','noopener');
-      if(!ventana){
-        var a=document.createElement('a');
-        a.href=enlace; a.target='_blank'; a.rel='noopener';
-        document.body.appendChild(a); a.click(); a.remove();
-      }
+      if(c.hasAttribute('data-gold')) return;
     });
   });
   pintarCupones();

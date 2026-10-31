@@ -22,10 +22,13 @@ const CHROME = process.env.REA_BROWSER_EXECUTABLE
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+let corridas = 0;
+
 async function conPagina(fn) {
+  const puerto = 9391 + (corridas++);
   const chrome = spawn(CHROME, [
-    '--headless=new', '--remote-debugging-port=9391',
-    '--user-data-dir=/tmp/chrome-imprimir', '--no-first-run', '--no-default-browser-check',
+    '--headless=new', '--remote-debugging-port=' + puerto,
+    '--user-data-dir=/tmp/chrome-imprimir-' + puerto, '--no-first-run', '--no-default-browser-check',
     '--disable-gpu', '--hide-scrollbars', '--allow-file-access-from-files',
     '--window-size=1240,1754', 'about:blank'
   ], { stdio: 'ignore' });
@@ -33,7 +36,7 @@ async function conPagina(fn) {
   let target = null;
   for (let i = 0; i < 60 && !target; i++) {
     try {
-      const list = await (await fetch('http://127.0.0.1:9391/json/list')).json();
+      const list = await (await fetch('http://127.0.0.1:' + puerto + '/json/list')).json();
       target = list.find((t) => t.type === 'page');
     } catch (e) { /* arrancando */ }
     if (!target) await sleep(250);
@@ -72,6 +75,7 @@ async function conPagina(fn) {
     return await fn(send, evaluar);
   } finally {
     try { chrome.kill(); } catch (e) { /* ya */ }
+    await sleep(600);   // que el navegador anterior suelte el puerto y el perfil
   }
 }
 
