@@ -14,8 +14,8 @@
  * la llave derivada por PBKDF2-SHA256. El nombre de cada foto si se ve (memoria1.jpg
  * y cosas asi), lo que se ve de una foto es su nombre, no su contenido.
  */
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, rmSync } from 'node:fs';
-import { webcrypto } from 'node:crypto';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync, unlinkSync } from 'node:fs';
+import { webcrypto, createHash } from 'node:crypto';
 import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,7 +33,25 @@ if (!password) {
 }
 
 const subtle = webcrypto.subtle;
-const sal = webcrypto.getRandomValues(new Uint8Array(16));
+const RUTA_SAL = join(ROOT, 'tools', 'sal.txt');
+const RUTA_MANIFIESTO = join(CARPETA_CIFRADA, '.manifiesto.json');
+
+// La sal no es secreta (viaja dentro del candado) y se queda fija para que
+// reconstruir no vuelva a cifrar las fotos que no cambiaron.
+let sal;
+if (existsSync(RUTA_SAL)) {
+  sal = Buffer.from(readFileSync(RUTA_SAL, 'utf8').trim(), 'hex');
+} else {
+  sal = Buffer.from(webcrypto.getRandomValues(new Uint8Array(16)));
+  writeFileSync(RUTA_SAL, sal.toString('hex') + '\n');
+}
+
+function huella(bytes) {
+  return createHash('sha256').update(bytes).digest('hex');
+}
+function leerManifiesto() {
+  try { return JSON.parse(readFileSync(RUTA_MANIFIESTO, 'utf8')); } catch (e) { return {}; }
+}
 
 async function derivar(pass) {
   const base = await subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
@@ -66,31 +84,44 @@ function archivosFoto(dir) {
 
 async function main() {
   const llave = await derivar(password);
-  const cuenta = { pagina: 0, fotos: 0, bytesIn: 0, bytesOut: 0 };
+  const cuenta = { nuevos: 0, reusados: 0, bytesIn: 0 };
+  const manifiesto = leerManifiesto();
+  const siguiente = {};
 
-  rmSync(CARPETA_CIFRADA, { recursive: true, force: true });
   mkdirSync(join(CARPETA_CIFRADA, 'fotos', 'web'), { recursive: true });
 
+  async function guardar(etiqueta, relativa, bytes) {
+    const marca = huella(bytes);
+    const destino = join(CARPETA_CIFRADA, relativa + '.enc');
+    if (manifiesto[relativa] === marca && existsSync(destino)) {
+      siguiente[relativa] = marca;
+      cuenta.reusados += 1;
+      return;
+    }
+    const cifrada = await cifrar(llave, bytes);
+    mkdirSync(dirname(destino), { recursive: true });
+    writeFileSync(destino, cifrada);
+    siguiente[relativa] = marca;
+    cuenta.nuevos += 1;
+    cuenta.bytesIn += bytes.length;
+  }
+
   // 1. la pagina
-  const pagina = readFileSync(join(ROOT, 'fuente', 'index.html'));
-  const paginaCifrada = await cifrar(llave, pagina);
-  writeFileSync(join(CARPETA_CIFRADA, 'pagina.enc'), paginaCifrada);
-  cuenta.pagina = 1;
-  cuenta.bytesIn += pagina.length;
-  cuenta.bytesOut += paginaCifrada.length;
+  await guardar('pagina', 'pagina', readFileSync(join(ROOT, 'fuente', 'index.html')));
 
   // 2. las fotos
   for (const ruta of archivosFoto(join(ROOT, 'fotos'))) {
-    const relativa = ruta.slice(join(ROOT, 'fotos').length + 1);
-    const bytes = readFileSync(ruta);
-    const cifrada = await cifrar(llave, bytes);
-    const destino = join(CARPETA_CIFRADA, 'fotos', relativa + '.enc');
-    mkdirSync(dirname(destino), { recursive: true });
-    writeFileSync(destino, cifrada);
-    cuenta.fotos += 1;
-    cuenta.bytesIn += bytes.length;
-    cuenta.bytesOut += cifrada.length;
+    const relativa = 'fotos/' + ruta.slice(join(ROOT, 'fotos').length + 1);
+    await guardar(relativa, relativa, readFileSync(ruta));
   }
+
+  // 3. fuera lo que ya no existe
+  const sobra = Object.keys(manifiesto).filter(function (k) { return !(k in siguiente); });
+  for (const k of sobra) {
+    const ruta = join(CARPETA_CIFRADA, k + '.enc');
+    if (existsSync(ruta)) { unlinkSync(ruta); }
+  }
+  if (sobra.length) { console.log('sobrantes: ' + sobra.join(', ')); }
 
   // 3. el candado
   const plantilla = readFileSync(join(ROOT, 'tools', 'candado.plantilla.html'), 'utf8');
@@ -99,10 +130,10 @@ async function main() {
     .replace('__ITER__', String(ITERACIONES));
   writeFileSync(join(ROOT, 'index.html'), candado);
 
-  console.log('pagina cifrada: 1 archivo');
-  console.log('fotos cifradas: ' + cuenta.fotos);
-  console.log('de ' + (cuenta.bytesIn / 1048576).toFixed(1) + ' MB a ' +
-    (cuenta.bytesOut / 1048576).toFixed(1) + ' MB en el repositorio');
+  writeFileSync(RUTA_MANIFIESTO, JSON.stringify(siguiente, null, 0));
+  console.log('cifrados de nuevo: ' + cuenta.nuevos + ' (' +
+    (cuenta.bytesIn / 1048576).toFixed(1) + ' MB)');
+  console.log('sin cambios, reusados: ' + cuenta.reusados);
   console.log('escrito: index.html (el candado) y cifrado/');
   console.log('para publicar: git add -A && git commit -m "Candado" && git push');
 }

@@ -103,6 +103,10 @@
     return url;
   };
 
+  if (!(window.crypto && window.crypto.subtle)) {
+    document.getElementById('err').textContent = 'This needs Chrome or Firefox.';
+    document.getElementById('go').disabled = true;
+  }
   var clave = document.getElementById('clave');
   var go = document.getElementById('go');
   var err = document.getElementById('err');

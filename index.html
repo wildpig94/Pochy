@@ -59,7 +59,7 @@
 (function(){
   // La pagina y las fotos estan cifradas con AES-GCM. Sin la contrasena no hay nada
   // que ver: lo unico publico es este candado.
-  var SAL = 'yE826al6kvV3VKFYDjgTBQ==';
+  var SAL = '1+0gwHSgnaG3IJOA9+IBBQ==';
   var ITER = 300000;
   var CACHE = {};
   var llave = null;
@@ -103,6 +103,10 @@
     return url;
   };
 
+  if (!(window.crypto && window.crypto.subtle)) {
+    document.getElementById('err').textContent = 'This needs Chrome or Firefox.';
+    document.getElementById('go').disabled = true;
+  }
   var clave = document.getElementById('clave');
   var go = document.getElementById('go');
   var err = document.getElementById('err');
