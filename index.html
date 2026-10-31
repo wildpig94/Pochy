@@ -140,6 +140,15 @@
   .toc-row .mark{font-family:'Poppins',sans-serif;font-size:18px;color:var(--lilac);justify-self:end;transition:transform .3s;}
   .toc-row[aria-expanded="true"] .mark{transform:rotate(45deg);}
 
+  .quick{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:0 0 34px;font-family:'Poppins',sans-serif;}
+  .quick>span{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);margin-right:4px;}
+  .quick button{
+    font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    background:none;border:1px solid var(--rule);color:var(--muted);padding:7px 11px;cursor:pointer;
+    transition:border-color .2s,color .2s;
+  }
+  .quick button:hover{border-color:var(--lilac);color:var(--lilac);}
+
   /* ===== Chapter ===== */
   .chapter{display:none;padding:44px 0 56px;}
   .chapter.open{display:block;animation:fadeUp .5s ease;}
@@ -460,9 +469,8 @@
     }
     body{background:#fff;color:#1b1815;}
     body::before,body::after{display:none;}
-    body *{visibility:hidden !important;}
-    #printArea, #printArea *{visibility:visible !important;}
-    #printArea{display:block !important;position:absolute;left:0;top:0;width:100%;background:#fff;color:#1b1815;}
+    body > *:not(#printArea){display:none !important;}
+    #printArea{display:block !important;position:static;width:100%;background:#fff;color:#1b1815;}
     #printArea .print-sheet{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:20px;}
     #printArea .print-sheet.cols-1{grid-template-columns:1fr;}
     #printArea .print-sheet.cols-3{grid-template-columns:repeat(3,1fr);}
@@ -563,6 +571,13 @@
       <span class="mark">+</span>
     </button>
   </nav>
+
+  <div class="quick">
+    <span>shortcuts</span>
+    <button type="button" data-go="ch4" data-block="vouchersBlock">the five coupons</button>
+    <button type="button" data-go="ch6">the photographs</button>
+    <button type="button" data-go="ch5">your page</button>
+  </div>
 
   <!-- CHAPTER I -->
   <section class="chapter open" id="ch1">
@@ -758,7 +773,7 @@
 
     <div class="block">
       <div class="kicker">Redeemable in person</div>
-      <h2>Five coupons</h2>
+      <h2 id="vouchersBlock">Five coupons</h2>
       <p>Print them. Bring them. No expiration.</p>
       <div class="vouchers">
         <div class="voucher">
@@ -1355,6 +1370,20 @@
         target.scrollIntoView({behavior:scrollMode(),block:'start'});
         memory.markChapter(id);
       }
+    });
+  });
+
+  // ============ SHORTCUTS ============
+  document.querySelectorAll('.quick button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var id=b.getAttribute('data-go');
+      var fila=document.querySelector('.toc-row[data-target="'+id+'"]');
+      var destino=document.getElementById(id);
+      if(!fila||!destino) return;
+      if(!destino.classList.contains('open')) fila.click();
+      var bloque=b.getAttribute('data-block');
+      var donde=bloque?document.getElementById(bloque):destino;
+      setTimeout(function(){ if(donde) donde.scrollIntoView({behavior:scrollMode(),block:'start'}); },80);
     });
   });
 
