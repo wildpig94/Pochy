@@ -1,13 +1,13 @@
 # 💜 For Pocha — the archive
 
-A private archive of us, for Carmen ("Pocha"), from Pocho (Alexis). Five chapters
+A private archive of one long-distance story. Five chapters
 of a long-distance story between Mexico 🇲🇽 and Canada 🇨🇦, behind a password gate,
 and one page at the end that is hers to write.
 
 Published with GitHub Pages at `https://wildpig94.github.io/Pochy/`.
 The page and every photograph are **encrypted**; the URL alone shows a password
-box and nothing else. The password is the four letters on her ring — and it is
-not used anywhere else.
+box and nothing else. The password is not written anywhere in this repository
+and is not reused for anything else.
 
 ## 🔐 How the lock works
 
