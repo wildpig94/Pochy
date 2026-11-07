@@ -52,12 +52,13 @@ const bytes = lista.reduce((total, r) => {
   try { return total + statSync(join(ROOT, r)).size; } catch (e) { return total; }
 }, 0);
 
+const plantilla = readFileSync(join(ROOT, 'tools', 'sw.plantilla.js'), 'utf8');
+
+// La version cambia si cambia la lista, el tamano o el propio service worker.
 const version = createHash('sha1')
-  .update(lista.join('\n') + '|' + bytes)
+  .update(lista.join('\n') + '|' + bytes + '|' + plantilla)
   .digest('hex')
   .slice(0, 10);
-
-const plantilla = readFileSync(join(ROOT, 'tools', 'sw.plantilla.js'), 'utf8');
 const sw = plantilla
   .replace('__VERSION__', version)
   .replace('__LISTA__', JSON.stringify(lista, null, 2));

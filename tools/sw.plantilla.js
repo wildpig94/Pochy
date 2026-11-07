@@ -6,14 +6,26 @@
 const VERSION = '__VERSION__';
 const PRECACHE = __LISTA__;
 
+// Baja lo que falte, sin repetir lo que ya esta. Si se corta a la mitad (se
+// acabo la senal, se cerro la pestana), la siguiente visita online lo termina.
+let completando = false;
+async function completar() {
+  if (completando) return;
+  completando = true;
+  try {
+    const c = await caches.open(VERSION);
+    for (const u of PRECACHE) {
+      if (await c.match(u, { ignoreSearch: true })) continue;
+      try { await c.add(new Request(u, { cache: 'reload' })); } catch (err) { /* luego */ }
+    }
+  } finally {
+    completando = false;
+  }
+}
+
 self.addEventListener('install', function (e) {
   e.waitUntil((async function () {
-    const c = await caches.open(VERSION);
-    for (let i = 0; i < PRECACHE.length; i += 12) {
-      await Promise.all(PRECACHE.slice(i, i + 12).map(function (u) {
-        return c.add(new Request(u, { cache: 'reload' })).catch(function () {});
-      }));
-    }
+    await completar();
     await self.skipWaiting();
   })());
 });
@@ -25,6 +37,7 @@ self.addEventListener('activate', function (e) {
       return n === VERSION ? null : caches.delete(n);
     }));
     await self.clients.claim();
+    completar();
   })());
 });
 
@@ -44,6 +57,7 @@ self.addEventListener('fetch', function (e) {
         const fresco = await fetch(req);
         const c = await caches.open(VERSION);
         c.put(req, fresco.clone());
+        completar();
         return fresco;
       } catch (err) {
         const c = await caches.open(VERSION);
