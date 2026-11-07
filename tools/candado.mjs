@@ -7,6 +7,7 @@
  *
  * Lee de:   fuente/index.html   (la pagina de trabajo)
  *           fotos/              (originales y versiones ligeras)
+ *           pdf/                (los dos pliegos para imprimir)
  * Escribe:  index.html          (el candado: lo unico que se publica de la pagina)
  *           cifrado/            (pagina.enc y una version cifrada de cada foto)
  *
@@ -75,7 +76,7 @@ function archivosFoto(dir) {
     const ruta = join(dir, nombre);
     if (statSync(ruta).isDirectory()) {
       salida.push(...archivosFoto(ruta));
-    } else if (/\.(jpe?g|png|webp)$/i.test(nombre)) {
+    } else if (/\.(jpe?g|png|webp|pdf)$/i.test(nombre)) {
       salida.push(ruta);
     }
   }
@@ -113,6 +114,14 @@ async function main() {
   for (const ruta of archivosFoto(join(ROOT, 'fotos'))) {
     const relativa = 'fotos/' + ruta.slice(join(ROOT, 'fotos').length + 1);
     await guardar(relativa, relativa, readFileSync(ruta));
+  }
+
+  // 2b. los dos pliegos para imprimir
+  if (existsSync(join(ROOT, 'pdf'))) {
+    for (const ruta of archivosFoto(join(ROOT, 'pdf'))) {
+      const relativa = 'pdf/' + ruta.slice(join(ROOT, 'pdf').length + 1);
+      await guardar(relativa, relativa, readFileSync(ruta));
+    }
   }
 
   // 3. fuera lo que ya no existe

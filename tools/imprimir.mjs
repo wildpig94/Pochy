@@ -4,7 +4,7 @@
  *
  *   node tools/imprimir.mjs
  *
- * Usa el propio index.html (sus estilos y sus fotos) y lo manda a la impresora
+ * Usa fuente/index.html (sus estilos y sus fotos) y lo manda a la impresora
  * de Chrome sin abrir ventana. Escribe pdf/cupones.pdf y pdf/fotos.pdf.
  *
  * Un PDF se imprime igual en cualquier telefono: se toca, se abre y ya. En vez
@@ -70,7 +70,7 @@ async function conPagina(fn) {
   try {
     await send('Page.enable');
     await send('Runtime.enable');
-    await send('Page.navigate', { url: pathToFileURL(join(ROOT, 'index.html')).href });
+    await send('Page.navigate', { url: pathToFileURL(join(ROOT, 'fuente', 'index.html')).href });
     await sleep(2200);
     return await fn(send, evaluar);
   } finally {

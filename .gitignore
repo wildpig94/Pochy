@@ -12,3 +12,9 @@ revisar.html
 # Basura de Python
 __pycache__/
 *.pyc
+
+# Lo que se cifra: la fuente en claro, los originales y los PDF no se publican.
+# Anclado a la raiz: cifrado/fotos y cifrado/pdf SI van.
+/fuente/
+/fotos/
+/pdf/

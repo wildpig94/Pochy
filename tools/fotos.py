@@ -7,7 +7,7 @@ asignacion, y ninguna foto carga con un texto encima.
 
     python3 tools/fotos.py
 
-  1. Vuelve a escribir la galeria dentro de index.html, entre los marcadores
+  1. Vuelve a escribir la galeria dentro de fuente/index.html, entre los marcadores
      FOTOS:inicio y FOTOS:fin. Si nada cambio en la tabla, el archivo queda
      identico byte por byte.
   2. Genera revisar.html: la pagina local donde se ve cada foto con su nombre y
@@ -21,7 +21,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INDEX = os.path.join(ROOT, 'index.html')
+INDEX = os.path.join(ROOT, 'fuente', 'index.html')
 REVIEW = os.path.join(ROOT, 'revisar.html')
 INICIO = '<!-- FOTOS:inicio'
 FIN = '<!-- FOTOS:fin'

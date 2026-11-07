@@ -1,12 +1,13 @@
-Las dos canciones, ya dentro.
+Las canciones, ya dentro.
 
   admv.m4a                    → ADMV — Maluma
   perdonar-y-agradecer.m4a    → Perdonar y Agradecer — Sharif
+  si-tu-no-vuelves.m4a        → Si Tú No Vuelves — Miguel Bosé   (todavía falta)
 
-Son AAC de 128 kbps (3.1 MB y 3.7 MB). Salieron de los originales que estaban
-en Escritorio/capitulo 4: 8.8 MB y 10.6 MB. La duración es la misma al
-milisegundo, así que las letras siguen cuadrando. Van con faststart, que quiere
-decir que empiezan a sonar sin esperar a que baje el archivo completo.
+Las dos primeras son AAC de 128 kbps (3.1 MB y 3.7 MB). Salieron de los
+originales que estaban en Escritorio/capitulo 4: 8.8 MB y 10.6 MB. La duración es
+la misma al milisegundo, así que las letras siguen cuadrando. Van con faststart,
+que quiere decir que empiezan a sonar sin esperar a que baje el archivo completo.
 
 Los originales no se tocaron; siguen en Escritorio/capitulo 4.
 
@@ -18,17 +19,22 @@ Si un archivo no está, esa canción cae sola al reproductor de YouTube (el de
 siempre). Para forzar YouTube aunque los archivos existan, abre el sitio con
 ?source=yt al final de la dirección.
 
+Miguel Bosé está en ese caso: suena por YouTube hasta que dejes el archivo con el
+nombre de arriba. Es la única sin letra cronometrada, porque la letra se ajusta
+contra el archivo. Para dejarla lista:
+
+  ffmpeg -i "Si tu no vuelves.mp3" -vn -c:a aac -b:a 128k -movflags +faststart \
+    si-tu-no-vuelves.m4a
+
 Reemplazar una canción: deja el archivo con el mismo nombre (sirve .m4a o .mp3,
 el reproductor prueba las dos) y sube:
 
   cd ~/Trabajo/Clientes/carmen-3-meses
-  git add audio && git commit -m "Song" && git push
-
-Para volver a comprimir un MP3 nuevo sin perder calidad de más:
-
-  ffmpeg -i original.mp3 -vn -c:a aac -b:a 128k -movflags +faststart nombre.m4a
+  node tools/candado.mjs 'la-contrasena'
+  node tools/offline.mjs
+  git add -A && git commit -m "Song" && git push
 
 Nota: las letras del sitio están cronometradas a las versiones de estudio.
 Si la versión que pusiste tiene la entrada más larga, la letra se adelanta o se
-atrasa; se corrige con el número `offset` de esa canción en index.html
+atrasa; se corrige con el número `offset` de esa canción en fuente/index.html
 (segundos: positivo atrasa la letra). Solo aplica a la reproducción local.
