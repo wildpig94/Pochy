@@ -46,7 +46,7 @@ Consequences worth knowing:
 
 ## ✨ What's inside
 
-- 📖 **Seven chapters** — opened one at a time from the contents list.
+- 📖 **Eight chapters** — opened one at a time from the contents list.
 - ⭐ **Under the same sky** — animated starfield with shooting stars.
 - 💍 **The ring** — the T.O.K.Y. promise, one letter at a time.
 - 🙈 **Hidden texts** — words in the story, a moon and two sparkles open a photo
