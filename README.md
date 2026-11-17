@@ -46,7 +46,7 @@ Consequences worth knowing:
 
 ## ✨ What's inside
 
-- 📖 **Eight chapters** — opened one at a time from the contents list.
+- 📖 **Seven chapters** — opened one at a time from the contents list.
 - ⭐ **Under the same sky** — animated starfield with shooting stars.
 - 💍 **The ring** — the T.O.K.Y. promise, one letter at a time.
 - 🙈 **Hidden texts** — words in the story, a moon and two sparkles open a photo
@@ -55,7 +55,9 @@ Consequences worth knowing:
   captions at all, grouped by the part of the wait they belong to; full size on
   tap, arrows and Escape on a keyboard.
 - 🎬 **The strip** — chapter one of a drawn story (Carmen & Alexis, 1314) in a
-  vertical reader: sixteen plates, full screen, remembers where she stopped.
+  vertical reader: sixteen plates, full screen, remembers where she stopped. It
+  is announced in three places: the cover button, the card under the masthead,
+  and the axolotl (a pink dot until she opens it).
 - ♫ **Three songs** with lyrics timed to the audio.
 - 🎟️ **Eleven coupons in their own chapter**, each with terms and conditions, a
   Redeem button that stamps it REDEEMED (kept in the browser), and a gold
@@ -156,9 +158,9 @@ in the table, and run `python3 tools/fotos.py`.
 
 ## 🎬 The strip
 
-Chapter VIII of the archive is a **webtoon reader**: a full-screen, vertical
-scroll of the first chapter, *Kitchen Thermodynamics & Basement Code* (sixteen
-plates, 1314).
+The archive has a **webtoon reader**: a full-screen, vertical scroll of the
+first chapter, *Kitchen Thermodynamics & Basement Code* (sixteen plates, 1314).
+It is not a chapter of the scroll — it is an entrance of its own.
 
 How it behaves:
 
@@ -168,8 +170,20 @@ How it behaves:
 - It loads a plate when it is about 1200 px away, so scrolling never waits.
 - A thin bar and a counter (`04 / 16`) follow the scroll; a tap on the art hides
   the chrome; `Esc` closes; `←` `→` jump a plate.
-- It remembers the last plate in `localStorage` (`pochy-strip-c1`), and the
-  button says *Continue · plate 07* when there is somewhere to continue from.
+- It remembers the last plate in `localStorage` (`pochy-strip-c1`), and the card
+  says *Continue · plate 07* when there is somewhere to continue from.
+- Opening it is a small scene of its own: the reader fades in, a title card
+  holds for three seconds and dissolves, plates rise as they arrive, and the end
+  of the chapter fades in when she gets there.
+
+Where it is announced:
+
+1. **On the cover**, under *Open*: a button with a pulsing dot —
+   *New: chapter one, drawn* — that goes straight into the reader.
+2. **Under the masthead**, before the contents: a card with the cover thumbnail,
+   a pink *New* tag and *Read the strip* (or *Continue · plate 07*).
+3. **The axolotl**: a pink dot on its shoulder until the strip is opened once
+   (`pochy-strip-seen`), and a line about it when tapped.
 - The first five plates (cover and opening) are also part of the offline cache;
   the rest are kept as she reads them.
 

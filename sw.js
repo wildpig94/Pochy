@@ -3,7 +3,7 @@
 // Guarda el candado, la pagina, las fotos ligeras y las dos canciones para que
 // el sitio abra sin senal. Lo que no este aqui (originales a tamano completo,
 // PDF, tipografias) se guarda la primera vez que se abre, y despues ya esta.
-const VERSION = 'd2136f9cf7';
+const VERSION = '6377c8fd01';
 const PRECACHE = [
   "./",
   "audio/admv.m4a",
