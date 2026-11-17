@@ -8,6 +8,7 @@
  * Lee de:   fuente/index.html   (la pagina de trabajo)
  *           fotos/              (originales y versiones ligeras)
  *           pdf/                (los dos pliegos para imprimir)
+ *           webtoon/            (las placas del capitulo dibujado)
  * Escribe:  index.html          (el candado: lo unico que se publica de la pagina)
  *           cifrado/            (pagina.enc y una version cifrada de cada foto)
  *
@@ -120,6 +121,14 @@ async function main() {
   if (existsSync(join(ROOT, 'pdf'))) {
     for (const ruta of archivosFoto(join(ROOT, 'pdf'))) {
       const relativa = 'pdf/' + ruta.slice(join(ROOT, 'pdf').length + 1);
+      await guardar(relativa, relativa, readFileSync(ruta));
+    }
+  }
+
+  // 2c. las placas del capitulo dibujado
+  if (existsSync(join(ROOT, 'webtoon'))) {
+    for (const ruta of archivosFoto(join(ROOT, 'webtoon'))) {
+      const relativa = 'webtoon/' + ruta.slice(join(ROOT, 'webtoon').length + 1);
       await guardar(relativa, relativa, readFileSync(ruta));
     }
   }

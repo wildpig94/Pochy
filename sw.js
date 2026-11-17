@@ -3,7 +3,7 @@
 // Guarda el candado, la pagina, las fotos ligeras y las dos canciones para que
 // el sitio abra sin senal. Lo que no este aqui (originales a tamano completo,
 // PDF, tipografias) se guarda la primera vez que se abre, y despues ya esta.
-const VERSION = '6b66184008';
+const VERSION = '746b31f97a';
 const PRECACHE = [
   "./",
   "audio/admv.m4a",
@@ -90,6 +90,11 @@ const PRECACHE = [
   "cifrado/fotos/web/nueva14-480.webp.enc",
   "cifrado/fotos/web/nueva14-900.webp.enc",
   "cifrado/pagina.enc",
+  "cifrado/webtoon/chapter-1/00-cover-480.webp.enc",
+  "cifrado/webtoon/chapter-1/00-cover.webp.enc",
+  "cifrado/webtoon/chapter-1/01-restaurant-exterior.webp.enc",
+  "cifrado/webtoon/chapter-1/02-carmen-wok.webp.enc",
+  "cifrado/webtoon/chapter-1/03-alexis-dishes.webp.enc",
   "icons/icon-192.png",
   "index.html",
   "manifest.webmanifest"

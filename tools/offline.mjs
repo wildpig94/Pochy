@@ -41,12 +41,18 @@ const fijos = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png',
 const fotos = recorrer(join(CIFRADO, 'fotos'), ROOT)
   .filter((r) => r.includes('/web/'));
 
+// Del capitulo dibujado se guardan la portada y las primeras placas; el resto
+// se cachea al leerlo, para no bajar 4 MB en la primera visita.
+const webtoon = existsSync(join(CIFRADO, 'webtoon'))
+  ? recorrer(join(CIFRADO, 'webtoon'), ROOT).sort().slice(0, 5)
+  : [];
+
 const audio = readdirSync(join(ROOT, 'audio'))
   .filter((n) => /\.(m4a|mp3)$/i.test(n))
   .sort()
   .map((n) => 'audio/' + n);
 
-const lista = Array.from(new Set([...fijos, ...fotos, ...audio])).sort();
+const lista = Array.from(new Set([...fijos, ...fotos, ...audio, ...webtoon])).sort();
 
 const bytes = lista.reduce((total, r) => {
   try { return total + statSync(join(ROOT, r)).size; } catch (e) { return total; }
@@ -66,5 +72,6 @@ const sw = plantilla
 writeFileSync(join(ROOT, 'sw.js'), sw);
 
 console.log('sw.js: ' + lista.length + ' archivos, ' + (bytes / 1048576).toFixed(1) + ' MB');
-console.log('  candado + pagina cifrada + ' + fotos.length + ' fotos ligeras + ' + audio.length + ' canciones');
+console.log('  candado + pagina cifrada + ' + fotos.length + ' fotos ligeras + ' +
+  audio.length + ' canciones + ' + webtoon.length + ' placas');
 console.log('  version ' + version);
