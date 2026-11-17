@@ -170,8 +170,10 @@ How it behaves:
 - It loads a plate when it is about 1200 px away, so scrolling never waits.
 - A thin bar and a counter (`04 / 16`) follow the scroll; a tap on the art hides
   the chrome; `Esc` closes; `←` `→` jump a plate.
-- It remembers the last plate in `localStorage` (`pochy-strip-c1`), and the card
-  says *Continue · plate 07* when there is somewhere to continue from.
+- It remembers the **furthest** plate in `localStorage` (`pochy-strip-c1`).
+  Opening always starts at the cover; a small *Continue · plate 07* appears
+  under the card when there is somewhere to go back to, and it is never
+  automatic.
 - Opening it is a small scene of its own: the reader fades in, a title card
   holds for three seconds and dissolves, plates rise as they arrive, and the end
   of the chapter fades in when she gets there.
@@ -181,7 +183,8 @@ Where it is announced:
 1. **On the cover**, under *Open*: a button with a pulsing dot —
    *New: chapter one, drawn* — that goes straight into the reader.
 2. **Under the masthead**, before the contents: a card with the cover thumbnail,
-   a pink *New* tag and *Read the strip* (or *Continue · plate 07*).
+   a pink *New* tag and *Read from the cover*, plus a *Continue · plate 07*
+   under it once she has started.
 3. **The axolotl**: a pink dot on its shoulder until the strip is opened once
    (`pochy-strip-seen`), and a line about it when tapped.
 - The first five plates (cover and opening) are also part of the offline cache;
