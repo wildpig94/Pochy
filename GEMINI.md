@@ -77,9 +77,12 @@ El candado tarda ~1 s a propósito (PBKDF2-SHA256, 300 000 rondas).
 ## Mudanza a `pochy.site`
 
 El dominio está comprado y su DNS vive en **Cloudflare**
-(`apollo.ns.cloudflare.com`, `bailey.ns.cloudflare.com`). Ahora mismo el sitio
-sirve en `https://wildpig94.github.io/Pochy/` porque el dominio personalizado se
-retiró mientras no existían los registros.
+(`apollo.ns.cloudflare.com`, `bailey.ns.cloudflare.com`). **Ya está activo**:
+`https://pochy.site/` sirve el sitio con certificado de Let's Encrypt y HTTPS
+forzado, y `https://wildpig94.github.io/Pochy/` redirige 301 al dominio.
+
+Los registros se crean (o se corrigen) con `tools/dns-pochy.sh`, que necesita un
+API Token de Cloudflare con `Zone:Read` + `DNS:Edit` limitado a `pochy.site`.
 
 Registros que hacen falta (todos en **DNS only**, nube gris; proxied rompe el
 certificado de GitHub):
