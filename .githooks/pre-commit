@@ -3,7 +3,7 @@
 #   git config core.hooksPath .githooks
 set -euo pipefail
 
-bloqueados='^(fuente/|fotos/|pdf/|webtoon/|revisar\.html)'
+bloqueados='^(fuente/|fotos/|pdf/|webtoon/|webtoon-originales/|revisar\.html)'
 malos=$(git diff --cached --name-only | grep -E "$bloqueados" || true)
 
 if [ -n "$malos" ]; then
