@@ -9,6 +9,7 @@ Sitio privado, estático y **cifrado**, publicado en GitHub Pages:
 |---|---|---|
 | `fuente/index.html` | la página en claro, el archivo que se edita | **no** (gitignored) |
 | `fotos/`, `pdf/`, `webtoon/` | originales en claro | **no** (gitignored) |
+| `webtoon-originales/` | respaldo de imágenes antes de convertir a WebP | **no** (gitignored) |
 | `cifrado/` | página, fotos, PDF y placas cifradas con AES-GCM | **sí** |
 | `index.html` | el candado (pide la contraseña y descifra) | **sí, pero es GENERADO** |
 | `sw.js` | lista del modo sin señal | **sí, pero es GENERADO** |

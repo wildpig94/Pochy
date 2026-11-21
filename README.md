@@ -48,7 +48,7 @@ Consequences worth knowing:
 
 - 📖 **Seven chapters** — opened one at a time from the contents list.
 - ⭐ **Under the same sky** — animated starfield with shooting stars.
-- 💍 **The ring** — the T.O.K.Y. promise, one letter at a time.
+- 💍 **The ring** — the promise, one letter at a time.
 - 🙈 **Hidden texts** — words in the story, a moon and two sparkles open a photo
   and a note.
 - 📸 **The plates** — 45 photographs in their own appendix chapter, with no
@@ -205,13 +205,22 @@ Where it is announced:
 
 The plates live in **`webtoon/chapter-1/`** and **`webtoon/chapter-2/`** as
 `.webp` (up to 848 px wide, 160–230 KB each) and are gitignored: what is
-published is `cifrado/webtoon/`. The list the reader uses — file, width, height,
-alt text, title, quote — is the `CAPS` array inside `fuente/index.html`.
+published is `cifrado/webtoon/`. Each chapter has a `capitulo.json` with its
+metadata, image plates (`{"f": "...", "alt": "..."}`) and optional text cards
+(`{"texto": "Three days later."}`), which render between plates without needing
+an image.
 
-To add chapter three: drop the plates in `webtoon/chapter-3/`, add an entry to
-`CAPS` (number, ordinal, kicker, title, sub, quote, panels) and a button next to
-`sfCap2`. The reader takes the list as it comes: chapter two's end will say
-*Read chapter three* on its own.
+To add chapter three:
+
+```
+# 1. Drop the images in webtoon/chapter-3/
+python3 tools/tira.py --nuevo 3   # converts to 848 px WebP, moves originals to webtoon-originales/chapter-3/, creates capitulo.json
+# 2. Fill in titulo, sub, cierre, alt text (and any text cards) in webtoon/chapter-3/capitulo.json
+python3 tools/tira.py             # updates CAPS, the announcement card and chapter buttons in fuente/index.html
+```
+
+The reader takes the list as it comes: chapter two's end will offer
+*Read chapter three* and the *New* tag + axolotl dot will announce it on their own.
 
 ## 🖨️ Printing
 
