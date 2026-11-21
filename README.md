@@ -267,7 +267,8 @@ data resets all of it.
 
 ## 🚀 Edit and publish
 
-Edit `fuente/index.html`. Then, always in this order:
+Edit `fuente/index.html`. Then, always in this order (or just let
+`tools/publicar.sh` do it):
 
 ```
 python3 tools/fotos.py                 # si cambiaste fotos o grupos
@@ -284,6 +285,42 @@ have to be re-keyed after every edit. GitHub Pages rebuilds in a minute or two.
 To read the page without the lock while working (no encryption, plain photos),
 open `fuente/index.html` directly: when `window.__abrir` does not exist, the page
 falls back to the plain URLs — including the PDF links.
+
+## 🔍 Letting someone else audit it (Gemini and company)
+
+The repository is public but **its content is encrypted**; the plain page lives
+only on this machine. So there are two ways to bring an outside model in, and
+they see different things:
+
+1. **The repository** (public): the lock, `cifrado/`, the tools, `sw.js` and the
+   docs. Good for auditing the encryption, the offline worker and the tooling —
+   the story and the photographs stay unreadable.
+2. **The audit bundle** (local zip): adds `fuente/index.html`, the page in
+   clear. It is the only way to audit the actual design, text and JavaScript,
+   and it means sending that text to the model. The photographs, the songs, the
+   PDFs and the password **never** go in the bundle.
+
+Prepare the bundle with:
+
+```
+./tools/empaquetar-auditoria.sh            # -> ~/Documentos/auditoria-pochy-*.zip
+```
+
+It contains `fuente/index.html`, `tools/` (without `sal.txt`), `sw.js`,
+`manifest.webmanifest`, `README.md`, `GEMINI.md` and a `LEEME-AUDITORIA.md`.
+Upload it to the model, ask for the audit, and bring the answer back as a patch.
+
+For an agent that works **inside** the repo (Gemini CLI, Claude Code, Codex),
+`GEMINI.md` is the contract: what is published, what is generated, the rules and
+the order to publish. Gemini CLI reads it automatically.
+
+Guard rails:
+
+- `tools/publicar.sh` is the only supported way to publish: it encrypts, builds
+  `sw.js`, commits and pushes in the right order.
+- `.githooks/pre-commit` refuses any commit that stages `fuente/`, `fotos/`,
+  `pdf/`, `webtoon/` or `revisar.html`. Install it once with
+  `git config core.hooksPath .githooks`.
 
 ## 🗂️ Files
 
@@ -302,6 +339,9 @@ falls back to the plain URLs — including the PDF links.
 - `pdf/` — the two printable sheets, in the clear. Gitignored, never published;
   what goes out is `cifrado/pdf/`.
 - `robots.txt` — keeps search engines out.
+- `GEMINI.md` — the contract for an outside agent working in this repository.
+- `tools/publicar.sh` — encrypt, build the offline list, commit, push.
+- `tools/empaquetar-auditoria.sh` — the zip for an external review.
 - `nueva.html`, `original.html` — old copies. Gitignored; safe to delete.
 
 ### Tools

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bloquea commits con material en claro. Se instala con:
+#   git config core.hooksPath .githooks
+set -euo pipefail
+
+bloqueados='^(fuente/|fotos/|pdf/|webtoon/|revisar\.html)'
+malos=$(git diff --cached --name-only | grep -E "$bloqueados" || true)
+
+if [ -n "$malos" ]; then
+  echo "pre-commit: esto no se publica en claro:" >&2
+  echo "$malos" | sed 's/^/  /' >&2
+  echo "quita esos archivos del índice (git restore --staged ...) o publica con tools/publicar.sh." >&2
+  exit 1
+fi
