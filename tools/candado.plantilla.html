@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#05060d">
 <meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --void:#05060d;--ink:#e9e6f3;--muted:#9d96b6;--dim:#6c6684;
+    --void:#05060d;--ink:#e9e6f3;--muted:#9d96b6;--dim:#857f9e;
     --lilac:#c3a6f5;--pink:#f5aac6;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -57,10 +58,10 @@
 <div class="g-mark">Carmen</div>
 <h1>What does your ring say?</h1>
 <p class="sub">Four letters. You know them.</p>
-<input id="clave" type="text" placeholder="type the answer" autocomplete="off" autocapitalize="off" spellcheck="false">
-<div class="err" id="err"></div>
+<input id="clave" type="text" aria-label="The four letters" placeholder="type the answer" autocomplete="off" autocapitalize="off" spellcheck="false">
+<div class="err" id="err" role="alert"></div>
 <button id="go">Enter</button>
-<div class="work" id="work"></div>
+<div class="work" id="work" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -71,11 +72,6 @@
   var CACHE = {};
   var llave = null;
 
-  function b64a(bytes){
-    var s = '';
-    for (var i = 0; i < bytes.length; i++) { s += String.fromCharCode(bytes[i]); }
-    return s;
-  }
   function desdeB64(txt){
     var bin = atob(txt);
     var out = new Uint8Array(bin.length);
@@ -93,7 +89,7 @@
     return 'application/octet-stream';
   }
   async function buscar(ruta){
-    var res = await fetch('cifrado/' + ruta + '.enc', { cache: 'force-cache' });
+    var res = await fetch('cifrado/' + ruta + '.enc');
     if (!res.ok) { throw new Error('404 ' + ruta); }
     return new Uint8Array(await res.arrayBuffer());
   }
