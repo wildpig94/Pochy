@@ -42,4 +42,4 @@ echo "· commit"
 git commit -m "$MSG"
 echo "· push"
 git push origin main
-echo "publicado: https://wildpig94.github.io/Pochy/"
+echo "publicado: https://pochy.site/"

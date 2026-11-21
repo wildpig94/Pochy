@@ -1,7 +1,7 @@
 # GEMINI.md — cómo trabajar en este repositorio
 
 Sitio privado, estático y **cifrado**, publicado en GitHub Pages:
-`https://wildpig94.github.io/Pochy/`. Léelo antes de tocar nada.
+`https://pochy.site/`. Léelo antes de tocar nada.
 
 ## Qué se publica y qué no
 

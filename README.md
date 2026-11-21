@@ -4,7 +4,7 @@ A private archive of one long-distance story between Mexico 🇲🇽 and Canada 
 two screens, a plane, and one door left — behind a password, with one page at the
 end that is hers to write.
 
-Published with GitHub Pages at `https://wildpig94.github.io/Pochy/`.
+Published with GitHub Pages at `https://pochy.site/`.
 The page, the photographs and the two printable sheets are **encrypted**; the
 URL alone shows a password box and nothing else. The password is four letters,
 it is not written anywhere in this repository, and it is not reused for anything
