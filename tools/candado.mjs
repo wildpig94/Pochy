@@ -26,7 +26,7 @@ const ITERACIONES = 300000;
 const CARPETA_CIFRADA = join(ROOT, 'cifrado');
 
 // La clave se normaliza igual que en el candado: sin espacios en las orillas y
-// sin mayusculas. Asi "toky", "TOKY" y " Toky " abren lo mismo.
+// sin mayusculas. Asi el candado y esta herramienta aceptan lo mismo.
 const normalizar = (t) => String(t).trim().toLowerCase();
 const password = normalizar(process.argv[2] || process.env.POCHY_PASS || '');
 if (!password) {

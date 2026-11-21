@@ -20,8 +20,8 @@ The site is published encrypted. What GitHub Pages serves is:
   two PDFs, as AES-GCM ciphertext (PBKDF2-SHA256, 300 000 rounds).
 
 Without the password, the repository shows file names and nothing else. The
-password is normalised to lowercase and trimmed, so `toky`, `TOKY` and ` Toky `
-all open the same thing.
+password is normalised to lowercase and trimmed, so capitalisation and stray
+spaces do not matter.
 
 The file you edit is **`fuente/index.html`**, in the clear. It is gitignored and
 never published: only `cifrado/pagina.enc` goes out.
