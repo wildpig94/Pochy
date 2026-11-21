@@ -73,3 +73,37 @@ El candado tarda ~1 s a propósito (PBKDF2-SHA256, 300 000 rondas).
 - Cambios grandes: propón el diff y espera confirmación; el dueño decide si se
   publica.
 - Nunca subas fotos, audio nuevo ni texto íntimo sin que él lo pida.
+
+## Mudanza a `pochy.site`
+
+El dominio está comprado y su DNS vive en **Cloudflare**
+(`apollo.ns.cloudflare.com`, `bailey.ns.cloudflare.com`). Ahora mismo el sitio
+sirve en `https://wildpig94.github.io/Pochy/` porque el dominio personalizado se
+retiró mientras no existían los registros.
+
+Registros que hacen falta (todos en **DNS only**, nube gris; proxied rompe el
+certificado de GitHub):
+
+| Tipo | Nombre | Contenido |
+|---|---|---|
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` |
+| CNAME | `www` | `wildpig94.github.io` |
+
+Cuando existan:
+
+```bash
+./tools/dominio.sh on    # escribe CNAME, configura Pages y publica
+# esperar a que GitHub emita el certificado (minutos u horas)
+gh api -X PUT repos/wildpig94/Pochy/pages -F https_enforced=true
+```
+
+Para volver atrás en cualquier momento: `./tools/dominio.sh off`.
+
+## Pruebas de navegador
+
+Hay scripts de Chromium (Playwright) que ya usamos para verificar el candado, el
+lector y el modo sin conexión, fuera del repo:
+`~/Documentos/deepseek-harness/default-workspace/pochy-work/test-*.mjs`.
+El binario está en `~/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome`.
+Úsalos como referencia o cópialos a `tools/pruebas/` si quieres versionarlos.
