@@ -3,7 +3,7 @@
 // Guarda el candado, la pagina, las fotos ligeras, el arranque del webtoon y
 // las canciones para que el sitio abra sin senal. Lo demas (originales, PDF,
 // resto de placas y tipografias) se guarda la primera vez que se abre.
-const VERSION = '1dbf5f7550';
+const VERSION = '72cf4bfa23';
 const CRITICOS = [
   "./",
   "index.html",
